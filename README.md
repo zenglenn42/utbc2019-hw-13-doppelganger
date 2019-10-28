@@ -16,3 +16,9 @@ Find someone with similar interests.
 ## Server-side cheet sheet ;-)
 
 Refresh your brain [here](docs/notes.md).
+
+## Add some data
+
+To keep things simple, our friends 'database' will just be a chunk of json sitting on the server:
+
+  [app/data/friends.js](app/data/friends.js)
