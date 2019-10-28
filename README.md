@@ -2,7 +2,7 @@
 
 Find someone with similar interests.
 
-![alt](docs/img/friendfinder.jpg)
+![alt](docs/img/helena-lopes-PGnqT0rXWLs-unsplash.jpg)
 
 ## Technology stack
 
