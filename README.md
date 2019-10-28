@@ -22,3 +22,7 @@ Refresh your brain [here](docs/notes.md).
 To keep things simple, our friends 'database' will just be a chunk of json sitting on the server:
 
   [app/data/friends.js](app/data/friends.js)
+
+and our survey will also start out as server-side json:
+
+  [app/data/survey.js](app/data/survey.js)
