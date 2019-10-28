@@ -1,0 +1,25 @@
+{
+  "name": "utbc2019-hw-13-friendfinder",
+  "version": "1.0.0",
+  "description": "Find someone with similar interests.",
+  "main": "index.js",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "path": "^0.12.7"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zenglenn42/utbc2019-hw-13-friendfinder.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zenglenn42/utbc2019-hw-13-friendfinder/issues"
+  },
+  "homepage": "https://github.com/zenglenn42/utbc2019-hw-13-friendfinder#readme"
+}
