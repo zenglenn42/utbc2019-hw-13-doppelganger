@@ -26,3 +26,28 @@ To keep things simple, our friends 'database' will just be a chunk of json sitti
 and our survey will also start out as server-side json:
 
   [app/data/survey.js](app/data/survey.js)
+
+## Add a simple express server and a route to serve up our survey json
+
+```
+var express = require("express");
+var survey = require("./app/data/survey.js")
+var app = express();
+var PORT = process.env.PORT || 8080;
+
+console.log(survey);
+
+app.get("/", (req, res) => {
+    res.writeHead(200, {"Content-Type": "text/html"});
+    res.end("<h1>Welcome to Friend Finder</h1>");
+})
+
+app.get("/survey.json", (req, res) => {
+    res.json(survey);
+});
+
+app.listen(PORT, () => {
+    console.log(`Friend Finder server listening on port ${PORT}`);
+})
+```
+![alt](docs/img/survey_json.png)
