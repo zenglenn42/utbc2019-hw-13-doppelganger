@@ -11,5 +11,61 @@
     <p>Answer a few basic questions</p>
     <p>Then find someone who answered similarly.</p>
     <button><a href="/survey.json">Go to Survey</a></button>
+    <button id="post-data">Post Test JSON</button>
 </body>
+
+<script>
+    var button = document.getElementById("post-data");
+    console.log("button", button);
+    button.addEventListener("click", postData);
+
+    function postData(e) {
+        console.log("clicked event = ", e);
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '/incomingSurvey.json');
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                var userInfo = JSON.parse(xhr.responseText);
+                console.log(userInfo);
+            }
+        }
+        xhr.send(JSON.stringify(
+            {
+                "name": "Ahmed",
+                "photo": "https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAAq7AAAAJDAwYzI4NTQ4LWYwZWUtNGFkYS1hNTYwLTZjYzkwY2ViZDA3OA.jpg",
+                "scores": [
+                    "5",
+                    "1",
+                    "4",
+                    "4",
+                    "5",
+                    "1",
+                    "2",
+                    "5",
+                    "4",
+                    "1"
+                ]
+	        },
+        ));
+    };
+</script>
 </html>
+
+<!--
+<script>
+var xhr = new XMLHttpRequest();
+xhr.open('PUT', 'myservice/user/1234');
+xhr.setRequestHeader('Content-Type', 'application/json');
+xhr.onload = function() {
+    if (xhr.status === 200) {
+        var userInfo = JSON.parse(xhr.responseText);
+    }
+};
+xhr.send(JSON.stringify({
+    name: 'John Smith',
+    age: 34
+}));
+</script>
+-->
+
