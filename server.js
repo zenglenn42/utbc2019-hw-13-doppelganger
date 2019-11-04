@@ -1,7 +1,7 @@
 var express = require("express");
 var path = require("path");
-var survey = require("./app/data/survey.js")
-var friends = require("./app/data/friends.js")
+var friends = require("./app/data/friends")
+const surveyHtml = require("./app/data/survey")
 
 var app = express();
 var PORT = process.env.PORT || 8080;
@@ -14,8 +14,8 @@ app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "./app/public/home.html"));
 })
 
-app.get("/survey.json", (req, res) => {
-    res.json(survey);
+app.get("/survey.html", (req, res) => {
+    res.send(surveyHtml);
 });
 
 app.get("*", (req, res) => {
