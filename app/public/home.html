@@ -92,7 +92,7 @@
                     })
                 }
             }
-        ).then( (friendObj) => console.log("friendObj", friendObj))
+        ).then( (friendObj) => console.log("friendInfo", friendObj))
         .catch(error => {
             if (error.status === 404) {
                 console.log("404 Resource not found.")
@@ -145,22 +145,18 @@
     // }
 
     // function postDataXhr(e) {
-    //     console.log("clicked event = ", e);
-    //     var formData = {
-    //         name: "Jeremiah Scanlon",
-    //         photo: "https://avatars2.githubusercontent.com/u/8504998?v=3&s=460",
-    //         scores: ["5", "2", "2", "2", "4", "1", "3", "2", "5", "5"]
-    //     }
+    //     var formElement = document.querySelector("#surveyForm");
+    //     var formDataObj = formDataToObj(formElement);
     //     var xhr = new XMLHttpRequest();
     //     xhr.open('POST', '/submitSurvey.json');
     //     xhr.setRequestHeader('Content-Type', 'application/json');
     //     xhr.onload = function() {
     //         if (xhr.status === 200) {
     //             var friendInfo = JSON.parse(xhr.responseText);
-    //             console.log(friendInfo);
+    //             console.log("friendInfo", friendInfo);
     //         }
     //     }
-    //     xhr.send(JSON.stringify(formData));
+    //     xhr.send(JSON.stringify(formDataObj));
     // };
 
 </script>
