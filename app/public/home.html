@@ -7,47 +7,162 @@
     <title>Friend Finder</title>
 </head>
 <body>
-    <h1>Welcome to Friend Finder</h1>
-    <p>Answer a few basic questions</p>
-    <p>then find someone who answered similarly.</p>
-    <button><a href="/survey.html">Go to Survey</a></button>
-    <button id="post-data">Post Test JSON</button>
+    <div id="body-container">
+        <h1>Welcome to Friend Finder</h1>
+        <p>Answer a few basic questions</p>
+        <p>then find someone who answered similarly.</p>
+        <button id="get-survey-html">Go to Survey</button>
+    </div>
 </body>
 
 <script>
-    var button = document.getElementById("post-data");
-    console.log("button", button);
-    button.addEventListener("click", postData);
+    // https://stackoverflow.com/questions/30880757/javascript-equivalent-to-on
+    delegate = function(el, evt, sel, handler) {
+        el.addEventListener(evt, function(event) {
+            let t = event.target;
+            while (t && t !== this) {
+            if (t.matches(sel)) {
+                handler.call(t, event);
+            }
+            t = t.parentNode;
+            }
+        });
+    };
 
-    function postData(e) {
-        console.log("clicked event = ", e);
-        var xhr = new XMLHttpRequest();
-        xhr.open('POST', '/submitSurvey.json');
-        xhr.setRequestHeader('Content-Type', 'application/json');
-        xhr.onload = function() {
-            if (xhr.status === 200) {
-                var friendInfo = JSON.parse(xhr.responseText);
-                console.log(friendInfo);
+    // Register click handler for submit button on dynamically added 
+    // survey form.
+    delegate(document, "click", "#submit-survey", postSurveyForm);
+
+    // Register click handler for survey button which triggers
+    // get of related html.
+    var surveyButton = document.getElementById("get-survey-html")
+    surveyButton.addEventListener("click", getSurveyHtml)
+
+    function getSurveyHtml(e) {
+        const url = "/survey.html";
+        fetch(url).then( response => 
+            {
+                if (response.ok) {
+                    return response.text()
+                } else {
+                    return Promise.reject({
+                        status: response.status,
+                        statusText: response.statusText
+                    })
+                }
+            }
+        ).then( surveyHtml => {
+                var bodyDiv = document.getElementById("body-container");
+                bodyDiv.innerHTML = surveyHtml
+            }
+        )
+        .catch( error => {
+            if (error.status === 404) {
+                console.log("404 Resource not found.")
+            }
+        })
+    }
+
+    function postSurveyForm(e) {
+        e.preventDefault();
+        
+        // Normalize form data.
+        var formElement = document.querySelector("#surveyForm");
+        var formDataObj = formDataToObj(formElement);
+        
+        // See: https://css-tricks.com/using-fetch/
+        const url = "/submitSurvey.json";
+        fetch(
+            url, 
+            {
+                method: 'post',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formDataObj)
+            }
+        ).then( response => 
+            {
+                if (response.ok) {
+                    return response.json()
+                } else {
+                    return Promise.reject({
+                        status: response.status,
+                        statusText: response.statusText
+                    })
+                }
+            }
+        ).then( (friendObj) => console.log("friendObj", friendObj))
+        .catch(error => {
+            if (error.status === 404) {
+                console.log("404 Resource not found.")
+            }
+        })
+    }
+
+    // Transform key/value pairs of input elements from survey form to
+    // a normalized object structured like this:
+    //
+    // formDataObj = {   
+    //     name: 'Ahmed',
+    //     photo: 'http://photo.com/some/picture.jpg',
+    //     scores: [ '5', '1', '4', '4', '5', '1', '2', '5', '4', '1' ] 
+    // }
+    //
+    // We can add some validation checks to this later.
+
+    function formDataToObj(formElement) {
+        var formData = new FormData(formElement);
+        var formDataObj = {scores: []}
+        for (var [key, value] of formData.entries()) {
+            if (key.match(/^q[0-9]*/)) {
+                formDataObj.scores.push(value);
+            } else {
+                formDataObj[key] = value;
             }
         }
-        xhr.send(JSON.stringify({
-            "name": "Jeremiah Scanlon",
-            "photo": "https://avatars2.githubusercontent.com/u/8504998?v=3&s=460",
-            "scores": 
-                    [
-                        "5",
-                        "2",
-                        "2",
-                        "2",
-                        "4",
-                        "1",
-                        "3",
-                        "2",
-                        "5",
-                        "5"
-                    ]
-        }));
-    };
+        return formDataObj
+    }
+
+    //-----------------------------------------------------
+    // Old-school way to get and post to the server using
+    // XMLHttpRequest objects.
+    //-----------------------------------------------------
+
+    // function getSurveyHtmlXhr(e) {
+    //     var xhr = new XMLHttpRequest();
+    //     xhr.open('GET', '/survey.html');
+    //     xhr.setRequestHeader('Content-Type', 'application/html');
+    //     xhr.onload = function() {
+    //         if (xhr.status === 200) {
+    //             var bodyDiv = document.getElementById("body-container");
+    //             bodyDiv.innerHTML = xhr.responseText
+    //         } else {
+    //             console.log("xhr.status = ", xhr.status);
+    //         }
+    //     }
+    //     xhr.send(null);
+    // }
+
+    // function postDataXhr(e) {
+    //     console.log("clicked event = ", e);
+    //     var formData = {
+    //         name: "Jeremiah Scanlon",
+    //         photo: "https://avatars2.githubusercontent.com/u/8504998?v=3&s=460",
+    //         scores: ["5", "2", "2", "2", "4", "1", "3", "2", "5", "5"]
+    //     }
+    //     var xhr = new XMLHttpRequest();
+    //     xhr.open('POST', '/submitSurvey.json');
+    //     xhr.setRequestHeader('Content-Type', 'application/json');
+    //     xhr.onload = function() {
+    //         if (xhr.status === 200) {
+    //             var friendInfo = JSON.parse(xhr.responseText);
+    //             console.log(friendInfo);
+    //         }
+    //     }
+    //     xhr.send(JSON.stringify(formData));
+    // };
+
 </script>
 </html>
 

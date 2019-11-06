@@ -35,7 +35,7 @@ function getHtml(json) {
         let questionHtml = `
             <h3><strong>Question ${num}</strong></h3>
             <h4>${question}</h4>
-            <select class="chosen-select" id="q${num}" required>
+            <select name="q${num}" class="chosen-select" id="q${num}" required>
                 <option value=""></option>
                 <option value="1">1 (${minComment})</option>
                 <option value="2">2</option>
@@ -45,22 +45,22 @@ function getHtml(json) {
             </select>
             `
         return questionHtml
-    }).join();
+    }).join("");
     let surveyHtml = `
-        <div class="container">
-        <h2>Survey Questions</h2>
-        <hr>
-        <form>
-            <legend><h3><strong>${json.title}</strong></legend>
-            <label><h4>${json.nameLabel}</h4><input name="name" type="text" placeholder="${json.namePlaceholder}" required></input></label>
-            <label><h4>${json.photoLabel}</h4><input name="photoUrl" type="text" placeholder="${json.photoPlaceholder}" required></input></label>
+        <div id="survey-container">
+            <h2>Survey Questions</h2>
             <hr>
-            ${questionsHtml}
-            <p>
-                <input type="submit" value="${json.submitText}">
-                <input type="reset" value="${json.resetText}">
-            </p>
-        </form>
+            <form id="surveyForm" action="">
+                <legend><h3><strong>${json.title}</strong></legend>
+                <label><h4>${json.nameLabel}</h4><input name="name" type="text" placeholder="${json.namePlaceholder}" required></input></label>
+                <label><h4>${json.photoLabel}</h4><input name="photoUrl" type="text" placeholder="${json.photoPlaceholder}" required></input></label>
+                <hr>
+                ${questionsHtml}
+                <p>
+                    <input type="submit" value="${json.submitText}" id="submit-survey">
+                    <input type="reset" value="${json.resetText}">
+                </p>
+            </form>
         </div>
         `
     return surveyHtml

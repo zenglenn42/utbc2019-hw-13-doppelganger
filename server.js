@@ -47,6 +47,9 @@ app.listen(PORT, () => {
 })
 
 function findFriend(you, friends) {
+    if (!you) {
+        throw new Error("Empty 'you' object in findFriend()")
+    }
     if (friends.length > 0) {
         let closestSoFar = Infinity;
         let friendIndex = -1;
