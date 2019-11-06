@@ -1,8 +1,6 @@
-var express = require("express");
-var path = require("path");
-
-var app = express();
-var PORT = process.env.PORT || 8080;
+const express = require("express");
+const app = express();
+const PORT = process.env.PORT || 8080;
 
 // Configure server for incoming posted json in req.body.
 app.use(express.urlencoded({ extended: true }));
