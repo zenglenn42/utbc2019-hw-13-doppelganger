@@ -164,3 +164,7 @@ app.listen(PORT, () => {
     console.log(`Friend Finder server listening on port ${PORT}`);
 })
 ```
+
+## Got basic functionality working
+
+![alt](doc/img/ff-mvp.png)

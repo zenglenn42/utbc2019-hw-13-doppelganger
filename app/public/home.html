@@ -30,6 +30,10 @@
             animation-duration: 0.4s
         }
 
+        .modal-img {
+            width: 75%;
+        }
+
         .close-btn {
             float: right;
             color: lightgray;
@@ -155,6 +159,12 @@
             console.log("friendInfo", friendObj)
             let modal = document.querySelector(".modal")
             modal.style.display = "block"
+            let friendEl = document.getElementById("friendResults");
+            let resultsHtml = `
+                <h1>${friendObj.name}</h1>
+                <img class="modal-img" src="${friendObj.photo}" alt="friend picture">
+            `
+            friendEl.innerHTML = resultsHtml
         })
         .catch(error => {
             if (error.status === 404) {

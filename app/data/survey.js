@@ -64,7 +64,8 @@ function getHtml(json) {
             <div class="modal">
                 <div class="modal-content">
                     <span class="close-btn">&times;</span>
-                    <p>this is the text inside the modal</p>
+                    <div id="friendResults">
+                    </div>
                 </div>
             </div>
         </div>
