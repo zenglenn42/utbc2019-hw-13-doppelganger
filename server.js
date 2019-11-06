@@ -38,6 +38,8 @@ app.post("/submitSurvey.json", (req, res) => {
             "name": friends[i].name,
             "photo": friends[i].photo
         }
+        // TODO: Prevent duplicates.
+        friends.push(req.body)
         res.json(friend)
     } catch(e) {
         console.log("Error: findFriend failure");
