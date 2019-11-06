@@ -31,7 +31,15 @@
 
     // Register click handler for submit button on dynamically added 
     // survey form.
-    delegate(document, "click", "#submit-survey", postSurveyForm);
+    //
+    // Responding to the 'submit' event allows us to take advantage of the
+    // built-in 'required' input validation provided by the browser while
+    // still using our own client-side method for pre-processing form data
+    // before we post it to the server.  (Simply responding to a click
+    // event for the submit button would cause the required field attribute
+    // to be ignored. :-/)
+    // 
+    delegate(document, "submit", "#surveyForm", postSurveyForm);
 
     // Register click handler for survey button which triggers
     // get of related html.
@@ -144,7 +152,8 @@
     //     xhr.send(null);
     // }
 
-    // function postDataXhr(e) {
+    // function postSurveyFormXhr(e) {
+    //     e.preventDefault();
     //     var formElement = document.querySelector("#surveyForm");
     //     var formDataObj = formDataToObj(formElement);
     //     var xhr = new XMLHttpRequest();

@@ -50,14 +50,14 @@ function getHtml(json) {
         <div id="survey-container">
             <h2>Survey Questions</h2>
             <hr>
-            <form id="surveyForm" action="">
+            <form id="surveyForm">
                 <legend><h3><strong>${json.title}</strong></legend>
                 <label><h4>${json.nameLabel}</h4><input name="name" type="text" placeholder="${json.namePlaceholder}" required></input></label>
                 <label><h4>${json.photoLabel}</h4><input name="photoUrl" type="text" placeholder="${json.photoPlaceholder}" required></input></label>
                 <hr>
                 ${questionsHtml}
                 <p>
-                    <input type="submit" value="${json.submitText}" id="submit-survey">
+                    <input type="submit" value="${json.submitText}">
                     <input type="reset" value="${json.resetText}">
                 </p>
             </form>
