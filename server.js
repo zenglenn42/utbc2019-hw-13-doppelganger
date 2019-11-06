@@ -14,6 +14,10 @@ app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "./app/public/home.html"));
 })
 
+app.get("/style.css", (req, res) => {
+    res.sendFile(path.join(__dirname, "./app/public/style.css"));
+});
+
 app.get("/survey.html", (req, res) => {
     res.send(surveyHtml);
 });
