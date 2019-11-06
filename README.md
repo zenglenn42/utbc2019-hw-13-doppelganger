@@ -167,4 +167,4 @@ app.listen(PORT, () => {
 
 ## Got basic functionality working
 
-![alt](doc/img/ff-mvp.png)
+![alt](docs/img/ff-mvp.png)
