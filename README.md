@@ -7,7 +7,11 @@ Find your Doppelgänger
 
 ## Specification
 
-Implement a full-stack site that takes user survey results and compares them to other users to deduce and display the name and picture of the user with the best overall match.  The pool of known people is represented by an in-memory array seeded by a static json file.  The array is augmented over time as the site remains operative and new users submit their responses.
+Implement a full-stack site that takes user survey results and compares those to other users' surveys to deduce and display the name and picture of the user with the most proximate responses.  
+
+The pool of known people is represented by an in-memory array seeded by a static json file.  The array is augmented over time as the site remains operative and new users submit their responses.
+
+This is not a full CRUD (Create, Retrieve, Update, Delete) application.  Nominally only create and retrieve are required at the record level.
 
 ## Minimal Implementation
 

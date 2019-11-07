@@ -80,7 +80,7 @@
         
         // Normalize form data.
         var formElement = document.querySelector("#surveyForm");
-        var formDataObj = formDataToObj(formElement);
+        var formDataObj = normalizeFormData(formElement);
         
         // See: https://css-tricks.com/using-fetch/
         const url = "/submitSurvey.json";
@@ -110,9 +110,18 @@
             modal.style.display = "block"
             let friendEl = document.getElementById("friendResults");
             let resultsHtml = `
-                <h1>${friendObj.name}</h1>
-                <img class="modal-img" src="${friendObj.photo}" alt="friend picture">
+                <h1>No doppelganger found.  You're utterly unique. ;-)</h1>
             `
+            if (friendObj.name) {
+                resultsHtml = `
+                    <h1>${friendObj.name}</h1>
+                `
+                if (friendObj.photo) {
+                    resultsHtml += `
+                    <img class="modal-img" src="${friendObj.photo}" alt="image unavailable">
+                    `
+                }
+            }
             friendEl.innerHTML = resultsHtml
         })
         .catch(error => {
@@ -122,7 +131,7 @@
         })
     }
 
-    // Transform key/value pairs of input elements from survey form to
+    // Transform key/value pairs from survey form input elements into
     // a normalized object structured like this:
     //
     // formDataObj = {   
@@ -133,7 +142,7 @@
     //
     // We can add some validation checks to this later.
 
-    function formDataToObj(formElement) {
+    function normalizeFormData(formElement) {
         var formData = new FormData(formElement);
         var formDataObj = {scores: []}
         for (var [key, value] of formData.entries()) {
@@ -169,7 +178,7 @@
     // function postSurveyFormXhr(e) {
     //     e.preventDefault();
     //     var formElement = document.querySelector("#surveyForm");
-    //     var formDataObj = formDataToObj(formElement);
+    //     var formDataObj = normalizeFormData(formElement);
     //     var xhr = new XMLHttpRequest();
     //     xhr.open('POST', '/submitSurvey.json');
     //     xhr.setRequestHeader('Content-Type', 'application/json');

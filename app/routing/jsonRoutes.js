@@ -6,7 +6,10 @@ module.exports = function(app) {
         //    photo: 'https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAAq7AAAAJDAwYzI4NTQ4LWYwZWUtNGFkYS1hNTYwLTZjYzkwY2ViZDA3OA.jpg',
         //    scores: [ '5', '1', '4', '4', '5', '1', '2', '5', '4', '1' ] 
         //}
-        console.log("request = req.body ", req.body);
+
+        // DEBUG
+        // console.log("request = req.body ", req.body);
+
         try {
             let i = findFriend(req.body, friends);
             let friend = {
@@ -17,7 +20,7 @@ module.exports = function(app) {
             friends.push(req.body)
             res.json(friend)
         } catch(e) {
-            console.log("Error: findFriend failure");
+            console.log("Error: Unable to find a doppelganger.");
             console.log(e)
             res.json({})
         }
@@ -25,7 +28,7 @@ module.exports = function(app) {
     
     function findFriend(you, friends) {
         if (!you) {
-            throw new Error("Empty 'you' object in findFriend()")
+            throw new Error("findFriend(): undefined 'you' parameter")
         }
         if (friends.length > 0) {
             let closestSoFar = Infinity;
@@ -39,16 +42,16 @@ module.exports = function(app) {
                 }
                 return acc;
             }, friendIndex);
-            if (friendIndex < 0) throw new Error("No friend found")
+            if (friendIndex < 0) throw new Error("findFriend(): no friend found")
             return friendIndex
         } else {
-            throw new Error("Empty friends database");
+            throw new Error("findFriend(): empty friends database");
         }
     }
     
     function vectorDiff(v1, v2) {
         if (v1.length !== v2.length) {
-            throw new Error("vectorDifference: vector length mismatch");
+            throw new Error("vectorDiff(): vector length mismatch");
         }
     
         let sigma = 0;
