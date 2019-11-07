@@ -228,6 +228,7 @@ and then in the callback that processes results, we enable the modal:
 * The UI could use some improvement. ;-)
     * It would be relatively easy to leverage React and some Material UI components.
     * Add more robust form validation.
+    * Use [SweetAlert](https://sweetalert.js.org/) for the modal.
 
 * Add a database backend to persist user survey results.
     * Harden the code to catch duplicate entries.
