@@ -98,7 +98,7 @@ Arguably, they:
 
 ### I break with thee, jQuery (and other 3rd parties)
 
-But I'm kinda not loving jQuery.  Despite it's ruggedized utility and tasty syntax:
+I'm kinda not loving jQuery.  Despite it's ruggedized utility and tasty syntax:
 
 ```
     $.ajax()
@@ -136,7 +136,7 @@ As for axios, I've used it in other projects and it's a fine API.  But I want to
 
 ### ["That's so Fetch"](https://media.giphy.com/media/vJ6hRee1ZlyNi/giphy.gif)
 
-It seems like the fetch API is the new hotness because:
+It seems like the [fetch API](https://developers.google.com/web/ilt/pwa/working-with-the-fetch-api) is the new hotness because:
 
 * I don't have to rely on a 3rd party API.
 * Browser support is decent.
@@ -162,7 +162,7 @@ While leveraging browser-supplied functionality, I employ the 'required' HTML at
     </form>
 ```
 
-Normally, this prevents the user from submitting incomplete forms to the server.  However my initial implementation defeats this desired behavior because I naively hook into the "click" event for the submit button (to bypass non-Ajaxy form processing with ACTION="```<surver-route>```").
+Normally, this prevents the user from submitting incomplete forms to the server.  However my initial implementation defeats this desired behavior because I naively hook into the "click" event for the submit button (to bypass non-Ajaxy form processing with ACTION="```<surver-route>```").  That's enough to fool the DOM into thinking I'm going rogue and will take on all validation tasks with my custom submit handler.
 
 The trick to get Ajax posting AND non-empty field validation by the browser is to:
 
