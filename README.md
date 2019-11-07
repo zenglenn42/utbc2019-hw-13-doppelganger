@@ -85,7 +85,7 @@ But how do we make those Ajax requests?
 
 Strangely, I feel a bit nostalgic for the XMLHttpRequest interface in the DOM.  It's /the/ archetypal mechanism for supporting Ajax requests originating from the browser so it's now universally supported.  
 
-Plus there are a ton of examples illustrating how to use it for all the RESTful verbs (GET, PUT, POST, DELETE).  I even wire up my frontend to the server in a low impedance dash to get stuff communicating.
+Plus there are a ton of examples illustrating how to use it with RESTful verbs (GET, POST, etc).  I even wire up my frontend to the server with [XHR](https://github.com/zenglenn42/utbc2019-hw-13-doppelganger/blob/b83fa7bbb5114b53c7d286d6e50c1afb9cb16694/app/public/controller.js#L147) in a low impedance dash to get stuff communicating.
 
 But that feels a bit too retro.  I mean there's a /reason/ why 3rd party solutions for doing Ajax manifested.
 
