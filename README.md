@@ -62,7 +62,12 @@ Whenever I see a bunch of hardcoded HTML, it just feels wrong.
 * we've limited our frontend options
 * we've complicated support for internationalization
 
-So I make form construction [data driven](https://github.com/zenglenn42/utbc2019-hw-13-doppelganger/blob/c096a76fe929ffb09ff0306ddaa35f57ebbd1975/app/data/survey.js#L6), opting for some server side [HTML generation](https://github.com/zenglenn42/utbc2019-hw-13-doppelganger/blob/c096a76fe929ffb09ff0306ddaa35f57ebbd1975/app/data/survey.js#L30).  
+So I make form construction [data driven](https://github.com/zenglenn42/utbc2019-hw-13-doppelganger/blob/c096a76fe929ffb09ff0306ddaa35f57ebbd1975/app/data/survey.js#L6), opting for some server side [HTML generation](https://github.com/zenglenn42/utbc2019-hw-13-doppelganger/blob/c096a76fe929ffb09ff0306ddaa35f57ebbd1975/app/data/survey.js#L30).
+
+What we have now is much more of a survey /engine/ since we can add or edit the survey questions without changing any code.
+
+![alt](docs/img/black-and-white-round-car-air-filter-159293.jpg)
+
 
 Down the road (when VC clears ;-), we could easily send the raw JSON down to the frontend where it could be clothed in some spiffy Material UI components.
 
