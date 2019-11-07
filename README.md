@@ -75,6 +75,8 @@ Interestingly, this decision steers the next.
 
 ### Ajax, bring it
 
+![alt](docs/img/alexandru-g-stavrica-1OFBOk1rfHU-unsplash.jpg)
+
 Our dynamically generated form implies Ajax since, by definition, we've diverged from serving up static pages of HTML along file boundaries.
 
 But how do we make those Ajax requests?
@@ -145,6 +147,8 @@ It /is/ a bit weird to POST something by calling fetch, though.  Whatever, we al
 Happily I find [this resource](https://css-tricks.com/using-fetch/) for using fetch with non-trivial error handling.  (I weather another pang for XHR. :-/)
 
 ### Form Data Validation
+
+![alt](docs/img/david-travis-WC6MJ0kRzGw-unsplash.jpg)
 
 While leveraging browser-supplied functionality, I employ the 'required' HTML attribute for my ```<input>``` form elements.
 
