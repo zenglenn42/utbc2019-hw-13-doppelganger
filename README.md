@@ -127,7 +127,7 @@ which registers event handlers for dynamically generated DOM elements, exactly t
 
 As for axios, I've used it in other projects and it's a fine API.  But I want to stay current with browser standards (and maybe polyfill as needed).
 
-### "That's so Fetch"
+### ["That's so Fetch"](https://media.giphy.com/media/vJ6hRee1ZlyNi/giphy.gif)
 
 It seems like the fetch API is the new hotness because:
 
