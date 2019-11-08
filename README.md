@@ -15,7 +15,7 @@ This is not a full CRUD (Create, Retrieve, Update, Delete) application.  Nominal
 
 ## Minimal Implementation
 
-![alt](docs/img/ff-mvp.png)
+![alt](docs/img/doppelganger.jpg)
 
 ## Technology stack
 
