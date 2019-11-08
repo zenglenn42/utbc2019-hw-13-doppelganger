@@ -98,15 +98,15 @@ Arguably, they:
 
 ### I break with thee, $.ajax
 
-Despite that alure, I'm kinda not loving jQuery.  Sure, it's ruggedized and has a tasty syntax:
+Despite that alure, I'm keeping jQuery at arm's length.  Sure, it offers enormous utility, including these tasty ajax functions:
 
-```
+```it
     $.get(URL,callback); 
     $.post(URL,data,callback); 
     $.ajax(url[, options])
 ```
 
-I feel it sets up a slippery slope that will lure me with its siren call into DOM manipulation, complicating my efforts to leverage virtual-DOM based technologies (like [React](https://reactjs.org/)) that could improve the user experience down the road.
+But if it's so handy, I may start using some of its DOM manipulation entry points, complicating my efforts to leverage virtual-DOM based technologies (like [React](https://reactjs.org/)) that could improve the user experience down the road.
 
 Who knows, maybe one day I'll feel the same way about 3rd party virtual-DOM manipulators as I do about jQuery. :D
 
@@ -116,7 +116,7 @@ Abandoning jQuery means I need to find an alternative to the hyper-useful:
     $(document).on(event, selector, callback)
 ```
 
-which registers event handlers for dynamically generated DOM elements, exactly the case with our survey form.
+which registers event handlers for dynamically generated DOM elements, exactly the case with our [survey form](https://github.com/zenglenn42/utbc2019-hw-13-doppelganger/blob/bc788df148759719f4c9617a441f8c16d145ac49/app/public/controller.js#L11).
 
 [This will suffice](https://stackoverflow.com/questions/30880757/javascript-equivalent-to-on), though it may need to be hardened in production:
 
