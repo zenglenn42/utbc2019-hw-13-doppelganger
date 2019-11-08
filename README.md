@@ -96,7 +96,7 @@ Arguably, they:
 * offer simpler usage patterns
 * normalize the API (if browser support diverges)
 
-### I break with thee, jQuery (and other 3rd parties)
+### I break with thee, $.ajax
 
 Despite that alure, I'm kinda not loving jQuery.  Sure, it's ruggedized and has a tasty syntax:
 
