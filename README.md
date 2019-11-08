@@ -46,6 +46,8 @@ However ...
 
 ### "There's options!"
 
+![alt](docs/img/raphael-schaller-D6uxeDSylxo-unsplash.jpg)
+
 Ajax? jQuery? Bootstrap? Templates? i18n?
 
 These are the questions running through my mind.  It's such a simple application but I kinda want to future-proof it a bit.
@@ -147,6 +149,52 @@ It seems like the [fetch API](https://developers.google.com/web/ilt/pwa/working-
 It /is/ a bit weird to POST something by calling fetch, though.  Whatever, we all learned to shut down Windows by pressing start.
 
 Happily I find [this resource](https://css-tricks.com/using-fetch/) for using fetch with non-trivial error handling.  (I weather another pang for XHR. :-/)
+
+### Intrinsic Beauty -- [Object Oriented Controller](https://github.com/zenglenn42/utbc2019-hw-13-doppelganger/blob/c7316dab38b248d64d7099f081c8e78678e5049f/app/public/controller.js#L2)
+
+![alt](docs/img/hannah-troupe-s5PoKQEHnxk-unsplash.jpg)
+
+Sometimes appearances can be deceiving.  We judge too soon.  The UI is pretty plain at the moment, but under the covers is a nice object oriented survey controller that enables behavior.  We instantiate it in our home page html:
+
+```
+<!DOCTYPE html>
+<html lang="en">
+<body>
+    <div id="body-container">
+        <h1>Find your Doppelgänger</h1>
+        ..
+    </div>
+</body>
+<script type="text/javascript" src="controller.js"></script>
+<script>
+    surveyController = new SurveyController();
+    ------------------------------------------
+</script>
+</html>
+```
+
+In the controller's constructor, we register event handlers which allow the application to post survey data and get results back from the server to display.
+
+```
+class SurveyController {
+    constructor() {
+        // Manage visibility of results modal window.
+        this.delegate(document, "click", ".close-btn", (e) => {
+            let modal = document.querySelector(".modal")
+            modal.style.display = "none"
+        });
+
+        // Allow the user to submit a completed form to the backend.
+        this.delegate(document, "submit", "#surveyForm", this.postSurveyForm.bind(this));
+
+        // Fetch fresh survey form when user clicks "Go to Survey" button.
+        var surveyButton = document.getElementById("get-survey-html")
+        surveyButton.addEventListener("click", this.getSurveyHtml.bind(this))
+    }
+
+    ...
+}
+```
 
 ### Form Data Validation
 
