@@ -9,6 +9,7 @@ app.use(express.json());
 
 require("./app/routing/htmlRoutes")(app)
 require("./app/routing/jsonRoutes")(app)
+app.get("*", (req, res) => { res.redirect("/"); })
 
 app.listen(PORT, () => {
     console.log(`${APP_NAME} server listening on port ${PORT}`);

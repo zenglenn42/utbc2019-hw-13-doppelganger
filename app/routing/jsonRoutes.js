@@ -1,6 +1,10 @@
 var friends = require("../data/friends")
 
 module.exports = function(app) {
+    app.get("/friends.json", (req, res) => {
+        res.json(JSON.stringify(friends));
+    });
+
     app.post("/submitSurvey.json", (req, res) => {
         // {   name: 'Ahmed',
         //    photo: 'https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAAq7AAAAJDAwYzI4NTQ4LWYwZWUtNGFkYS1hNTYwLTZjYzkwY2ViZDA3OA.jpg',
@@ -8,7 +12,7 @@ module.exports = function(app) {
         //}
 
         // DEBUG
-        console.log("request = req.body ", req.body);
+        console.log("incoming request = req.body ", req.body);
 
         try {
             let i = findFriend(req.body, friends);

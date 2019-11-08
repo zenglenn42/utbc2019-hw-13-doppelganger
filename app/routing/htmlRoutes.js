@@ -17,8 +17,4 @@ module.exports = function(app) {
     app.get("/survey.html", (req, res) => {
         res.send(surveyHtml);
     });
-    
-    app.get("*", (req, res) => {
-        res.redirect("/");
-    })
 }
