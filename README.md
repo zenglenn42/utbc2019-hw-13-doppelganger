@@ -77,7 +77,7 @@ Interestingly, this decision steers the next.
 
 ![alt](docs/img/alexandru-g-stavrica-1OFBOk1rfHU-unsplash.jpg)
 
-Our dynamically generated form implies Ajax since, by definition, we've diverged from serving up static pages of HTML along file boundaries.
+Our dynamically generated form implies Ajax by definition since we've diverged from serving up static pages of HTML along file boundaries.
 
 But how do we make those Ajax requests?
 
