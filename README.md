@@ -93,8 +93,8 @@ But that feels a bit too retro.  I mean there's a /reason/ why 3rd party solutio
 
 Arguably, they:
 
-* offered simpler usage patterns
-* normalized the API (when, in the bad old days, browsers diverged)
+* offer simpler usage patterns
+* normalize the API (if browser support diverges)
 
 ### I break with thee, jQuery (and other 3rd parties)
 
@@ -104,7 +104,7 @@ I'm kinda not loving jQuery.  Despite it's ruggedized utility and tasty syntax:
     $.ajax()
 ```
 
-I feel it sets up a slippery slope that will lure me with its siren call into DOM manipulation, complicating my efforts to leverage virtual-DOM based technologies that could improve the user experience down the road.
+I feel it sets up a slippery slope that will lure me with its siren call into DOM manipulation, complicating my efforts to leverage virtual-DOM based technologies (like React) that could improve the user experience down the road.
 
 Who knows, maybe one day I'll feel the same way about 3rd party virtual-DOM manipulators as I do about jQuery. :D
 
