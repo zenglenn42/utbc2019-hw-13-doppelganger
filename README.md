@@ -69,7 +69,7 @@ What we have now is much more of a survey /engine/ since we can add or edit the 
 ![alt](docs/img/black-and-white-round-car-air-filter-159293.jpg)
 
 
-Down the road (when VC clears ;-), we could easily send the raw JSON down to the frontend where it could be clothed in some spiffy Material UI components.
+Down the road (when VC clears ;-), we could easily send the raw JSON down to the frontend where it could be clothed in some spiffy [Material UI](https://material-ui.com/) components.
 
 Interestingly, this decision steers the next.
 
@@ -98,13 +98,15 @@ Arguably, they:
 
 ### I break with thee, jQuery (and other 3rd parties)
 
-I'm kinda not loving jQuery.  Despite it's ruggedized utility and tasty syntax:
+Despite that alure, I'm kinda not loving jQuery.  Sure, it's ruggedized and has a tasty syntax:
 
 ```
-    $.ajax()
+    $.get(URL,callback); 
+    $.post(URL,data,callback); 
+    $.ajax(url[, options])
 ```
 
-I feel it sets up a slippery slope that will lure me with its siren call into DOM manipulation, complicating my efforts to leverage virtual-DOM based technologies (like React) that could improve the user experience down the road.
+I feel it sets up a slippery slope that will lure me with its siren call into DOM manipulation, complicating my efforts to leverage virtual-DOM based technologies (like [React](https://reactjs.org/)) that could improve the user experience down the road.
 
 Who knows, maybe one day I'll feel the same way about 3rd party virtual-DOM manipulators as I do about jQuery. :D
 
