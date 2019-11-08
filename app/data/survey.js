@@ -53,7 +53,7 @@ function getHtml(json) {
             <form id="surveyForm">
                 <legend><h3><strong>${json.title}</strong></legend>
                 <label><h4>${json.nameLabel}</h4><input name="name" type="text" placeholder="${json.namePlaceholder}" required></input></label>
-                <label><h4>${json.photoLabel}</h4><input name="photoUrl" type="text" placeholder="${json.photoPlaceholder}" required></input></label>
+                <label><h4>${json.photoLabel}</h4><input name="photo" type="text" placeholder="${json.photoPlaceholder}" required></input></label>
                 <hr>
                 ${questionsHtml}
                 <p>

@@ -8,7 +8,7 @@ module.exports = function(app) {
         //}
 
         // DEBUG
-        // console.log("request = req.body ", req.body);
+        console.log("request = req.body ", req.body);
 
         try {
             let i = findFriend(req.body, friends);
