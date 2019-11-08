@@ -66,6 +66,32 @@ Whenever I see a bunch of hardcoded HTML, it just feels wrong.
 
 So I make form construction [data driven](https://github.com/zenglenn42/utbc2019-hw-13-doppelganger/blob/c096a76fe929ffb09ff0306ddaa35f57ebbd1975/app/data/survey.js#L6), opting for some server side [HTML generation](https://github.com/zenglenn42/utbc2019-hw-13-doppelganger/blob/c096a76fe929ffb09ff0306ddaa35f57ebbd1975/app/data/survey.js#L30).
 
+```
+const formObj = {
+    title: "About You",
+    nameLabel: "Name",
+    namePlaceholder: "name required",
+    photoLabel: "Link to your photo",
+    photoPlaceholder: "url required",
+    minComment: "strongly disagree",
+    maxComment: "strongly agree",
+    questions: [
+        "Your mind is always buzzing with unexplored ideas and plans.",
+        "Generally speaking, you rely more on your experience than your imagination.",
+        "You find it easy to stay relaxed and focused even when there is some pressure.",
+        "You rarely do something just out of sheer curiosity.",
+        "People can rarely upset you.",
+        "It is often difficult for you to relate to other people’s feelings.",
+        "In a discussion, truth should be more important than people’s sensitivities.",
+        "You rarely get carried away by fantasies and ideas.",
+        "You think that everyone’s views should be respected regardless of whether they are supported by facts or not.",
+        "You feel more energetic after spending time with a group of people.",
+    ],
+    submitText: "Submit",
+    resetText: "Reset"
+};
+```
+
 What we have now is much more of a survey /engine/ since we can add or edit the survey questions without changing any code.
 
 ![alt](docs/img/black-and-white-round-car-air-filter-159293.jpg)
