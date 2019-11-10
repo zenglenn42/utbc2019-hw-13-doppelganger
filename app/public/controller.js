@@ -1,7 +1,18 @@
 
 class SurveyController {
     constructor() {
+        // console.log("SurveyController::constructor()");
+        
+        // Once the rest of the home page body elements are dynamically 
+        // added to the DOM, complete controller initialization by
+        // adding other event handlers.
+        
+        let initControllerCB = this.initController.bind(this);
+        this.getHomeBodyHtml(initControllerCB)
+    }
 
+    initController() {
+        // console.log("initController");
         // https://medium.com/@nerdplusdog/a-how-to-guide-for-modal-boxes-with-javascript-html-and-css-6a49d063987e
         this.delegate(document, "click", ".close-btn", (e) => {
             let modal = document.querySelector(".modal")
@@ -22,7 +33,7 @@ class SurveyController {
         // Register click handler for survey button which triggers
         // get of related html.
         var surveyButton = document.getElementById("get-survey-html")
-        surveyButton.addEventListener("click", this.getSurveyHtml.bind(this))
+        surveyButton.addEventListener("click", this.getSurveyBodyHtml.bind(this))
     }
 
     // https://stackoverflow.com/questions/30880757/javascript-equivalent-to-on
@@ -38,8 +49,15 @@ class SurveyController {
         });
     };
 
-    getSurveyHtml(e) {
-        const url = "/survey.html";
+    getHomeBodyHtml(callback) {
+        this.getBodyHtml("/homeBody.html", callback)
+    }
+
+    getSurveyBodyHtml(e) {
+        this.getBodyHtml("/surveyBody.html")
+    }
+
+    getBodyHtml(url, callback) {
         fetch(url).then( response => 
             {
                 if (response.ok) {
@@ -51,9 +69,12 @@ class SurveyController {
                     })
                 }
             }
-        ).then( surveyHtml => {
+        ).then( bodyHtml => {
                 var bodyDiv = document.getElementById("body-container");
-                bodyDiv.innerHTML = surveyHtml
+                bodyDiv.innerHTML = bodyHtml;
+                if (callback) {
+                    callback();
+                }
             }
         )
         .catch( error => {
@@ -149,7 +170,7 @@ class SurveyController {
 // XMLHttpRequest objects.
 //-----------------------------------------------------
 
-// function getSurveyHtmlXhr(e) {
+// function getSurveyBodyHtmlXhr(e) {
 //     var xhr = new XMLHttpRequest();
 //     xhr.open('GET', '/survey.html');
 //     xhr.setRequestHeader('Content-Type', 'application/html');

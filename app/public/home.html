@@ -6,17 +6,16 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Doppelganger</title>
     <link rel="stylesheet" type="text/css" href="style.css">
+    <script type="text/javascript" src="controller.js"></script>
 </head>
 <body>
     <div id="body-container">
-        <h1>Find your Doppelgänger</h1>
-        <p>Answer a few basic questions then find someone who may be your twin stranger.</p>
-        <button id="get-survey-html">Go to Survey</button>
     </div>
+    <script type="text/javascript">
+        document.addEventListener(
+            "DOMContentLoaded",
+            (event) => { surveyController = new SurveyController(); }
+        );
+    </script>
 </body>
-<script type="text/javascript" src="controller.js"></script>
-<script>
-    surveyController = new SurveyController();
-</script>
 </html>
-
