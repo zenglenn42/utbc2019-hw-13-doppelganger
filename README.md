@@ -1,6 +1,6 @@
-# utbc2019-hw-13-doppelganger [(demo)](https://limitless-mountain-95968.herokuapp.com/)
+# utbc2019-hw-13-similarity-engine [(demo)](https://limitless-mountain-95968.herokuapp.com/)
 
-Find your Doppelgänger
+Find a similar survey respondent.
 
 ![alt](docs/img/Dante_Gabriel_Rossetti-How_They_Met_Themselves_1860-64_circa.jpg)
 ##### Dante Gabriel Rossetti - How They Met Themselves (circa 1860-64)
@@ -67,8 +67,9 @@ Whenever I see a bunch of hardcoded HTML, it just feels wrong.
 So I make form construction [data driven](https://github.com/zenglenn42/utbc2019-hw-13-doppelganger/blob/c096a76fe929ffb09ff0306ddaa35f57ebbd1975/app/data/survey.js#L6), opting for some server side [HTML generation](https://github.com/zenglenn42/utbc2019-hw-13-doppelganger/blob/c096a76fe929ffb09ff0306ddaa35f57ebbd1975/app/data/survey.js#L30).
 
 ```
-const formObj = {
-    title: "About You",
+const surveyObj = {
+    surveyTitle: "Survey Questions",
+    formHeading: "About You",
     nameLabel: "Name",
     namePlaceholder: "name required",
     photoLabel: "Link to your photo",
@@ -92,7 +93,7 @@ const formObj = {
 };
 ```
 
-What we have now is much more of a survey /engine/ since we can add or edit the survey questions without changing any code.
+What we have now is much more of a similarity /engine/ since we can add or edit the survey questions without changing any code.
 
 ![alt](docs/img/black-and-white-round-car-air-filter-159293.jpg)
 
@@ -185,17 +186,22 @@ Sometimes appearances can be deceiving.  We judge too soon.  The UI is pretty pl
 ```
 <!DOCTYPE html>
 <html lang="en">
+<head>
+    <script type="text/javascript" src="controller.js"></script>
+</head>
 <body>
     <div id="body-container">
         <h1>Find your Doppelgänger</h1>
         ..
     </div>
 </body>
-<script type="text/javascript" src="controller.js"></script>
-<script>
-    surveyController = new SurveyController();
-    ------------------------------------------
-</script>
+    <script type="text/javascript">
+        document.addEventListener(
+            "DOMContentLoaded",
+            (event) => { surveyController = new SurveyController(); }
+                         -----------------------------------------
+        );
+    </script>
 </html>
 ```
 
@@ -204,20 +210,28 @@ In the controller's constructor, we register event handlers which allow the appl
 ```
 class SurveyController {
     constructor() {
-        // Manage visibility of results modal window.
+        let initControllerCB = this.initController.bind(this);
+        this.getHomeBodyHtml(initControllerCB)
+    }
+
+    initController() {
+        let titleText = document.getElementById("title").innerText;
+        if (titleText) {
+            document.title = titleText;
+        }
+
         this.delegate(document, "click", ".close-btn", (e) => {
             let modal = document.querySelector(".modal")
             modal.style.display = "none"
         });
 
-        // Allow the user to submit a completed form to the backend.
+        // Register click handler for dynamically added survey form.
         this.delegate(document, "submit", "#surveyForm", this.postSurveyForm.bind(this));
 
-        // Fetch fresh survey form when user clicks "Go to Survey" button.
+        // Register click handler for survey button which gets survey html.
         var surveyButton = document.getElementById("get-survey-html")
-        surveyButton.addEventListener("click", this.getSurveyHtml.bind(this))
+        surveyButton.addEventListener("click", this.getSurveyBodyHtml.bind(this))
     }
-
     ...
 }
 ```
@@ -289,7 +303,7 @@ The essense of the solution is to define some CSS classes and associate those wi
     <div class="modal">
         <div class="modal-content">
             <span class="close-btn">&times;</span>
-            <div id="friendResults">
+            <div id="results">
             </div>
         </div>
     </div>
