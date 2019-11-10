@@ -3,7 +3,7 @@
 //
 // This puts us in a nice position to support internationalization at some point.
 
-const formObj = {
+const surveyObj = {
     title: "About You",
     nameLabel: "Name",
     namePlaceholder: "name required",
@@ -27,50 +27,4 @@ const formObj = {
     resetText: "Reset"
 };
 
-function getHtml(json) {
-    const minComment = json.minComment;
-    const maxComment = json.maxComment
-    let questionsHtml = json.questions.map((question, index) => {
-        let num = index + 1;
-        let questionHtml = `
-            <h3><strong>Question ${num}</strong></h3>
-            <h4>${question}</h4>
-            <select name="q${num}" class="chosen-select" id="q${num}" required>
-                <option value=""></option>
-                <option value="1">1 (${minComment})</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5 (${maxComment})</option>
-            </select>
-            `
-        return questionHtml
-    }).join("");
-    let surveyHtml = `
-        <div id="survey-container">
-            <h2>Survey Questions</h2>
-            <hr>
-            <form id="surveyForm">
-                <legend><h3><strong>${json.title}</strong></legend>
-                <label><h4>${json.nameLabel}</h4><input name="name" type="text" placeholder="${json.namePlaceholder}" required></input></label>
-                <label><h4>${json.photoLabel}</h4><input name="photo" type="text" placeholder="${json.photoPlaceholder}" required></input></label>
-                <hr>
-                ${questionsHtml}
-                <p>
-                    <input type="submit" value="${json.submitText}">
-                    <input type="reset" value="${json.resetText}">
-                </p>
-            </form>
-            <div class="modal">
-                <div class="modal-content">
-                    <span class="close-btn">&times;</span>
-                    <div id="friendResults">
-                    </div>
-                </div>
-            </div>
-        </div>
-        `
-    return surveyHtml
-}
-
-module.exports = getHtml(formObj);
+module.exports = surveyObj;

@@ -4,13 +4,4 @@ var homeBodyObj = {
     buttonText: "Go to Survey"
 }
 
-function getHtml(json) {
-    let homeBodyHtml = `
-        <h1>${json.callToActionShort}</h1>
-        <p>${json.callToActionLong}</p>
-        <button id="get-survey-html">${json.buttonText}</button>
-    `
-    return homeBodyHtml
-}
-
-module.exports = getHtml(homeBodyObj);
+module.exports = homeBodyObj;
