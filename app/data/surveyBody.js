@@ -4,7 +4,8 @@
 // This puts us in a nice position to support internationalization at some point.
 
 const surveyObj = {
-    heading: "About You",
+    surveyTitle: "Survey Questions",
+    formHeading: "About You",
     nameLabel: "Name",
     namePlaceholder: "name required",
     photoLabel: "Link to your photo",

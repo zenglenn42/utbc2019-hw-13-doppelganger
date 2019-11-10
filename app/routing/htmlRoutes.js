@@ -55,10 +55,10 @@ function getSurveyBodyHtml(jsObj) {
     }).join("");
     const surveyHtml = `
         <div id="survey-container">
-            <h2>Survey Questions</h2>
+            <h2>${jsObj.surveyTitle}</h2>
             <hr>
             <form id="surveyForm">
-                <legend><h3><strong>${jsObj.heading}</strong></legend>
+                <legend><h3><strong>${jsObj.formHeading}</strong></legend>
                 <label><h4>${jsObj.nameLabel}</h4><input name="name" type="text" placeholder="${jsObj.namePlaceholder}" required></input></label>
                 <label><h4>${jsObj.photoLabel}</h4><input name="photo" type="text" placeholder="${jsObj.photoPlaceholder}" required></input></label>
                 <hr>
