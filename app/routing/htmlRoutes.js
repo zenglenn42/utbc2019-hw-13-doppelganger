@@ -26,6 +26,7 @@ module.exports = function(app) {
 
 function getHomeBodyHtml(jsObj) {
     const homeBodyHtml = `
+        <span id="title" style="display: none">${jsObj.title}</span>
         <h1>${jsObj.callToActionShort}</h1>
         <p>${jsObj.callToActionLong}</p>
         <button id="get-survey-html">${jsObj.buttonText}</button>
@@ -57,7 +58,7 @@ function getSurveyBodyHtml(jsObj) {
             <h2>Survey Questions</h2>
             <hr>
             <form id="surveyForm">
-                <legend><h3><strong>${jsObj.title}</strong></legend>
+                <legend><h3><strong>${jsObj.heading}</strong></legend>
                 <label><h4>${jsObj.nameLabel}</h4><input name="name" type="text" placeholder="${jsObj.namePlaceholder}" required></input></label>
                 <label><h4>${jsObj.photoLabel}</h4><input name="photo" type="text" placeholder="${jsObj.photoPlaceholder}" required></input></label>
                 <hr>

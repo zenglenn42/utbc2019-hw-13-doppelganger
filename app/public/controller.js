@@ -12,6 +12,11 @@ class SurveyController {
     }
 
     initController() {
+        let titleText = document.getElementById("title").innerText;
+        if (titleText) {
+            document.title = titleText;
+        }
+
         // console.log("initController");
         // https://medium.com/@nerdplusdog/a-how-to-guide-for-modal-boxes-with-javascript-html-and-css-6a49d063987e
         this.delegate(document, "click", ".close-btn", (e) => {
