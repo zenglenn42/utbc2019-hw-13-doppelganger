@@ -71,7 +71,7 @@ function getSurveyBodyHtml(jsObj) {
             <div class="modal">
                 <div class="modal-content">
                     <span class="close-btn">&times;</span>
-                    <div id="friendResults">
+                    <div id="results">
                     </div>
                 </div>
             </div>

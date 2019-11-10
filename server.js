@@ -1,7 +1,6 @@
 const express = require("express");
 const app = express();
 const PORT = process.env.PORT || 8080;
-const APP_NAME = "Doppelganger"
 
 // Configure server for incoming posted json in req.body.
 app.use(express.urlencoded({ extended: true }));
@@ -12,5 +11,5 @@ require("./app/routing/jsonRoutes")(app)
 app.get("*", (req, res) => { res.redirect("/"); })
 
 app.listen(PORT, () => {
-    console.log(`${APP_NAME} server listening on port ${PORT}`);
+    console.log(`similarity server listening on port ${PORT}`);
 })

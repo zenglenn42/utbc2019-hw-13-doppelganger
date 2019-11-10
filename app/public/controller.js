@@ -118,25 +118,25 @@ class SurveyController {
                     })
                 }
             }
-        ).then( (friendObj) => {
-            console.log("friendInfo", friendObj)
+        ).then( (resultsObj) => {
+            console.log("resultsObj", resultsObj)
             let modal = document.querySelector(".modal")
             modal.style.display = "block"
-            let friendEl = document.getElementById("friendResults");
+            let resultsEl = document.getElementById("results");
             let resultsHtml = `
-                <h1>No doppelganger found.  You're utterly unique. ;-)</h1>
+                <h1>No results.</h1>
             `
-            if (friendObj.name) {
+            if (resultsObj.name) {
                 resultsHtml = `
-                    <h1>${friendObj.name}</h1>
+                    <h1>${resultsObj.name}</h1>
                 `
-                if (friendObj.photo) {
+                if (resultsObj.photo) {
                     resultsHtml += `
-                    <img class="modal-img" src="${friendObj.photo}" alt="image unavailable">
+                    <img class="modal-img" src="${resultsObj.photo}" alt="image unavailable">
                     `
                 }
             }
-            friendEl.innerHTML = resultsHtml
+            resultsEl.innerHTML = resultsHtml
         })
         .catch(error => {
             if (error.status === 404) {
@@ -199,8 +199,8 @@ class SurveyController {
 //     xhr.setRequestHeader('Content-Type', 'application/json');
 //     xhr.onload = function() {
 //         if (xhr.status === 200) {
-//             var friendInfo = JSON.parse(xhr.responseText);
-//             console.log("friendInfo", friendInfo);
+//             var resultsInfo = JSON.parse(xhr.responseText);
+//             console.log("resultsInfo", resultsInfo);
 //         }
 //     }
 //     xhr.send(JSON.stringify(formDataObj));
