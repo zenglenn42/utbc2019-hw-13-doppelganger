@@ -1,4 +1,4 @@
-# utbc2019-hw-13-similarity-engine [(demo)](https://limitless-mountain-95968.herokuapp.com/)
+# utbc2019-hw-13-similarity-engine [(demo)](https://still-stream-71803.herokuapp.com)
 
 Find a similar survey respondent.
 
@@ -26,7 +26,7 @@ This is not a full CRUD (Create, Retrieve, Update, Delete) application.  Nominal
 * Backend
   * Node.js
   * Express.js
-  * [Functional](https://github.com/zenglenn42/utbc2019-hw-13-doppelganger/blob/c096a76fe929ffb09ff0306ddaa35f57ebbd1975/app/data/survey.js#L33) JS
+  * [Functional](https://github.com/zenglenn42/utbc2019-hw-13-similarity-engine/blob/c096a76fe929ffb09ff0306ddaa35f57ebbd1975/app/data/survey.js#L33) JS
 
 ## Server-side cheet sheet ;-)
 
@@ -64,7 +64,7 @@ Whenever I see a bunch of hardcoded HTML, it just feels wrong.
 * we've limited our frontend options
 * we've complicated support for internationalization
 
-So I make form construction [data driven](https://github.com/zenglenn42/utbc2019-hw-13-doppelganger/blob/c096a76fe929ffb09ff0306ddaa35f57ebbd1975/app/data/survey.js#L6), opting for some server side [HTML generation](https://github.com/zenglenn42/utbc2019-hw-13-doppelganger/blob/c096a76fe929ffb09ff0306ddaa35f57ebbd1975/app/data/survey.js#L30).
+So I make form construction [data driven](https://github.com/zenglenn42/utbc2019-hw-13-similarity-engine/blob/c096a76fe929ffb09ff0306ddaa35f57ebbd1975/app/data/survey.js#L6), opting for some server side [HTML generation](https://github.com/zenglenn42/utbc2019-hw-13-similarity-engine/blob/c096a76fe929ffb09ff0306ddaa35f57ebbd1975/app/data/survey.js#L30).
 
 ```
 const surveyObj = {
@@ -116,7 +116,7 @@ But how do we make those Ajax requests?
 
 Strangely, I feel a bit nostalgic for the XMLHttpRequest interface in the DOM.  It's /the/ archetypal mechanism for supporting Ajax requests originating from the browser so it's now universally supported.  
 
-Plus there are a ton of examples illustrating how to use it with RESTful verbs (GET, POST, etc).  I even wire up my frontend to the server with [XHR](https://github.com/zenglenn42/utbc2019-hw-13-doppelganger/blob/b83fa7bbb5114b53c7d286d6e50c1afb9cb16694/app/public/controller.js#L147) in a low impedance dash to get stuff communicating.
+Plus there are a ton of examples illustrating how to use it with RESTful verbs (GET, POST, etc).  I even wire up my frontend to the server with [XHR](https://github.com/zenglenn42/utbc2019-hw-13-similarity-engine/blob/b83fa7bbb5114b53c7d286d6e50c1afb9cb16694/app/public/controller.js#L147) in a low impedance dash to get stuff communicating.
 
 But that feels a bit too retro.  I mean there's a /reason/ why 3rd party solutions for doing Ajax manifested.
 
@@ -145,7 +145,7 @@ Abandoning jQuery means I need to find an alternative to the hyper-useful:
     $(document).on(event, selector, callback)
 ```
 
-which registers event handlers for dynamically generated DOM elements, exactly the case with our [survey form](https://github.com/zenglenn42/utbc2019-hw-13-doppelganger/blob/bc788df148759719f4c9617a441f8c16d145ac49/app/public/controller.js#L11).
+which registers event handlers for dynamically generated DOM elements, exactly the case with our [survey form](https://github.com/zenglenn42/utbc2019-hw-13-similarity-engine/blob/bc788df148759719f4c9617a441f8c16d145ac49/app/public/controller.js#L11).
 
 [This will suffice](https://stackoverflow.com/questions/30880757/javascript-equivalent-to-on), though it may need to be hardened in production:
 
@@ -177,7 +177,7 @@ It /is/ a bit weird to POST something by calling fetch, though.  Whatever, we al
 
 Happily I find [this resource](https://css-tricks.com/using-fetch/) for using fetch with non-trivial error handling.  (I weather another pang for XHR. :-/)
 
-### Intrinsic Beauty -- [Object Oriented Controller](https://github.com/zenglenn42/utbc2019-hw-13-doppelganger/blob/c7316dab38b248d64d7099f081c8e78678e5049f/app/public/controller.js#L2)
+### Intrinsic Beauty -- [Object Oriented Controller](https://github.com/zenglenn42/utbc2019-hw-13-similarity-engine/blob/c7316dab38b248d64d7099f081c8e78678e5049f/app/public/controller.js#L2)
 
 ![alt](docs/img/hannah-troupe-s5PoKQEHnxk-unsplash.jpg)
 
