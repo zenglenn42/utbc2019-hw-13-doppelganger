@@ -1,8 +1,8 @@
-var friends = require("../data/friends")
+var surveyRespondents = require("../data/friends.js")
 
 module.exports = function(app) {
-    app.get("/friends.json", (req, res) => {
-        res.json(JSON.stringify(friends));
+    app.get("/surveyRespondents.json", (req, res) => {
+        res.json(JSON.stringify(surveyRespondents));
     });
 
     app.post("/submitSurvey.json", (req, res) => {
@@ -15,41 +15,41 @@ module.exports = function(app) {
         console.log("incoming request = req.body ", req.body);
 
         try {
-            let i = findFriend(req.body, friends);
-            let friend = {
-                "name": friends[i].name,
-                "photo": friends[i].photo
+            let i = mostSimilar(req.body, surveyRespondents);
+            let results = {
+                "name": surveyRespondents[i].name,
+                "photo": surveyRespondents[i].photo
             }
             // TODO: Prevent duplicates.
-            friends.push(req.body)
-            res.json(friend)
+            surveyRespondents.push(req.body)
+            res.json(results)
         } catch(e) {
-            console.log("Error: Unable to find a doppelganger.");
+            console.log("Error: Unable to find someone similar.");
             console.log(e)
             res.json({})
         }
     });
     
-    function findFriend(you, friends) {
+    function mostSimilar(you, surveyRespondents) {
         if (!you) {
-            throw new Error("findFriend(): undefined 'you' parameter")
+            throw new Error("mostSimilar(): undefined 'you' parameter")
         }
-        if (friends.length > 0) {
+        if (surveyRespondents.length > 0) {
             let closestSoFar = Infinity;
-            let friendIndex = -1;
+            let index = -1;
             
-            friendIndex = friends.reduce((acc, friend, index) => {
-                let distance = vectorDiff(you.scores, friend.scores);
+            index = surveyRespondents.reduce((acc, respondent, index) => {
+                let distance = vectorDiff(you.scores, respondent.scores);
                 if (distance < closestSoFar) {
                     closestSoFar = distance;
                     acc = index;
                 }
                 return acc;
-            }, friendIndex);
-            if (friendIndex < 0) throw new Error("findFriend(): no friend found")
-            return friendIndex
+            }, index);
+            if (index < 0) throw new Error("mostSimilar(): no similar match found")
+            return index
         } else {
-            throw new Error("findFriend(): empty friends database");
+            throw new Error("mostSimilar(): empty respondends database");
         }
     }
     
