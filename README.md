@@ -334,7 +334,71 @@ and then in the callback that processes results, we enable the modal:
 
 With a couple hours work this morning, I leverage the jsonified UI content to produce an internationalized version of the similarity engine.  New languages can now be added in minutes.
 
-Most of the work is here.  I may go back and add a selection option in the UI to select language.
+Most of the work is [here](https://github.com/zenglenn42/utbc2019-hw-13-similarity-engine/compare/39321344cca8733956fa0d52fcf1939c0c6c557c...2a6564eb9c28c2921ade2ebaff49468cbc11f09f).  I may go back and add a selection option in the UI to select language.
+
+Integration on the frontend happens at the controller level which can be instantiated with a preferred language or modified after the fact through a SurveyController.setLang(lang) method:
+
+```
+<body>
+    <div id="body-container">
+    </div>
+    <script type="text/javascript">
+        document.addEventListener(
+            "DOMContentLoaded",
+            (event) => { surveyController = new SurveyController("es"); }
+                                                                 ----
+        );
+    </script>
+</body>
+```
+this injects a lang parameter into our query url
+
+```
+getHomeBodyHtml(callback) {
+    let queryUrl = `/homeBody.html?lang=${this.lang}`
+                                    -----------------
+    this.getBodyHtml(queryUrl, callback)
+}
+```
+
+which is interpreted by the server:
+
+```
+app.get("/homeBody.html", (req, res) => {
+    let lang = req.query.lang;
+    res.send(getHomeBodyHtml(getHomeBodyObj(lang)));
+});
+```
+
+which performs a look-up into our various translated UI content objects:
+
+```
+const DEFAULT_LANG = "en"
+const homeBodyEn = {
+    title: "Friend Finder",
+    callToActionShort: "Find your mental doppelgänger!",
+    callToActionLong: "Answer a few basic questions then find someone among others who is closest to you in outlook.",
+    buttonText: "Go to Survey"
+}
+
+const homeBodyEs = {
+    title: "Buscador de Amigos",
+    callToActionShort: "Encuentra tu doppelganger mental!",
+    callToActionLong: "Responda algunas preguntas básicas y luego encuentre a alguien más cercano a usted en perspectiva.",
+    buttonText: "Ir a la Encuesta"
+}
+
+const homeBody = {
+    "en": homeBodyEn,
+    "es": homeBodyEs
+}
+
+function getObj(lang = DEFAULT_LANG) {
+    return (homeBody[lang]) ? homeBody[lang] : homeBody[DEFAULT_LANG];
+}
+
+module.exports = getObj;
+```
 
 ## Next Steps
 
