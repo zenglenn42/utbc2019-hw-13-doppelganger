@@ -136,7 +136,7 @@ Despite that alure, I'm keeping jQuery at arm's length.  Sure, it offers enormou
     $.ajax(url[, options])
 ```
 
-But if it's so handy, I may start using some of its DOM manipulation entry points, complicating my efforts to leverage virtual-DOM based technologies (like [React](https://reactjs.org/)) that could improve the user experience down the road.
+But if it's so handy, I (or some maintainer) may start using some of its DOM manipulation entry points, complicating my efforts to leverage virtual-DOM based technologies (like [React](https://reactjs.org/)) that could improve the user experience down the road.
 
 Who knows, maybe one day I'll feel the same way about 3rd party virtual-DOM manipulators as I do about jQuery. :D
 
