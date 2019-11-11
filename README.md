@@ -253,7 +253,7 @@ While leveraging browser-supplied functionality, I employ the 'required' HTML at
     </form>
 ```
 
-Normally, this prevents the user from submitting incomplete forms to the server.  However my initial implementation defeats this desired behavior because I naively hook into the "click" event for the submit button (to bypass non-Ajaxy form processing with ACTION="```<surver-route>```").  That's enough to fool the DOM into thinking I'm going rogue and will take on all validation tasks with my custom submit handler.
+Normally, this prevents the user from submitting incomplete forms to the server.  However my initial implementation defeats this desired behavior because I naively hook into the "click" event for the submit button (to bypass non-Ajaxy form processing with ACTION="```<surver-route>```").  Sadly, that fools the DOM into thinking I'm going rogue and will take on /all/ validation tasks with my custom submit handler.
 
 The trick to get Ajax posting AND non-empty field validation by the browser is to:
 
