@@ -1,6 +1,6 @@
 const path = require("path");
-const homeBodyObj = require("../data/homeBody.js")
-const surveyBodyObj = require("../data/surveyBody.js")
+const getHomeBodyObj = require("../data/homeBody.js")
+const getSurveyBodyObj = require("../data/surveyBody.js")
 
 module.exports = function(app) {
     app.get("/", (req, res) => {
@@ -16,11 +16,13 @@ module.exports = function(app) {
     });
 
     app.get("/homeBody.html", (req, res) => {
-        res.send(getHomeBodyHtml(homeBodyObj));
+        let lang = req.query.lang;
+        res.send(getHomeBodyHtml(getHomeBodyObj(lang)));
     });
 
     app.get("/surveyBody.html", (req, res) => {
-        res.send(getSurveyBodyHtml(surveyBodyObj));
+        let lang = req.query.lang;
+        res.send(getSurveyBodyHtml(getSurveyBodyObj(lang)));
     });
 }
 

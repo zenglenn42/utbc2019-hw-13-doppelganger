@@ -1,11 +1,11 @@
 class SurveyController {
-    constructor() {
+    constructor(lang) {
         // console.log("SurveyController::constructor()");
         
         // Once the rest of the home page body elements are dynamically 
         // added to the DOM, complete controller initialization by
         // adding other event handlers.
-        
+        this.lang = lang
         let initControllerCB = this.initController.bind(this);
         this.getHomeBodyHtml(initControllerCB)
     }
@@ -56,11 +56,12 @@ class SurveyController {
     };
 
     getHomeBodyHtml(callback) {
-        this.getBodyHtml("/homeBody.html", callback)
+        let queryUrl = `/homeBody.html?lang=${this.lang}`
+        this.getBodyHtml(queryUrl, callback)
     }
 
     getSurveyBodyHtml(e) {
-        this.getBodyHtml("/surveyBody.html")
+        this.getBodyHtml(`/surveyBody.html?lang=${this.lang}`)
     }
 
     getApiJson(e) {
