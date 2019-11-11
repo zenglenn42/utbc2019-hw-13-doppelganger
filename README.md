@@ -174,7 +174,7 @@ It seems like the [fetch API](https://developers.google.com/web/ilt/pwa/working-
 * Browser support is decent.
 * It offers a modern, promise-based, usage pattern.
 
-It /is/ a bit weird to POST something by calling fetch, though.  Whatever, we all learned to shut down Windows by pressing start.
+It /is/ a bit weird to [POST something by calling fetch](https://github.com/zenglenn42/utbc2019-hw-13-similarity-engine/blob/a07d40a5a4a0826891dbce0ae40542a5c825bb17/app/public/controller.js#L100), though.  Whatever, we all learned to shut down Windows by pressing start.
 
 Happily I find [this resource](https://css-tricks.com/using-fetch/) for using fetch with non-trivial error handling.  (I weather another pang for XHR. :-/)
 
