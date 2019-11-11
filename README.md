@@ -125,7 +125,7 @@ Arguably, they:
 * offer simpler usage patterns
 * normalize the API (if browser support diverges)
 
-### I break with thee, jQuery
+### I break with thee, jQuery ❌
 
 Despite that alure, I'm keeping jQuery at arm's length.  Sure, it offers enormous utility, including these tasty ajax functions:
 
