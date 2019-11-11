@@ -128,7 +128,7 @@ Arguably, they:
 
 ### I break with thee, jQuery ❌
 
-Despite that alure, I'm keeping jQuery at arm's length.  Sure, it offers enormous utility, including these tasty ajax functions:
+Despite the alure of 3rd party libraries, I'm keeping jQuery at arm's length.  Sure, it offers enormous utility, including these tasty ajax functions:
 
 ```it
     $.get(URL,callback); 
