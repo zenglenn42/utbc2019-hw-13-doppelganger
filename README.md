@@ -53,7 +53,7 @@ However ...
 
 ![alt](docs/img/raphael-schaller-D6uxeDSylxo-unsplash.jpg)
 
-Ajax? jQuery? Bootstrap? Templates? i18n?
+Single Page Application? Static HTML? jQuery? Bootstrap? Templates? i18n?
 
 These are the questions running through my mind.  It's such a simple application but I kinda want to future-proof it a bit.
 
@@ -61,7 +61,7 @@ I could go with a couple static html files, one for the home page, one for the s
 
 It's all very adequate and 90's-ish ... and not what I'm going to do.
 
-### JSON-based Survey Form
+### JS Object-based Survey Form
 
 Whenever I see a bunch of hardcoded HTML, it just feels wrong.  
 
@@ -336,7 +336,7 @@ With a couple hours work this morning, I leverage the jsonified UI content to pr
 
 Most of the work is [here](https://github.com/zenglenn42/utbc2019-hw-13-similarity-engine/compare/39321344cca8733956fa0d52fcf1939c0c6c557c...2a6564eb9c28c2921ade2ebaff49468cbc11f09f).  I may go back and add a selection option in the UI to select language.  Careful readers will notice a bug (which I've [fixed](https://github.com/zenglenn42/utbc2019-hw-13-similarity-engine/commit/5451add1d8c020aa0ade2838b218829a092cf5ed)) with 'Question' not getting translated.
 
-Integration on the frontend happens at the controller level which can be instantiated with a preferred language or modified after the fact through a SurveyController.setLang(lang) method:
+Integration on the frontend happens at the controller level which can be instantiated with a preferred language or modified after the fact through a ```SurveyController.setLang(lang)``` method:
 
 ```
 <body>
