@@ -15,7 +15,11 @@ This is not a full CRUD (Create, Retrieve, Update, Delete) application.  Nominal
 
 ## Minimal Implementation
 
-![alt](docs/img/doppelganger.jpg)
+![alt](docs/img/ui.jpg)
+
+## Ahora en Español ;-)
+
+![alt](docs/img/ui-i18n-es.png)
 
 ## Technology stack
 
@@ -27,6 +31,7 @@ This is not a full CRUD (Create, Retrieve, Update, Delete) application.  Nominal
   * Node.js
   * Express.js
   * [Functional](https://github.com/zenglenn42/utbc2019-hw-13-similarity-engine/blob/c096a76fe929ffb09ff0306ddaa35f57ebbd1975/app/data/survey.js#L33) JS
+  * i18n
 
 ## Server-side cheet sheet ;-)
 
@@ -322,6 +327,14 @@ and then in the callback that processes results, we enable the modal:
 ```
     modal.style.display = "block"
 ```
+
+## i18n anyone?
+
+![alt](ui-i18n-es-320.png)
+
+With a couple hours work this morning, I leverage the jsonified UI content to produce an internationalized version of the similarity engine.  New languages can now be added in minutes.
+
+Most of the work is here.  I may go back and add a selection option in the UI to select language.
 
 ## Next Steps
 

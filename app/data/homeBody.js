@@ -5,17 +5,17 @@
 
 const DEFAULT_LANG = "en"
 const homeBodyEn = {
-    title: "Mind Meld",
-    callToActionShort: "Find your mental doppelgänger",
-    callToActionLong: "Answer a few basic questions then find someone who may be your mental twin.",
+    title: "Friend Finder",
+    callToActionShort: "Find your mental doppelgänger!",
+    callToActionLong: "Answer a few basic questions then find someone among others who is closest to you in outlook.",
     buttonText: "Go to Survey"
 }
 
 const homeBodyEs = {
-    title: "Mind Meldo",
-    callToActionShort: "Find your mental doppelgänger (spanish)",
-    callToActionLong: "Answer a few basic questions then find someone who may be your mental twin.",
-    buttonText: "Go to Survey"
+    title: "Buscador de Amigos",
+    callToActionShort: "Encuentra tu doppelganger mental!",
+    callToActionLong: "Responda algunas preguntas básicas y luego encuentre a alguien más cercano a usted en perspectiva.",
+    buttonText: "Ir a la Encuesta"
 }
 
 const homeBody = {
