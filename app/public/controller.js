@@ -1,5 +1,7 @@
+const DEFAULT_LANG = "en";
+
 class SurveyController {
-    constructor(lang) {
+    constructor(lang = DEFAULT_LANG) {
         // console.log("SurveyController::constructor()");
         
         // Once the rest of the home page body elements are dynamically 
@@ -40,6 +42,14 @@ class SurveyController {
         // 
         this.delegate(document, "submit", "#surveyForm", this.postSurveyForm.bind(this));
         this.delegate(document, "click", "#api-button", this.getApiJson.bind(this));
+    }
+    
+    getLang() {
+        return this.lang
+    }
+
+    setLang(lang) {
+        this.lang = lang;
     }
 
     // https://stackoverflow.com/questions/30880757/javascript-equivalent-to-on
