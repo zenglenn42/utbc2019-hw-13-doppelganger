@@ -330,7 +330,7 @@ and then in the callback that processes results, we enable the modal:
 
 ## i18n anyone?
 
-![alt](ui-i18n-es-320.png)
+![alt](docs/img/ui-i18n-es-320.png)
 
 With a couple hours work this morning, I leverage the jsonified UI content to produce an internationalized version of the similarity engine.  New languages can now be added in minutes.
 
