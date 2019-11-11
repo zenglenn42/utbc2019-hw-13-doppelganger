@@ -97,6 +97,7 @@ What we have now is much more of a similarity /engine/ since we can add or edit 
 
 ![alt](docs/img/black-and-white-round-car-air-filter-159293.jpg)
 
+Even the body of our home page gets distilled into a [js object](https://github.com/zenglenn42/utbc2019-hw-13-similarity-engine/blob/69fbcf7a337f968649b442d4471d38b479af6d25/app/data/homeBody.js#L1) and [reinflated to HTML](https://github.com/zenglenn42/utbc2019-hw-13-similarity-engine/blob/69fbcf7a337f968649b442d4471d38b479af6d25/app/routing/htmlRoutes.js#L27) as needed.
 
 Down the road (when VC clears ;-), we could easily send the raw JSON down to the frontend where it could be clothed in some spiffy [Material UI](https://material-ui.com/) components.
 
