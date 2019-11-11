@@ -2,7 +2,7 @@ var surveyRespondents = require("../data/respondents.js")
 
 module.exports = function(app) {
     app.get("/surveyRespondents.json", (req, res) => {
-        res.json(JSON.stringify(surveyRespondents));
+        res.json(surveyRespondents);
     });
 
     app.post("/submitSurvey.json", (req, res) => {

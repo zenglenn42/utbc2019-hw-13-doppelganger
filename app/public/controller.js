@@ -1,4 +1,3 @@
-
 class SurveyController {
     constructor() {
         // console.log("SurveyController::constructor()");
@@ -24,6 +23,12 @@ class SurveyController {
             modal.style.display = "none"
         });
 
+        // Register click handler for survey button which triggers
+        // get of related html.
+        const surveyButton = document.getElementById("get-survey-html");
+        const getSurveyBodyHtmlCB = this.getSurveyBodyHtml.bind(this)
+        surveyButton.addEventListener("click", getSurveyBodyHtmlCB);
+
         // Register click handler for dynamically added survey form.
         //
         // Responding to the 'submit' event allows us to take advantage of the
@@ -34,11 +39,7 @@ class SurveyController {
         // to be ignored. :-/)
         // 
         this.delegate(document, "submit", "#surveyForm", this.postSurveyForm.bind(this));
-
-        // Register click handler for survey button which triggers
-        // get of related html.
-        var surveyButton = document.getElementById("get-survey-html")
-        surveyButton.addEventListener("click", this.getSurveyBodyHtml.bind(this))
+        this.delegate(document, "click", "#api-button", this.getApiJson.bind(this));
     }
 
     // https://stackoverflow.com/questions/30880757/javascript-equivalent-to-on
@@ -62,6 +63,12 @@ class SurveyController {
         this.getBodyHtml("/surveyBody.html")
     }
 
+    getApiJson(e) {
+        this.getBodyHtml("/surveyRespondents.json", (bodyDiv, body) => {
+            bodyDiv.innerHTML = `<pre>${body}</pre>`
+        });
+    }
+
     getBodyHtml(url, callback) {
         fetch(url).then( response => 
             {
@@ -74,11 +81,11 @@ class SurveyController {
                     })
                 }
             }
-        ).then( bodyHtml => {
+        ).then( body => {
                 var bodyDiv = document.getElementById("body-container");
-                bodyDiv.innerHTML = bodyHtml;
+                bodyDiv.innerHTML = body;
                 if (callback) {
-                    callback();
+                    callback(bodyDiv, body);
                 }
             }
         )

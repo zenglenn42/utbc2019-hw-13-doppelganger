@@ -66,6 +66,7 @@ function getSurveyBodyHtml(jsObj) {
                 <p>
                     <input type="submit" value="${jsObj.submitText}">
                     <input type="reset" value="${jsObj.resetText}">
+                    <input type="button" value="${jsObj.apiText}" id="api-button">
                 </p>
             </form>
             <div class="modal">

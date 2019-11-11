@@ -25,7 +25,8 @@ const surveyObj = {
         "You feel more energetic after spending time with a group of people.",
     ],
     submitText: "Submit",
-    resetText: "Reset"
+    resetText: "Reset",
+    apiText: "API"
 };
 
 module.exports = surveyObj;
