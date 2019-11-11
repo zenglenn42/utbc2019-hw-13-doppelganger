@@ -9,7 +9,7 @@ Find a similar survey respondent.
 
 Implement a full-stack site that takes user survey results and compares those to other users' surveys to deduce and display the name and picture of the user with the most proximate responses.  
 
-The pool of known people is represented by an in-memory array seeded by a static json file.  The array is augmented over time as the site remains operative and new users submit their responses.
+The pool of known people is represented by an in-memory array seeded by a [static js file](https://github.com/zenglenn42/utbc2019-hw-13-similarity-engine/blob/master/app/data/respondents.js).  The array is augmented over time as the site remains operative and new users submit their responses.
 
 This is not a full CRUD (Create, Retrieve, Update, Delete) application.  Nominally only create and retrieve are required at the record level.
 
