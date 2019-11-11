@@ -334,7 +334,7 @@ and then in the callback that processes results, we enable the modal:
 
 With a couple hours work this morning, I leverage the jsonified UI content to produce an internationalized version of the similarity engine.  New languages can now be added in minutes.
 
-Most of the work is [here](https://github.com/zenglenn42/utbc2019-hw-13-similarity-engine/compare/39321344cca8733956fa0d52fcf1939c0c6c557c...2a6564eb9c28c2921ade2ebaff49468cbc11f09f).  I may go back and add a selection option in the UI to select language.
+Most of the work is [here](https://github.com/zenglenn42/utbc2019-hw-13-similarity-engine/compare/39321344cca8733956fa0d52fcf1939c0c6c557c...2a6564eb9c28c2921ade2ebaff49468cbc11f09f).  I may go back and add a selection option in the UI to select language.  Careful readers will notice a bug (which I've [fixed](https://github.com/zenglenn42/utbc2019-hw-13-similarity-engine/commits/)) with 'Question' not getting translated.
 
 Integration on the frontend happens at the controller level which can be instantiated with a preferred language or modified after the fact through a SurveyController.setLang(lang) method:
 

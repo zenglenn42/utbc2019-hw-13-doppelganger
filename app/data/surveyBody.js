@@ -27,7 +27,8 @@ const surveyBodyEn = {
     ],
     submitText: "Submit",
     resetText: "Reset",
-    apiText: "API"
+    apiText: "API",
+    questionText: "Question"
 };
 
 const surveyBodyEs = {
@@ -53,7 +54,8 @@ const surveyBodyEs = {
     ],
     submitText: "Enviar",
     resetText: "Reiniciar",
-    apiText: "API"
+    apiText: "API",
+    questionText: "Pregunta"
 };
 
 const surveyBody = {

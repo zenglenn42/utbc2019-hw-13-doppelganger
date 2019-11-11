@@ -42,7 +42,7 @@ function getSurveyBodyHtml(jsObj) {
     const questionsHtml = jsObj.questions.map((question, index) => {
         let num = index + 1;
         let questionHtml = `
-            <h3><strong>Question ${num}</strong></h3>
+            <h3><strong>${jsObj.questionText} ${num}</strong></h3>
             <h4>${question}</h4>
             <select name="q${num}" class="chosen-select" id="q${num}" required>
                 <option value=""></option>
