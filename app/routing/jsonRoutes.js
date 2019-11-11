@@ -1,4 +1,4 @@
-var surveyRespondents = require("../data/friends.js")
+var surveyRespondents = require("../data/respondents.js")
 
 module.exports = function(app) {
     app.get("/surveyRespondents.json", (req, res) => {
