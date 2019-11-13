@@ -198,7 +198,7 @@ Happily I find [this resource](https://css-tricks.com/using-fetch/) for using fe
 
 ![alt](docs/img/hannah-troupe-s5PoKQEHnxk-unsplash.jpg)
 
-Sometimes appearances can be deceiving.  We judge too soon.  The UI is pretty plain at the moment, but under the covers is a nice object oriented survey controller that enables behavior.  We instantiate it in our home page html:
+Sometimes appearances can be deceiving.  We judge too soon.  The UI is pretty plain at the moment, but under the covers is a nice object oriented survey controller that enables behavior and a goodly flow of HTML (and JSON that could be easily leveraged to beautify the frontend).  Here's how we instantiate the controller:
 
 ```
 <!DOCTYPE html>
