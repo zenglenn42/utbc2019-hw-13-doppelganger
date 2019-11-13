@@ -153,6 +153,11 @@ class SurveyController {
                     <img class="modal-img" src="${resultsObj.photo}" alt="image unavailable">
                     `
                 }
+                if (resultsObj.percentSimilar) {
+                    resultsHtml += `
+                    <h1>${resultsObj.percentSimilar} %</h1>
+                    `
+                }
             }
             resultsEl.innerHTML = resultsHtml
         })
