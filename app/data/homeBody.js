@@ -9,6 +9,8 @@ const homeBodyEn = {
     callToActionShort: "Find your mental doppelgänger!",
     callToActionLong: "Answer a few basic questions then find someone among others who is closest to you in outlook.",
     buttonText: "Go to Survey",
+    similarResults: "Most Similar",
+    dissimilarResults: "Least Similar",
     similarText: "similar"
 }
 
@@ -17,7 +19,9 @@ const homeBodyEs = {
     callToActionShort: "Encuentra tu doppelganger mental!",
     callToActionLong: "Responda algunas preguntas básicas y luego encuentre a alguien más cercano a usted en perspectiva.",
     buttonText: "Ir a la Encuesta",
-    similarText: "similario"    // TODO: translate me!
+    similarResults: "Muy Sympatico",    // TODO: translate me!
+    dissimilarResults: "Poquito Sympatico",
+    similarText: "sympatico"
 }
 
 const homeBody = {

@@ -16,13 +16,16 @@ module.exports = function(app) {
 
         try {
             newRespondent = req.body;
-            let [i, percentSimilar] = mostSimilar(newRespondent, surveyRespondents);
+            let [mostSimilarIndex, mostPercent, leastSimilarIndex, leastPercent] = mostSimilar(newRespondent, surveyRespondents);
             let results = {
-                "name": surveyRespondents[i].name,
-                "photo": surveyRespondents[i].photo,
-                "percentSimilar": percentSimilar.toFixed(0)
+                "name": surveyRespondents[mostSimilarIndex].name,
+                "photo": surveyRespondents[mostSimilarIndex].photo,
+                "percent": mostPercent.toFixed(0),
+                "nameLeast": surveyRespondents[leastSimilarIndex].name,
+                "photoLeast": surveyRespondents[leastSimilarIndex].photo,
+                "percentLeast": leastPercent.toFixed(0)
             }
-            console.log("mostSimilar =", results);
+            console.log("results =", results);
             // TODO: Prevent duplicates.
             // surveyRespondents.push(req.body)
             res.json(results)
@@ -40,12 +43,14 @@ module.exports = function(app) {
 
         if (surveyRespondents.length > 0) {
             acc = {
-                l2Index: -1,
-                l2Percent: 0,
+                indexL2MaxSimilar: -1,
+                indexL2MinSimilar: -1,
+                percentL2MaxSimilar: 0,
+                percentL2MinSimilar: 100,
                 l2Min: Infinity,
                 l2Max: 0,
                 l2Distances: [],
-                l2Percents: [],
+                percentL2Similarities: [],
                 // cosIndex: -1,
                 // cosPercent: 0,
                 // cosDistances: [],
@@ -58,10 +63,11 @@ module.exports = function(app) {
                 acc.l2Distances.push(l2);
                 if (l2 < acc.l2Min) {
                     acc.l2Min = l2;
-                    acc.l2Index = index;
+                    acc.indexL2MaxSimilar = index;
                 }
                 if (l2 > acc.l2Max) {
                     acc.l2Max = l2;
+                    acc.indexL2MinSimilar = index;
                 }
 
                 // Cosine distance is a number between 1 and -1
@@ -93,23 +99,34 @@ module.exports = function(app) {
             let l2MaxDistance = euclidianDistance(minScores, maxScores);
 
             for (let i = 0; i < acc.l2Distances.length; i++) {
-                let l2Percent = (1.0 - acc.l2Distances[i]/l2MaxDistance) * 100;
-                acc.l2Percents.push(l2Percent);
-                if (l2Percent > acc.l2Percent) {
-                    acc.l2Percent = l2Percent;
-                    acc.l2Index = i;
+                let percentL2Similar = (1.0 - acc.l2Distances[i]/l2MaxDistance) * 100;
+                acc.percentL2Similarities.push(percentL2Similar);
+                if (percentL2Similar > acc.percentL2MaxSimilar) {
+                    acc.percentL2MaxSimilar = percentL2Similar;
+                    acc.indexL2MaxSimilar = i;
+                }
+                if (percentL2Similar < acc.percentL2MinSimilar) {
+                    acc.percentL2MinSimilar = percentL2Similar;
+                    acc.indexL2MinSimilar = i;
                 }
             }
 
-            if (acc.l2Index < 0) throw new Error("mostSimilar(): no similar match found")
+            if (acc.indexL2MaxSimilar < 0) throw new Error("mostSimilar(): no similar match found")
+
             // console.log("acc.cosPercent =", acc.cosPercent);
             // console.log("cosDistances =", acc.cosDistances);
             // console.log("cosPercents =", acc.cosPercents);
             // console.log("acc.l2Distances =", acc.l2Distances);
-            // console.log("acc.l2Percent =", acc.l2Percent);
-            console.log("acc.l2Percents =", acc.l2Percents);
-            console.log("acc.l2Index =", acc.l2Index);
-            return [acc.l2Index, acc.l2Percent]
+            // console.log("acc.percentL2MaxSimilar =", acc.percentL2MaxSimilar);
+            console.log("acc.percentL2Similarities =", acc.percentL2Similarities);
+            console.log("acc.indexL2MaxSimilar =", acc.indexL2MaxSimilar);
+            console.log("acc.indexL2MinSimilar =", acc.indexL2MinSimilar);
+            return [
+                acc.indexL2MaxSimilar,
+                acc.percentL2MaxSimilar,
+                acc.indexL2MinSimilar,
+                acc.percentL2MinSimilar
+            ];
         } else {
             throw new Error("mostSimilar(): empty respondends database");
         }

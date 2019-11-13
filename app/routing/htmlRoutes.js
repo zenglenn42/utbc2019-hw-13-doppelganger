@@ -30,6 +30,8 @@ function getHomeBodyHtml(jsObj) {
     const homeBodyHtml = `
         <span id="title" style="display: none">${jsObj.title}</span>
         <span id="similar" style="display: none">${jsObj.similarText}</span>
+        <span id="similarResults" style="display: none">${jsObj.similarResults}</span>
+        <span id="dissimilarResults" style="display: none">${jsObj.dissimilarResults}</span>
         <h1>${jsObj.callToActionShort}</h1>
         <p>${jsObj.callToActionLong}</p>
         <button id="get-survey-html">${jsObj.buttonText}</button>

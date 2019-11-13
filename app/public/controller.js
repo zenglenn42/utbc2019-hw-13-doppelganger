@@ -16,6 +16,8 @@ class SurveyController {
         console.log("initController this =", this);
         let titleText = document.getElementById("title").innerText;
         this.similarText = document.getElementById("similar").innerText;
+        this.similarResults = document.getElementById("similarResults").innerText;
+        this.dissimilarResults = document.getElementById("dissimilarResults").innerText;
         if (titleText) {
             document.title = titleText;
         }
@@ -148,17 +150,34 @@ class SurveyController {
             `
             if (resultsObj.name) {
                 resultsHtml = `
-                    <h1>${resultsObj.name}</h1>
+                    <h1>${this.similarResults}</h1>
+                    <h2>${resultsObj.name}</h2>
                 `
                 if (resultsObj.photo) {
                     resultsHtml += `
                     <img class="modal-img" src="${resultsObj.photo}" alt="image unavailable">
                     `
                 }
-                if (resultsObj.percentSimilar) {
+                if (resultsObj.percent) {
                     resultsHtml += `
-                    <h1>${resultsObj.percentSimilar}% ${this.similarText}</h1>
+                    <h2>${resultsObj.percent}% ${this.similarText}</h2>
                     `
+                }
+                if (resultsObj.nameLeast) {
+                    resultsHtml += `
+                        <h1>${this.dissimilarResults}</h1>
+                        <h2>${resultsObj.nameLeast}</h2>
+                    `
+                    if (resultsObj.photoLeast) {
+                        resultsHtml += `
+                        <img class="modal-img" src="${resultsObj.photoLeast}" alt="image unavailable">
+                        `
+                    }
+                    if (resultsObj.percentLeast) {
+                        resultsHtml += `
+                        <h1>${resultsObj.percentLeast}% ${this.similarText}</h1>
+                        `
+                    }
                 }
             }
             resultsEl.innerHTML = resultsHtml
