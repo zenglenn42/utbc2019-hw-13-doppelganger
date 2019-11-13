@@ -8,14 +8,16 @@ const homeBodyEn = {
     title: "Friend Finder",
     callToActionShort: "Find your mental doppelgänger!",
     callToActionLong: "Answer a few basic questions then find someone among others who is closest to you in outlook.",
-    buttonText: "Go to Survey"
+    buttonText: "Go to Survey",
+    similarText: "similar"
 }
 
 const homeBodyEs = {
     title: "Buscador de Amigos",
     callToActionShort: "Encuentra tu doppelganger mental!",
     callToActionLong: "Responda algunas preguntas básicas y luego encuentre a alguien más cercano a usted en perspectiva.",
-    buttonText: "Ir a la Encuesta"
+    buttonText: "Ir a la Encuesta",
+    similarText: "similario"    // TODO: translate me!
 }
 
 const homeBody = {

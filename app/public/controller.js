@@ -13,7 +13,9 @@ class SurveyController {
     }
 
     initController() {
+        console.log("initController this =", this);
         let titleText = document.getElementById("title").innerText;
+        this.similarText = document.getElementById("similar").innerText;
         if (titleText) {
             document.title = titleText;
         }
@@ -125,7 +127,7 @@ class SurveyController {
                 },
                 body: JSON.stringify(formDataObj)
             }
-        ).then( response => 
+        ).then(response => 
             {
                 if (response.ok) {
                     return response.json()
@@ -136,7 +138,7 @@ class SurveyController {
                     })
                 }
             }
-        ).then( (resultsObj) => {
+        ).then(resultsObj => {
             console.log("resultsObj", resultsObj)
             let modal = document.querySelector(".modal")
             modal.style.display = "block"
@@ -155,7 +157,7 @@ class SurveyController {
                 }
                 if (resultsObj.percentSimilar) {
                     resultsHtml += `
-                    <h1>${resultsObj.percentSimilar} %</h1>
+                    <h1>${resultsObj.percentSimilar}% ${this.similarText}</h1>
                     `
                 }
             }

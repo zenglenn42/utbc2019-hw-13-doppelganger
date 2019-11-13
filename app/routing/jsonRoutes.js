@@ -15,14 +15,16 @@ module.exports = function(app) {
         console.log("incoming request = req.body ", req.body);
 
         try {
-            let [i, percentSimilar] = mostSimilar(req.body, surveyRespondents);
+            newRespondent = req.body;
+            let [i, percentSimilar] = mostSimilar(newRespondent, surveyRespondents);
             let results = {
                 "name": surveyRespondents[i].name,
                 "photo": surveyRespondents[i].photo,
                 "percentSimilar": percentSimilar.toFixed(0)
             }
+            console.log("mostSimilar =", results);
             // TODO: Prevent duplicates.
-            surveyRespondents.push(req.body)
+            // surveyRespondents.push(req.body)
             res.json(results)
         } catch(e) {
             console.log("Error: Unable to find someone similar.");
@@ -38,87 +40,130 @@ module.exports = function(app) {
 
         if (surveyRespondents.length > 0) {
             acc = {
-                cosIndex: -1,
-                cosPercent: 0,
-                cosDistances: [],
                 l2Index: -1,
+                l2Percent: 0,
                 l2Min: Infinity,
+                l2Max: 0,
                 l2Distances: [],
-                similarIndex: -1
+                l2Percents: [],
+                // cosIndex: -1,
+                // cosPercent: 0,
+                // cosDistances: [],
+                // cosPercents: [],
             }
             acc = surveyRespondents.reduce((acc, respondent, index) => {
-                // Cosine distance (between -1 and 1) is our primary indicator of survey
-                // sentiment similarity ... the vectors are pointing in the same general
-                // direction. 1 is 100% similar, -1 is 0% similar.
-                let cos = cosineDistance(you.scores, respondent.scores);
-                acc.cosDistances.push(cos);
-                let percent = ((cos + 1.0) / 2.0) * 100.0;
-                if (percent > acc.cosPercent) {
-                    acc.cosPercent = percent;
-                    acc.cosIndex = index;
-                    acc.similarIndex = index;
-                }
-
-                // Euclidian distance is our secondary indicator of similarity.
-                // Smaller distance is more similar.
+                // Euclidian distance is the distance between the tips of
+                // two vectors.
                 let l2 = euclidianDistance(you.scores, respondent.scores);
                 acc.l2Distances.push(l2);
                 if (l2 < acc.l2Min) {
                     acc.l2Min = l2;
                     acc.l2Index = index;
                 }
+                if (l2 > acc.l2Max) {
+                    acc.l2Max = l2;
+                }
+
+                // Cosine distance is a number between 1 and -1
+                // and represents the cosine of the angle between two vectors.
+                //  1 == 100% similar
+                // -1 ==   0% similar
+                //
+                // I find this leads to /very/ close clustering around what should
+                // be diverging survey responses. :-/
+
+                // let cos = cosineDistance(you.scores, respondent.scores);
+                // acc.cosDistances.push(cos);
+                // let percent = ((cos + 1.0) / 2.0) * 100.0;
+                // acc.cosPercents.push(percent.toFixed(0));
+                // if (percent > acc.cosPercent) {
+                //     acc.cosPercent = percent;
+                //     acc.cosIndex = index;
+                // }
+
                 return acc;
             }, acc);
 
-            let minL2Distance = acc.l2Distances[acc.cosIndex];
+            let minScores = [];
+            let maxScores = [];
+            you.scores.map( () => {
+                minScores.push('1');    // TODO: Derive
+                maxScores.push('5');    // TODO: Derive
+            });
+            let l2MaxDistance = euclidianDistance(minScores, maxScores);
+
             for (let i = 0; i < acc.l2Distances.length; i++) {
-                if (acc.cosIndex != i) {
-                    if (acc.cosDistances[acc.cosIndex] == acc.cosDistances[i]) {
-                        if (acc.l2Distances[i] < minL2Distance) {
-                            minL2Distance = acc.l2Distances[i];
-                            acc.similarIndex = i;
-                        }
-                    }
+                let l2Percent = (1.0 - acc.l2Distances[i]/l2MaxDistance) * 100;
+                acc.l2Percents.push(l2Percent);
+                if (l2Percent > acc.l2Percent) {
+                    acc.l2Percent = l2Percent;
+                    acc.l2Index = i;
                 }
             }
 
-            if (acc.similarIndex < 0) throw new Error("mostSimilar(): no similar match found")
-            return [acc.similarIndex, acc.cosPercent]
+            if (acc.l2Index < 0) throw new Error("mostSimilar(): no similar match found")
+            // console.log("acc.cosPercent =", acc.cosPercent);
+            // console.log("cosDistances =", acc.cosDistances);
+            // console.log("cosPercents =", acc.cosPercents);
+            // console.log("acc.l2Distances =", acc.l2Distances);
+            // console.log("acc.l2Percent =", acc.l2Percent);
+            console.log("acc.l2Percents =", acc.l2Percents);
+            console.log("acc.l2Index =", acc.l2Index);
+            return [acc.l2Index, acc.l2Percent]
         } else {
             throw new Error("mostSimilar(): empty respondends database");
         }
     }
 
-    function cosineDistance(s1, s2, normalizeToVector = zeroMedian) {
-        let v = normalizeToVector(s1);
-        let w = normalizeToVector(s2);
-        return dotProduct(v, w) / (norm(v) * norm(w))
+    function cosineDistance(s1, s2, normalize = normalizeVector) {
+        let v = normalize(s1);
+        let w = normalize(s2);
+        let normV = norm(v);
+        let normW = norm(w);
+        if (normV == 0) throw new Error("cosineDistance: division by 0-vector");
+        if (normW == 0) throw new Error("cosineDistance: division by 0-vector");
+        return dotProduct(v, w) / (normV * normW)
     }
     
-    function euclidianDistance(s1, s2, normalizeToVector = zeroMedian) {
+    function euclidianDistance(s1, s2, normalize = zeroMedian) {
         if (s1.length !== s2.length) {
-            throw new Error("vectorDiff(): score array length mismatch");
+            throw new Error("euclidianDistance(): score array length mismatch");
         }
         let sigma = 0;
-        let v1 = normalizeToVector(s1);
-        let v2 = normalizeToVector(s2);
+        let v1 = normalize(s1);
+        let v2 = normalize(s2);
         for (let i = 0; i < s1.length; i++) {
             sigma += Math.pow(v1[i] - v2[i], 2);
         }
         return Math.sqrt(sigma);
     }
 
-    const RAW_MID_VALUE = 3; // TODO: Derive this.
-    function zeroMedian(v, bias = RAW_MID_VALUE) {
+    function normalizeVector(v) {
+        return v.map((coord) => {
+            let iCoord = parseInt(coord);
+            if (isNaN(iCoord)) {
+                throw new Error(`normalizeVector: vector coord (${coord}) is non-numeric`);
+            }
+            return iCoord;
+        })
+    }
 
-        // Shift raw scores from:
-        //      1 thru 5 
-        // to: -2 thru 2
-        //
-        // This creates a true vector since it can now be a member of a vector space
-        // which must contain the null vector (or [0, 0, 0, 0, 0] in this case.
+    // The following transforms survey response values
+    //
+    //  from:     1 through 5
+    //  to:      -2 through 2
+    //
+    // This ensures opposing sentiment is modeled by opposing
+    // vector direction:
+    //                     -2     0      2
+    //   strongly disagree <--+-- * --+--> strongly agree
+    //
+    // That should yield a better spread of overall resultant vector
+    // distances.
 
-        return v.map(coord => {
+    const BIAS_LEFT = 3;
+    function zeroMedian(v, bias = BIAS_LEFT) {
+        return v.map((coord) => {
             let iCoord = parseInt(coord);
             if (isNaN(iCoord)) {
                 throw new Error(`zeroMedian: vector coord (${coord}) is non-numeric`);
@@ -138,10 +183,13 @@ module.exports = function(app) {
 
     function norm(v) {
         let n = 0;
-        n = v.map(coord => Math.pow(coord, 2)).reduce((n, sqrdCoord, index) => {
+        n = v.map(coord => Math.pow(coord, 2))
+             .reduce(
+                 (n, sqrdCoord, index) => {
                         n += sqrdCoord
                         return (index == v.length - 1) ? Math.sqrt(n) : n
-                  }, n);
+                    }, 
+                  n);
         return n;
     }
 }
