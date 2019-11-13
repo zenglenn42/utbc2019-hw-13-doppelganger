@@ -32,6 +32,8 @@ This is not a full CRUD (Create, Retrieve, Update, Delete) application.  Nominal
   * Express.js
   * [Functional](https://github.com/zenglenn42/utbc2019-hw-13-similarity-engine/blob/c096a76fe929ffb09ff0306ddaa35f57ebbd1975/app/data/survey.js#L33) JS
   * i18n
+  * Model Analytics
+    * L2 similarity
 
 ## Server-side cheet sheet ;-)
 
@@ -44,7 +46,7 @@ I know the point of this exercise is just to:
 * slap together a web server
 * present a form to the user
 * post user data to the backend
-* perform a server-side calculation
+* perform a server-side similarity calculation
 * present results to the frontend
 
 However ...
@@ -53,13 +55,22 @@ However ...
 
 ![alt](docs/img/raphael-schaller-D6uxeDSylxo-unsplash.jpg)
 
-Single Page Application? Static HTML? jQuery? Bootstrap? Templates? i18n?
+* Backend
+    * What kind of similarity?
+        * L1, L2, Cosine?
+    * Single Page Application or Static HTML?
+* Frontend
+    * jQuery? 
+    * Bootstrap? 
+    * Templates? 
+* Internationalization
+    * i18n?
 
 These are the questions running through my mind.  It's such a simple application but I kinda want to future-proof it a bit.
 
 I could go with a couple static html files, one for the home page, one for the survey.  The survey could hardcode a route for scoring the response data and return a match from the in-memory respondents list.
 
-It's all very adequate and 90's-ish ... and not what I'm going to do.
+It's all very adequate and mid-90's ... and not what I'm going to do.
 
 ### JS Object-based Survey Form
 
@@ -328,7 +339,7 @@ and then in the callback that processes results, we enable the modal:
     modal.style.display = "block"
 ```
 
-## i18n anyone?
+## Internationalization
 
 ![alt](docs/img/ui-i18n-es-320.png)
 
@@ -400,7 +411,33 @@ function getObj(lang = DEFAULT_LANG) {
 module.exports = getObj;
 ```
 
-## Next Steps
+## % Similarity
+
+I want the number.  
+
+Yeah, I've plugged in a similarity calculation and I'm returning the "most similar" respondent.  But /how similar/ are their survey responses to my user's responses?  I mean, if I only have one person in my pool of respondents, the app will blithely tell you this person is your best match.  Given human exhuberance, you may think they're your soulmate because you don't realize they are only 17% similar.  Are there several respondents that are 97%, 98%, 99% similar?  A decent app would maybe return multiple "highly similar" matches to give you some options in your quest for similarity.
+
+So I take another look a the similarity calculation and deriving a % similar metric to report back to the user.  Quantified similarity would be a huge value-add and represents the model by which input data is transformed into interesting results.
+
+The specification suggests a simple L1 distance calculation whereby a summation of deltas are calculated between the user's responses and the responsones of a pool of survey respondents.  The smallest result would be one measure of affinity between two respondents.
+
+A brief online survey yields two other popular approaches to computing similarity, L2 and cosine distance.  L2 is the classic Pythogorean distance formula.  If you model a completed survey as a vector, with each question corresponding to an axis in vector space, you can compute the distance between any two surveys by taking the square root of the summation of each question-response coordinate difference squared.
+
+The other approach is to compute the angle or, for performance reasons, the cosine of the angle between any two survey vectors.  A small angle between two survey vectors indicates an overall similarity of outlook.  A cosine close to 1 would indicate strong similarity whereas a cosine of -1 would reflect two dissimilar survey response sets.
+
+According to literature, similarity metrics involve science and art, suggesting I may need to play with multiple methods or create a hybrid weighting of methods for reasonable results.
+
+My initial implementation of cosine distance yields a high degree of clustering in the 90% - 98% range with test data.  I also notice a high degree of sensitivity to computed similarity when altering the responses on a single question.  I'm sad.  Intuitively, I want to see a wider spread of values and less sensitivity when altering the response to a single question or two.
+
+I fall back on an L2 implementation which shifts the median value of 3 in the response value to the origin.  This ensures that vectors for 'strongly agree' versus 'strongly disagree' responses have 180 degree orientations.  This method gives a nice spread of % similarity results and is less prone to wild swings in overall affinity when altering a single question's response value.  To compute % similarity I calculate the distance between the two most extreme response sets (all questions marked as 'strongly disagree' versus all marked 'strongly agree).  This maximal theoretical distance becomes my denominator while the distances between my user's responses and the pool of existing responses become the numerators.  Now I have a not horrible measure of % similarity I can pass back to the user.
+
+If I were to commercialize this code, I'd dig more deeply into the analytics or consult my awesome math friends. It seemes reasonable to make the code configurable with 'similarity scoring' functions that could be passed in for different kinds of survey data.  I also think about how different questions may actually fall along the same axis especially in psychometric data.  That should be accounted for in a more sophisticated scoring model.
+
+For now, I'm in good enough territory.  As an easter egg, I also pass back the most and least similar respondents.  Sometimes it's good to be challenged by contrarians. ;-)
+
+![alt](docs/img/ui-percent-similar.png)
+
+# Next Steps
 
 * The UI could use some improvement. ;-)
     * It would be relatively easy to leverage React and some Material UI components.

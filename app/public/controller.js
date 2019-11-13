@@ -175,7 +175,7 @@ class SurveyController {
                     }
                     if (resultsObj.percentLeast) {
                         resultsHtml += `
-                        <h1>${resultsObj.percentLeast}% ${this.similarText}</h1>
+                        <h2>${resultsObj.percentLeast}% ${this.similarText}</h2>
                         `
                     }
                 }
