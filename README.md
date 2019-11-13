@@ -43,11 +43,11 @@ Refresh your brain [here](docs/notes.md).
 
 I know the point of this exercise is just to:
 
-* slap together a web server
+* deploy a simple Node.js Express web server
 * present a form to the user
-* post user data to the backend
+* post user response data to the backend
 * perform a server-side similarity calculation
-* present results to the frontend
+* present a similarity match to the frontend
 
 However ...
 
