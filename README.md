@@ -13,7 +13,7 @@ The pool of known people is represented by an in-memory array seeded by a [stati
 
 This is not a full CRUD (Create, Retrieve, Update, Delete) application.  Nominally only create and retrieve are required at the record level.
 
-## Minimal Implementation
+## Minimal Viable Product (MVP)
 
 ![alt](docs/img/ui.jpg)
 
