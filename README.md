@@ -17,9 +17,11 @@ This is not a full CRUD (Create, Retrieve, Update, Delete) application.  Nominal
 
 ![alt](docs/img/ui.jpg)
 
-## Ahora en Español ;-)
+## MVP + Internationalization
 
-![alt](docs/img/ui-i18n-es.png)
+Make our application accessible by ~2 billion people by supporting the top 4 spoken languages.
+
+![alt](docs/img/ui-i18n-top4.png)
 
 ## Technology stack
 
@@ -32,6 +34,10 @@ This is not a full CRUD (Create, Retrieve, Update, Delete) application.  Nominal
   * Express.js
   * [Functional](https://github.com/zenglenn42/utbc2019-hw-13-similarity-engine/blob/c096a76fe929ffb09ff0306ddaa35f57ebbd1975/app/data/survey.js#L33) JS
   * i18n
+    * Chinese
+    * Spanish
+    * English
+    * Hindi
   * Model Analytics
     * L2 similarity
 
@@ -341,7 +347,7 @@ and then in the callback that processes results, we enable the modal:
 
 ## Internationalization
 
-![alt](docs/img/ui-i18n-es-320.png)
+![alt](docs/img/ui-i18n-top4-320.png)
 
 With a couple hours work this morning, I leverage the jsonified UI content to produce an internationalized version of the similarity engine.  New languages can now be added in minutes.
 
@@ -421,7 +427,11 @@ So I take another look a the similarity calculation and deriving a % similar met
 
 The specification suggests a simple L1 distance calculation whereby a summation of deltas are calculated between the user's responses and the responsones of a pool of survey respondents.  The smallest result would be one measure of affinity between two respondents.
 
-A brief online survey yields two other popular approaches to computing similarity, L2 and cosine distance.  L2 is the classic Pythogorean distance formula.  If you model a completed survey as a vector, with each question corresponding to an axis in vector space, you can compute the distance between any two surveys by taking the square root of the summation of each question-response coordinate difference squared.
+A brief online survey yields two other popular approaches to computing similarity, [L2](https://en.wikipedia.org/wiki/Euclidean_distance) and [cosine](https://en.wikipedia.org/wiki/Cosine_similarity).  L2 is the classic Euclidean distance formula.  If you model a completed survey as a vector, with each question corresponding to an axis in vector space, you can compute the distance between any two surveys by taking the square root of the summation of each question-response coordinate difference squared.
+
+![alt](docs/img/l2-ndim.png)
+
+##### CC-SA 3.0 https://en.wikipedia.org/wiki/Euclidean_distance
 
 The other approach is to compute the angle or, for performance reasons, the cosine of the angle between any two survey vectors.  A small angle between two survey vectors indicates an overall similarity of outlook.  A cosine close to 1 would indicate strong similarity whereas a cosine of -1 would reflect two dissimilar survey response sets.
 
