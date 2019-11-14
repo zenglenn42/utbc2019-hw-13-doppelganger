@@ -425,7 +425,7 @@ Yeah, I've plugged in a similarity calculation and I'm returning the "most simil
 
 So I take another look a the similarity calculation and deriving a % similar metric to report back to the user.  Quantified similarity would be a huge value-add and represents the model by which input data is transformed into interesting results.
 
-The specification suggests a simple L1 distance calculation whereby a summation of deltas are calculated between the user's responses and the responsones of a pool of survey respondents.  The smallest result would be one measure of affinity between two respondents.
+The specification suggests a simple [L1 distance](https://en.wikipedia.org/wiki/Taxicab_geometry) calculation whereby a summation of deltas are calculated between the user's responses and the responsones of a pool of survey respondents.  The smallest result would be one measure of affinity between two respondents.
 
 A brief online survey yields two other popular approaches to computing similarity, [L2](https://en.wikipedia.org/wiki/Euclidean_distance) and [cosine](https://en.wikipedia.org/wiki/Cosine_similarity).  L2 is the classic Euclidean distance formula.  If you model a completed survey as a vector, with each question corresponding to an axis in vector space, you can compute the distance between any two surveys by taking the square root of the summation of each question-response coordinate difference squared.
 
