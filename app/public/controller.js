@@ -61,7 +61,18 @@ class SurveyController {
     changeLangCB(e) {
         const langSelect = document.getElementById("select-lang");
         this.setLang(langSelect.value);
-        this.getHomeBodyHtml(this.initController.bind(this));
+        let bodyDiv = document.getElementById("body-container");
+        let page = bodyDiv.getAttribute("page");
+        switch(page) {
+            case "survey":
+                this.getSurveyBodyHtml();
+                break;
+
+            case "home":
+            default:
+                this.getHomeBodyHtml(this.initController.bind(this));
+        }
+  
         // Hacky way to get body div to refresh with new lang.
         this.elRedraw("body-container");
         let bc = document.getElementById("body-container");
@@ -99,11 +110,14 @@ class SurveyController {
 
     getHomeBodyHtml(callback) {
         let queryUrl = `/homeBody.html?lang=${this.lang}`
-        this.getBodyHtml(queryUrl, callback)
+        let page = "home"
+        this.getBodyHtml(queryUrl, page, callback)
     }
 
     getSurveyBodyHtml(e) {
-        this.getBodyHtml(`/surveyBody.html?lang=${this.lang}`)
+        let queryUrl = `/surveyBody.html?lang=${this.lang}`
+        let page = "survey"
+        this.getBodyHtml(queryUrl, page)
     }
 
     getApiJson(e) {
@@ -112,7 +126,7 @@ class SurveyController {
         });
     }
 
-    getBodyHtml(url, callback) {
+    getBodyHtml(url, page, callback) {
         fetch(url).then( response => 
             {
                 if (response.ok) {
@@ -127,6 +141,7 @@ class SurveyController {
         ).then( body => {
                 var bodyDiv = document.getElementById("body-container");
                 bodyDiv.innerHTML = body;
+                bodyDiv.setAttribute("page", page);
                 if (callback) {
                     callback(bodyDiv, body);
                 }
