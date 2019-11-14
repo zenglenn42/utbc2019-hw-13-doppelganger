@@ -347,11 +347,14 @@ and then in the callback that processes results, we enable the modal:
 
 ## Internationalization
 
+With a couple hours [work](https://github.com/zenglenn42/utbc2019-hw-13-similarity-engine/compare/39321344cca8733956fa0d52fcf1939c0c6c557c...2a6564eb9c28c2921ade2ebaff49468cbc11f09f) this morning, I leverage the jsonified UI content to produce an internationalized version of the similarity engine.  
+
+New languages can now be added in minutes.  For fun, I add Spanish, Hindi, and Chinese by just editing two files:
+
+* i18n [home page](https://github.com/zenglenn42/utbc2019-hw-13-similarity-engine/blob/a7a69c3546f9bdc4cec33ebab549ee28235d1956/app/data/homeBody.js#L19)
+* i18n [survey page](https://github.com/zenglenn42/utbc2019-hw-13-similarity-engine/blob/a7a69c3546f9bdc4cec33ebab549ee28235d1956/app/data/surveyBody.js#L34)
+
 ![alt](docs/img/ui-i18n-top4-320.png)
-
-With a couple hours work this morning, I leverage the jsonified UI content to produce an internationalized version of the similarity engine.  New languages can now be added in minutes.
-
-Most of the work is [here](https://github.com/zenglenn42/utbc2019-hw-13-similarity-engine/compare/39321344cca8733956fa0d52fcf1939c0c6c557c...2a6564eb9c28c2921ade2ebaff49468cbc11f09f).  I may go back and add a language selection option in the UI.
 
 Integration on the frontend happens at the controller level which can be instantiated with a preferred language or modified after the fact through a ```SurveyController.setLang(lang)``` method:
 
