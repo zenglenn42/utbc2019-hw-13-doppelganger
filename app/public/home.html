@@ -11,10 +11,24 @@
 <body>
     <div id="body-container">
     </div>
+    <footer style="background-color: #ddd">
+        <hr/>
+        <p>Language:
+            <select name="lang" id="select-lang">
+                <option value="en" selected>English</option>
+                <option value="es">Español</option>
+                <option value="zh">简体中文</option>
+                <option value="hi">हिंदी</option>
+            </select>
+        </p>
+        <p>Powered by Similarity Engine &copy;</p>
+    </footer>
     <script type="text/javascript">
         document.addEventListener(
             "DOMContentLoaded",
-            (event) => { surveyController = new SurveyController("en"); }
+            (event) => {
+                surveyController = new SurveyController(); 
+            }
         );
     </script>
 </body>

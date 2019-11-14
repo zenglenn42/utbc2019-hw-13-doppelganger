@@ -7,13 +7,12 @@ class SurveyController {
         // Once the rest of the home page body elements are dynamically 
         // added to the DOM, complete controller initialization by
         // adding other event handlers.
-        this.lang = lang
+        this.lang = lang;
         let initControllerCB = this.initController.bind(this);
         this.getHomeBodyHtml(initControllerCB)
     }
 
     initController() {
-        console.log("initController this =", this);
         let titleText = document.getElementById("title").innerText;
         this.similarText = document.getElementById("similar").innerText;
         this.similarResults = document.getElementById("similarResults").innerText;
@@ -35,6 +34,9 @@ class SurveyController {
         const getSurveyBodyHtmlCB = this.getSurveyBodyHtml.bind(this)
         surveyButton.addEventListener("click", getSurveyBodyHtmlCB);
 
+        const langSelect = document.getElementById("select-lang");
+        langSelect.addEventListener("change", this.changeLangCB.bind(this));
+
         // Register click handler for dynamically added survey form.
         //
         // Responding to the 'submit' event allows us to take advantage of the
@@ -54,6 +56,32 @@ class SurveyController {
 
     setLang(lang) {
         this.lang = lang;
+    }
+
+    changeLangCB(e) {
+        const langSelect = document.getElementById("select-lang");
+        this.setLang(langSelect.value);
+        this.getHomeBodyHtml(this.initController.bind(this));
+        // Hacky way to get body div to refresh with new lang.
+        this.elRedraw("body-container");
+        let bc = document.getElementById("body-container");
+        bc.style.display = "block"
+    }
+
+    elRedraw(elId) {
+        console.log("domRedraw");
+        var element = document.getElementById(elId);
+        console.log("element = ", element);
+        var n = document.createTextNode(' ');
+        var disp = element.style.display;  // don't worry about previous display style
+
+        element.appendChild(n);
+        element.style.display = 'none';
+
+        setTimeout(function(){
+            element.style.display = disp;
+            n.parentNode.removeChild(n);
+        },100); // you can play with this timeout to make it as short as possible
     }
 
     // https://stackoverflow.com/questions/30880757/javascript-equivalent-to-on
