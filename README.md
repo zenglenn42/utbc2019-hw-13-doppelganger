@@ -433,11 +433,15 @@ A brief online survey yields two other popular approaches to computing similarit
 
 ##### CC-SA 3.0 https://en.wikipedia.org/wiki/Euclidean_distance
 
+### Cosine similarity fights me. :-/
+
 The other approach is to compute the angle or, for performance reasons, the cosine of the angle between any two survey vectors.  A small angle between two survey vectors indicates an overall similarity of outlook.  A cosine close to 1 would indicate strong similarity whereas a cosine of -1 would reflect two dissimilar survey response sets.
 
 According to literature, similarity metrics involve science and art, suggesting I may need to play with multiple methods or create a hybrid weighting of methods for reasonable results.
 
 My initial implementation of cosine distance yields a high degree of clustering in the 90% - 98% range with test data.  I also notice a high degree of sensitivity to computed similarity when altering the responses on a single question.  I'm sad.  Intuitively, I want to see a wider spread of values and less sensitivity when altering the response to a single question or two.
+
+### L2 similarity is good enough
 
 I fall back on an L2 implementation which shifts the median value of 3 in the response value to the origin.  This ensures that vectors for 'strongly agree' versus 'strongly disagree' responses have 180 degree orientations.  This method gives a nice spread of % similarity results and is less prone to wild swings in overall affinity when altering a single question's response value.  To compute % similarity I calculate the distance between the two most extreme response sets (all questions marked as 'strongly disagree' versus all marked 'strongly agree).  This maximal theoretical distance becomes my denominator while the distances between my user's responses and the pool of existing responses become the numerators.  Now I have a not horrible measure of % similarity I can pass back to the user.
 
