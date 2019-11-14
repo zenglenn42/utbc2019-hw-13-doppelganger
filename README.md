@@ -62,9 +62,9 @@ However ...
 ![alt](docs/img/raphael-schaller-D6uxeDSylxo-unsplash.jpg)
 
 * Backend
+    * Single Page Application or Static HTML?
     * What kind of similarity?
         * L1, L2, Cosine?
-    * Single Page Application or Static HTML?
 * Frontend
     * jQuery? 
     * Bootstrap? 
