@@ -34,9 +34,9 @@ module.exports = function(app) {
 
 function getSimilarityEngineBodyHtml(lang, jsObj) {
     jsLangObj = getLangObj(lang);
-    demoSurveys = jsObj.demoSurveys;
+    demoTitles = jsObj.demoTitles(lang);
 
-    let demoSurveyOptions = demoSurveys.map((survey, index) => {
+    let demoSurveyOptions = demoTitles.map((survey, index) => {
         let minifiedSurvey = survey.replace(/[ ]*/g,"");
         return `<option value="${minifiedSurvey}">${survey}</option>`
     });
