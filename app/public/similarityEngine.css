@@ -44,10 +44,11 @@ main {
 #select-survey {
     font-size: 130%;
     padding: 0.25em 1em;
+    padding-right: 1.5em;
 }
 
 footer {
     padding: 0 1em;
     background-color: #50535c;
-    color: #c29b9a;
+    color: #2b302c;
 }
