@@ -1,0 +1,53 @@
+body {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    margin: 0;
+}
+
+#body-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+header {
+    background-color: #878f9e;
+    color: white;
+    padding: 0 1em;
+}
+
+main {
+    flex: 1;
+    padding: 0 1em;
+    background-position: center center;
+    background-image: url(/similarityEngineBackground.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: white;
+
+    display: flex;
+    flex-direction: column;
+}
+
+#main-cta-short {
+    margin-bottom: 0;
+}
+
+#main-cta-long {
+    flex: 1;
+    font-size: 125%;
+}
+
+#main-select-survey {
+    padding-bottom: 1em;
+}
+
+#select-survey {
+    font-size: 130%;
+    padding: 0.25em 1em;
+}
+
+footer {
+    padding: 0 1em;
+    background-color: #50535c;
+    color: #c29b9a;
+}

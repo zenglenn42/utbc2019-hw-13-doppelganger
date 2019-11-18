@@ -1,29 +1,69 @@
 const path = require("path");
-const getHomeBodyObj = require("../data/homeBody.js")
-const getSurveyBodyObj = require("../data/surveyBody.js")
+const { getObj, getLangObj } = require("../data/similarityEngineObj.js")
 
 module.exports = function(app) {
     app.get("/", (req, res) => {
-        res.sendFile(path.join(__dirname, "/../public/home.html"));
+        res.sendFile(path.join(__dirname, "/../public/similarityEngineSkeleton.html"));
     })
 
-    app.get("/style.css", (req, res) => {
-        res.sendFile(path.join(__dirname, "/../public/style.css"));
+    app.get("/similarityEngine.css", (req, res) => {
+        res.sendFile(path.join(__dirname, "/../public/similarityEngine.css"));
     });
 
-    app.get("/controller.js", (req, res) => {
-        res.sendFile(path.join(__dirname, "/../public/controller.js"));
+    app.get("/similarityEngineController.js", (req, res) => {
+        res.sendFile(path.join(__dirname, "/../public/similarityEngineController.js"));
     });
 
-    app.get("/homeBody.html", (req, res) => {
+    app.get("/similarityEngineLogo.png", (req, res) => {
+        res.sendFile(path.join(__dirname, "/../public/similarityEngineLogo.png"));
+    });
+
+    app.get("/similarityEngineBackground.jpg", (req, res) => {
+        res.sendFile(path.join(__dirname, "/../public/similarityEngineBackground.jpg"));
+    });
+
+    app.get("/i18nLogo.png", (req, res) => {
+        res.sendFile(path.join(__dirname, "/../public/i18nLogo.png"));
+    });
+
+    app.get("/similarityEngineBody.html", (req, res) => {
         let lang = req.query.lang;
-        res.send(getHomeBodyHtml(getHomeBodyObj(lang)));
+        res.send(getSimilarityEngineBodyHtml(lang, getObj()));
     });
+}
 
-    app.get("/surveyBody.html", (req, res) => {
-        let lang = req.query.lang;
-        res.send(getSurveyBodyHtml(getSurveyBodyObj(lang)));
+function getSimilarityEngineBodyHtml(lang, jsObj) {
+    jsLangObj = getLangObj(lang);
+    demoSurveys = jsObj.demoSurveys;
+
+    let demoSurveyOptions = demoSurveys.map((survey, index) => {
+        let minifiedSurvey = survey.replace(/[ ]*/g,"");
+        return `<option value="${minifiedSurvey}">${survey}</option>`
     });
+    let demoSelectHtml = `
+        <select name="survey" id="select-survey">
+            <option value="">${jsLangObj.optionText}</option>
+            ${demoSurveyOptions}
+        </select>
+        `
+    const bodyHtml = `
+        <span id="title" style="display: none">${jsLangObj.title}</span>
+        <header>
+            <h1>${jsLangObj.title}</h1>
+        </header>
+        <main>
+            <h2 id="main-cta-short">${jsLangObj.callToActionShort}</h2>
+            <p id="main-cta-long">${jsLangObj.callToActionLong}</p>
+            <div id="main-select-survey">
+                <h2>${jsLangObj.selectDemoText}</h2>
+                ${demoSelectHtml}
+            </div>
+        </main>
+        <footer>
+            <p>Copyright &copy; 2019 zenglenn42</p>
+        </footer>
+    `
+    return bodyHtml
 }
 
 function getHomeBodyHtml(jsObj) {

@@ -11,5 +11,5 @@ require("./app/routing/jsonRoutes")(app)
 app.get("*", (req, res) => { res.redirect("/"); })
 
 app.listen(PORT, () => {
-    console.log(`similarity server listening on port ${PORT}`);
+    console.log(`similarity engine server listening on port ${PORT}`);
 })
