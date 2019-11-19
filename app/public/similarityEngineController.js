@@ -14,9 +14,14 @@ class SimilarityEngineController {
         if (title) {
             document.title = title;
         }
-        const langSelect = document.getElementById("select-lang");
-        langSelect.addEventListener("change", this.changeLang.bind(this));
-        this.delegate(document, "change", "#select-survey", this.getSurvey.bind(this));
+        // const langSelect = document.getElementById("select-lang");
+        // langSelect.addEventListener("change", this.changeLang.bind(this));
+        this.delegate(document, "change", "#select-demo", this.selectApp.bind(this));
+    }
+
+    selectApp(e) {
+        let app = document.getElementById("select-demo").value
+        console.log("getApp: click", app);
     }
     
     getLang() {

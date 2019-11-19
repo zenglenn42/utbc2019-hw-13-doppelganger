@@ -36,12 +36,12 @@ function getSimilarityEngineBodyHtml(lang, jsObj) {
     jsLangObj = getLangObj(lang);
     demoTitles = jsObj.demoTitles(lang);
 
-    let demoSurveyOptions = demoTitles.map((survey, index) => {
-        let minifiedSurvey = survey.replace(/[ ]*/g,"");
-        return `<option value="${minifiedSurvey}">${survey}</option>`
+    let demoSurveyOptions = demoTitles.map((title, index) => {
+        let minifiedApp = title.replace(/[ ]*/g,"");
+        return `<option value="${minifiedApp}">${title}</option>`
     });
     let demoSelectHtml = `
-        <select name="survey" id="select-survey">
+        <select name="demo" id="select-demo">
             <option value="">${jsLangObj.optionText}</option>
             ${demoSurveyOptions}
         </select>
