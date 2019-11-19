@@ -14,8 +14,9 @@ class SimilarityEngineController {
         if (title) {
             document.title = title;
         }
-        // const langSelect = document.getElementById("select-lang");
-        // langSelect.addEventListener("change", this.changeLang.bind(this));
+        const langSelect = document.getElementById("select-lang");
+        langSelect.addEventListener("change", this.changeLang.bind(this));
+
         this.delegate(document, "change", "#select-demo", this.selectApp.bind(this));
     }
 
@@ -36,16 +37,6 @@ class SimilarityEngineController {
         const langSelect = document.getElementById("select-lang");
         this.setLang(langSelect.value);
         let bodyDiv = document.getElementById("body-container");
-        let page = bodyDiv.getAttribute("page");
-        switch(page) {
-            case "survey":
-                this.getSurveyBodyHtml();
-                break;
-
-            case "home":
-            default:
-                this.getBodyHtml(this.initController.bind(this));
-        }
   
         // Hacky way to get body div to refresh with new lang.
         this.elRedraw("body-container");
@@ -84,11 +75,10 @@ class SimilarityEngineController {
 
     getBodyHtml(callback) {
         let queryUrl = `/similarityEngineBody.html?lang=${this.lang}`
-        let page = "home"
-        this.fetchBodyHtml(queryUrl, page, callback)
+        this.fetchBodyHtml(queryUrl, callback)
     }
 
-    fetchBodyHtml(url, page, callback) {
+    fetchBodyHtml(url, callback) {
         fetch(url).then( response => 
             {
                 if (response.ok) {
@@ -104,7 +94,6 @@ class SimilarityEngineController {
                 console.log("body html = ", body)
                 var bodyDiv = document.getElementById("body-container");
                 bodyDiv.innerHTML = body;
-                bodyDiv.setAttribute("page", page);
                 if (callback) {
                     callback(bodyDiv, body);
                 }

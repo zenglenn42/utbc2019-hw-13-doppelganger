@@ -1,5 +1,5 @@
 const path = require("path");
-const { getObj, getLangObj } = require("../data/similarityEngineObj.js")
+const { getObj, getLangObj, getSupportedLangs } = require("../data/similarityEngineObj.js")
 
 module.exports = function(app) {
     app.get("/", (req, res) => {
@@ -46,10 +46,26 @@ function getSimilarityEngineBodyHtml(lang, jsObj) {
             ${demoSurveyOptions}
         </select>
         `
+
+    let langs = getSupportedLangs();
+    let langOptions = langs.map((lang, index) => {
+        return `<option value="${lang}">${lang}</option>`
+    });
+    let langSelectHtml = `
+        <select name="lang" id="select-lang">
+            <option value="">${jsLangObj.selectLangText}</option>
+            ${langOptions}
+        </select>
+        `
+
     const bodyHtml = `
         <span id="title" style="display: none">${jsLangObj.title}</span>
         <header>
-            <h1>${jsLangObj.title}</h1>
+            <h1 id="header-title">${jsLangObj.title}</h1>
+            <div id="header-padding"> </div>
+            <div id="header-select-lang">
+                ${langSelectHtml}
+            </div>
         </header>
         <main>
             <h2 id="main-cta-short">${jsLangObj.callToActionShort}</h2>

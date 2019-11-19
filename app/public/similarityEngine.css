@@ -10,9 +10,28 @@ body {
 }
 
 header {
+    display: flex;
+    flex-direction: row;
     background-color: #878f9e;
     color: white;
     padding: 0 1em;
+    min-width: 100vw;
+}
+
+#header-padding {
+    flex: 1;
+}
+
+#header-select-lang {
+    padding-top: 1.5em;
+    padding-right: 1.5em;
+}
+
+#select-lang {
+    display: inline;
+    font-size: 130%;
+    padding: 0.25em 1em;
+    padding-right: 1.5em;
 }
 
 main {

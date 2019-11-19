@@ -9,7 +9,8 @@ const similarityEngineEn = {
     callToActionShort: "Find a similar respondent to a survey.",
     callToActionLong:  "Complete a survey to quantify similarity between you and other survey respondents or archetypes.",
     selectDemoText:    "Try it ...",
-    optionText:        "Choose an application"
+    optionText:        "Choose an application",
+    selectLangText:    "Language"
 }
 
 const similarityEngineEs = {
@@ -20,7 +21,8 @@ const similarityEngineEs = {
     callToActionShort: "Es:Find a similar respondent to a survey.",
     callToActionLong:  "Es:Complete a survey to quantify similarity between you and other survey respondents or archetypes.",
     selectDemoText:    "Es:Try it ...",
-    optionText:        "Es:Choose an application"
+    optionText:        "Es:Choose an application",
+    selectLangText:    "Es:Language"
 }
 
 const similarityEngine = {
@@ -35,6 +37,13 @@ const similarityEngine = {
     i18nIcon:          ""
 }
 
+function getSupportedLangs() {
+    let supportedLangs = [];
+    for (let lang in similarityEngine[lang]) {
+        console.log("lang = ",lang);
+    }
+}
+
 function getLangObj(lang = DEFAULT_LANG) {
     let jsObj = similarityEngine["lang"].lang;
     return (similarityEngine["lang"][lang]) ? 
@@ -45,4 +54,8 @@ function getObj() {
     return similarityEngine;
 }
 
-module.exports = { getObj, getLangObj }
+function getSupportedLangs() {
+    return ["English", "Español"]
+}
+
+module.exports = { getObj, getLangObj, getSupportedLangs }
