@@ -61,7 +61,7 @@ function getSimilarityEngineBodyHtml(lang, jsObj) {
     });
     let langSelectHtml = `
         <select name="lang" id="select-lang">
-            <option value="">${jsLangObj.selectLangText}</option>
+            <!-- <option value="">${jsLangObj.selectLangText}</option> -->
             ${langOptions}
         </select>
         `

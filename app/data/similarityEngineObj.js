@@ -15,14 +15,14 @@ const similarityEngineEn = {
 
 const similarityEngineEs = {
     langName:          "Español",
-    title:             "Es:Similarity Engine",
-    aboutButtonText:   "Es:About",
-    aboutText:         "Es:Add more extensive text about this application and how it works here ...",
-    callToActionShort: "Es:Find a similar respondent to a survey.",
-    callToActionLong:  "Es:Complete a survey to quantify similarity between you and other survey respondents or archetypes.",
-    selectDemoText:    "Es:Try it ...",
-    optionText:        "Es:Choose an application",
-    selectLangText:    "Es:Language"
+    title:             "Motor de Similitud",
+    aboutButtonText:   "Acerca de",
+    aboutText:         "Agregue texto más extenso sobre esta aplicación y cómo funciona aquí ...",
+    callToActionShort: "Encuentra a alguien que responda encuestas como tú.",
+    callToActionLong:  "Complete una encuesta para cuantificar la similitud entre usted y otros encuestados o arquetipos de la encuesta.",
+    selectDemoText:    "Intentalo ...",
+    optionText:        "Elige una aplicación",
+    selectLangText:    "Idioma"
 }
 
 const similarityEngine = {

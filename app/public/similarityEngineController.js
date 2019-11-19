@@ -14,13 +14,13 @@ class SimilarityEngineController {
         if (title) {
             document.title = title;
         }
+        //let selectLangEl = document.getElementById("select-lang");
         this.delegate(document, "change", "#select-demo", this.changeApp.bind(this));
         this.delegate(document, "change", "#select-lang", this.changeLang.bind(this));
     }
 
     changeApp(e) {
         let app = document.getElementById("select-demo").value
-        console.log("getApp: click", app);
     }
     
     getLang() {
@@ -32,17 +32,9 @@ class SimilarityEngineController {
     }
 
     changeLang(e) {
-        console.log("changeLang:before", this.lang);
         const langSelect = document.getElementById("select-lang");
         this.setLang(langSelect.value);
-        console.log("changeLang:after", this.lang);
-        let body = document.getElementById("body-container");
-        console.log("body div = ", body);
-  
-        // Hacky way to get body div to refresh with new lang.
-        // this.elRedraw("body-container");
-        // let bc = document.getElementById("body-container");
-        // bc.style.display = "flex"
+        this.getBodyHtml()
     }
 
     elRedraw(elId) {
