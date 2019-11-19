@@ -29,7 +29,7 @@ const appObjEn = {
 }
 
 const appObjEs = {
-    title: "Es: Dance Finder",
+    title: "Buscador de Baile",
     callToActionShort: "Es: Find your best moves",
     callToActionLong: "Es: Answer a few basic questions then find some dances you may want to try.",
     buttonText: "Es: Go to Survey",
