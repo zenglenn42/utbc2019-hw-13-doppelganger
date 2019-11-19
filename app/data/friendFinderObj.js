@@ -23,8 +23,8 @@ const appObjEn = {
     imSorry: "I'm sorry",
     noResults: "No results available at this time",
     brandingLogo: "Branding-Logo.png",
-    poweredbyLogo: "SE-Logo.png",
-    i18nLogo: "i18n-Logo.png",
+    poweredbyLogo: "similarityEngineLogo.png",
+    i18nLogo: "i18nLogo.png",
     survey: surveyObjEn
 }
 
@@ -39,8 +39,8 @@ const appObjEs = {
     imSorry: "Lo siento",
     noResults: "No hay partidos disponibles en este momento",
     brandingLogo: "Branding-Logo.png",
-    poweredbyLogo: "SE-Logo.png",
-    i18nLogo: "i18n-Logo.png",
+    poweredbyLogo: "similarityEngineLogo.png",
+    i18nLogo: "i18nLogo.png",
     survey: surveyObjEs
 }
 
@@ -55,8 +55,8 @@ const appObjHi = {
     imSorry: "मुझे माफ कर दो",
     noResults: "इस समय कोई परिणाम उपलब्ध नहीं हैं।",
     brandingLogo: "Branding-Logo.png",
-    poweredbyLogo: "SE-Logo.png",
-    i18nLogo: "i18n-Logo.png",
+    poweredbyLogo: "similarityEngineLogo.png",
+    i18nLogo: "i18nLogo.png",
     survey: surveyObjHi
 }
 
@@ -71,8 +71,8 @@ const appObjZh = {
     imSorry: "对不起",
     noResults: "目前没有可用结果",
     brandingLogo: "Branding-Logo.png",
-    poweredbyLogo: "SE-Logo.png",
-    i18nLogo: "i18n-Logo.png",
+    poweredbyLogo: "similarityEngineLogo.png",
+    i18nLogo: "i18nLogo.png",
     survey: surveyObjZh
 }
 

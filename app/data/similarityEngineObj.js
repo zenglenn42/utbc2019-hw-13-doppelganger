@@ -37,11 +37,16 @@ const similarityEngine = {
     i18nIcon:          ""
 }
 
-function getSupportedLangs() {
-    let supportedLangs = [];
-    for (let lang in similarityEngine[lang]) {
-        console.log("lang = ",lang);
+function getSupportedLangCodes() {
+    let langCodes = [];
+    for (let langCode in similarityEngine["lang"]) {
+        langCodes.push(langCode);
     }
+    return langCodes;
+}
+
+function getLanguageName(lang) {
+    return getLangObj(lang).langName;
 }
 
 function getLangObj(lang = DEFAULT_LANG) {
@@ -55,7 +60,7 @@ function getObj() {
 }
 
 function getSupportedLangs() {
-    return ["English", "Español"]
+    return ["en", "Español"]
 }
 
-module.exports = { getObj, getLangObj, getSupportedLangs }
+module.exports = { getObj, getLangObj, getLanguageName, getSupportedLangCodes }

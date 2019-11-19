@@ -14,13 +14,11 @@ class SimilarityEngineController {
         if (title) {
             document.title = title;
         }
-        const langSelect = document.getElementById("select-lang");
-        langSelect.addEventListener("change", this.changeLang.bind(this));
-
-        this.delegate(document, "change", "#select-demo", this.selectApp.bind(this));
+        this.delegate(document, "change", "#select-demo", this.changeApp.bind(this));
+        this.delegate(document, "change", "#select-lang", this.changeLang.bind(this));
     }
 
-    selectApp(e) {
+    changeApp(e) {
         let app = document.getElementById("select-demo").value
         console.log("getApp: click", app);
     }
@@ -34,20 +32,22 @@ class SimilarityEngineController {
     }
 
     changeLang(e) {
+        console.log("changeLang:before", this.lang);
         const langSelect = document.getElementById("select-lang");
         this.setLang(langSelect.value);
-        let bodyDiv = document.getElementById("body-container");
+        console.log("changeLang:after", this.lang);
+        let body = document.getElementById("body-container");
+        console.log("body div = ", body);
   
         // Hacky way to get body div to refresh with new lang.
-        this.elRedraw("body-container");
-        let bc = document.getElementById("body-container");
-        bc.style.display = "block"
+        // this.elRedraw("body-container");
+        // let bc = document.getElementById("body-container");
+        // bc.style.display = "flex"
     }
 
     elRedraw(elId) {
-        console.log("domRedraw");
+        console.log("domRedraw:", elId);
         var element = document.getElementById(elId);
-        console.log("element = ", element);
         var n = document.createTextNode(' ');
         var disp = element.style.display;  // don't worry about previous display style
 
@@ -57,11 +57,12 @@ class SimilarityEngineController {
         setTimeout(function(){
             element.style.display = disp;
             n.parentNode.removeChild(n);
-        },100); // you can play with this timeout to make it as short as possible
+        },200); // you can play with this timeout to make it as short as possible
     }
 
     // https://stackoverflow.com/questions/30880757/javascript-equivalent-to-on
     delegate(el, evt, sel, handler) {
+        console.log("delegate")
         el.addEventListener(evt, function(event) {
             let t = event.target;
             while (t && t !== this) {
@@ -91,10 +92,11 @@ class SimilarityEngineController {
                 }
             }
         ).then( body => {
-                console.log("body html = ", body)
+                // console.log("body html = ", body)
                 var bodyDiv = document.getElementById("body-container");
                 bodyDiv.innerHTML = body;
                 if (callback) {
+                    console.log("calling callback")
                     callback(bodyDiv, body);
                 }
             }

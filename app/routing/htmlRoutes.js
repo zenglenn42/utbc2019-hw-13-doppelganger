@@ -1,5 +1,10 @@
 const path = require("path");
-const { getObj, getLangObj, getSupportedLangs } = require("../data/similarityEngineObj.js")
+const { 
+    getObj, 
+    getLangObj, 
+    getLanguageName,
+    getSupportedLangCodes 
+} = require("../data/similarityEngineObj.js")
 
 module.exports = function(app) {
     app.get("/", (req, res) => {
@@ -28,6 +33,7 @@ module.exports = function(app) {
 
     app.get("/similarityEngineBody.html", (req, res) => {
         let lang = req.query.lang;
+        console.log("getting body, server says lang =", lang)
         res.send(getSimilarityEngineBodyHtml(lang, getObj()));
     });
 }
@@ -47,9 +53,11 @@ function getSimilarityEngineBodyHtml(lang, jsObj) {
         </select>
         `
 
-    let langs = getSupportedLangs();
-    let langOptions = langs.map((lang, index) => {
-        return `<option value="${lang}">${lang}</option>`
+    let langs = getSupportedLangCodes();
+    let langOptions = langs.map((alang, index) => {
+        let selected = (lang == alang) ? "selected" : "";
+        let langName = getLanguageName(alang)
+        return `<option value="${alang}" ${selected}>${langName}</option>`
     });
     let langSelectHtml = `
         <select name="lang" id="select-lang">
@@ -62,7 +70,7 @@ function getSimilarityEngineBodyHtml(lang, jsObj) {
         <span id="title" style="display: none">${jsLangObj.title}</span>
         <header>
             <h1 id="header-title">${jsLangObj.title}</h1>
-            <div id="header-padding"> </div>
+            <div id="header-padding"></div>
             <div id="header-select-lang">
                 ${langSelectHtml}
             </div>
