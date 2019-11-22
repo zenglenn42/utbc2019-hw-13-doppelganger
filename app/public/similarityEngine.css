@@ -38,7 +38,6 @@ main {
     flex: 1;
     padding: 0 1em;
     background-position: center center;
-    background-image: url(/similarityEngineBackground.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     color: white;

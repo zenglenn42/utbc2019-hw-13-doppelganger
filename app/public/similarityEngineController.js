@@ -14,6 +14,7 @@ class SimilarityEngineController {
         if (title) {
             document.title = title;
         }
+        let langSelectEl = document.getElementById("select-lang");
         this.delegate(document, "change", "#select-lang", this.changeLang.bind(this));
     }
     
@@ -28,6 +29,7 @@ class SimilarityEngineController {
     changeLang(e) {
         const langSelect = document.getElementById("select-lang");
         this.setLang(langSelect.value);
+        console.log("lang = ", this.lang);
         this.getBodyHtml();
     }
 

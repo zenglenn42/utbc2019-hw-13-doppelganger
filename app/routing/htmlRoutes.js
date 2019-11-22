@@ -44,7 +44,7 @@ module.exports = function(app) {
 
     app.get("/similarityEngineBody.html", (req, res) => {
         let lang = req.query.lang;
-        console.log("getting body, server says lang =", lang)
+        //console.log("getting body, server says lang =", lang)
         res.send(getSimilarityEngineBodyHtml(lang, getObj()));
     });
 
@@ -52,7 +52,7 @@ module.exports = function(app) {
         let lang = req.query.lang;
         let app = req.query.app;
 
-        console.log("get skeleton html for", app);
+        //console.log("get skeleton html for", app);
         let appSkeletonHtml = `
             <!DOCTYPE html>
             <html lang="en">
@@ -85,8 +85,8 @@ module.exports = function(app) {
     app.get("/appBody.html", (req, res) => {
         let lang = req.query.lang;
         let app = req.query.app;
-        console.log("getting body: lang =", lang);
-        console.log(`app = >${app}<`)
+        // console.log("getting body: lang =", lang);
+        // console.log(`app = >${app}<`)
         res.send(getAppBodyHtml(lang, app, getAppObj(app, lang)));
     });
 }
@@ -149,6 +149,7 @@ function getSimilarityEngineBodyHtml(lang, jsObj) {
         `
     const bodyHtml = `
         <span id="title" style="display: none">${jsLangObj.title}</span>
+        <span id="backgroundImg" style="display: none">${jsLangObj.backgroundImgFile}</span>
         <header>
             <h1 id="header-title">${jsLangObj.title}</h1>
             <div id="header-padding"></div>

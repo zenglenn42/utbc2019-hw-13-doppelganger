@@ -15,7 +15,8 @@ const similarityEngineEn = {
     callToActionLong:  "Complete a survey to quantify similarity between you and other survey respondents or archetypes.",
     selectDemoText:    "Try it ...",
     optionText:        "Choose an application",
-    selectLangText:    "Language"
+    selectLangText:    "Language",
+    backgroundImgFile: "similarityEngineBackground.jpg"
 }
 
 const similarityEngineEs = {
@@ -27,7 +28,8 @@ const similarityEngineEs = {
     callToActionLong:  "Complete una encuesta para cuantificar la similitud entre usted y otros encuestados o arquetipos de la encuesta.",
     selectDemoText:    "Intentalo ...",
     optionText:        "Elige una aplicación",
-    selectLangText:    "Idioma"
+    selectLangText:    "Idioma",
+    backgroundImgFile: "similarityEngineBackground.jpg"
 }
 
 const similarityEngine = {
@@ -35,7 +37,6 @@ const similarityEngine = {
         "en": similarityEngineEn,
         "es": similarityEngineEs,
     },
-    backgroundImgFile: "vsmilelx-l6JiEFGaDIQ-unsplash.jpg",
     demoTitles:        getDemoTitles,
     gitHubIcon:        "",
     gitHubRepoUrl:     "https://github.com/zenglenn42/utbc2019-hw-13-similarity-engine",

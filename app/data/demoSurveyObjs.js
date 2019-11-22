@@ -29,9 +29,8 @@ const getDemoTitleKeys = function() {
 }
 
 const getDemoObj = function(app, lang = DEFAULT_LANG) {
-    console.log("app = ", app);
-    console.log("demoObj[app] = ", demoObj[app]);
-    console.log(typeof demoObj[app]);
+    // console.log("app = ", app);
+    // console.log("demoObj[app] = ", demoObj[app]);
     return demoObj[app](lang);
 }
 
