@@ -78,6 +78,18 @@ main[data-app="DanceFinder"] {
     padding-bottom: 1em;
 }
 
+#surveyForm {
+    overflow-y: scroll;
+    max-height: 70vh;
+    max-width: 95vw;
+    margin: 0 auto;
+    background-color: rgba(16,16,16,0.8);
+    border-radius: .2em;
+    color: white;
+    padding: .3em .8em;
+    margin-bottom: 1em;
+}
+
 button {
     /* Courtesy CSS Secrets :-) */
     padding: .3em .8em;

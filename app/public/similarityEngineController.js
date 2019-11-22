@@ -16,6 +16,7 @@ class SimilarityEngineController {
         }
         let langSelectEl = document.getElementById("select-lang");
         this.delegate(document, "change", "#select-lang", this.changeLang.bind(this));
+        this.delegate(document, "click",  "#main-survey-button", this.getSurveyHtml.bind(this));
     }
     
     getLang() {
@@ -70,6 +71,13 @@ class SimilarityEngineController {
         });
     };
 
+    getSurveyHtml() {
+        let mainEl = document.getElementById("#app-main");
+        let queryUrl = `/appMain.html?lang=${this.lang}&app=${this.app}`
+        let callback = undefined;
+        this.fetchMainHtml(queryUrl, callback);
+    }
+
     getBodyHtml(callback) {
         let queryUrl = "";
         switch (this.app) {
@@ -95,13 +103,42 @@ class SimilarityEngineController {
                 }
             }
         ).then( body => {
-                // console.log("body html = ", body)
                 var bodyDiv = document.getElementById("body-container");
                 bodyDiv.innerHTML = body;
                 this.setBackgroundImg("main");
                 if (callback) {
                     console.log("calling callback")
                     callback(bodyDiv, body);
+                }
+            }
+        )
+        .catch( error => {
+            if (error.status === 404) {
+                console.log("404 Resource not found.")
+            }
+        })
+    }
+
+    fetchMainHtml(url, callback) {
+        fetch(url).then( response => 
+            {
+                if (response.ok) {
+                    return response.text()
+                } else {
+                    return Promise.reject({
+                        status: response.status,
+                        statusText: response.statusText
+                    })
+                }
+            }
+        ).then(mainHtml => 
+            {
+                let mainEl = document.querySelector("main");
+                mainEl.innerHTML = mainHtml
+                // this.setBackgroundImg("main");
+                if (callback) {
+                    console.log("calling callback")
+                    callback(mainEl);
                 }
             }
         )

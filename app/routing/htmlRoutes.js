@@ -88,6 +88,17 @@ module.exports = function(app) {
         // console.log(`app = >${app}<`)
         res.send(getAppBodyHtml(lang, app, getAppObj(app, lang)));
     });
+
+    app.get("/appMain.html", (req, res) => {
+        let lang = req.query.lang;
+        let app = req.query.app;
+        res.send(getAppMainHtml(getAppObj(app, lang)));
+    });
+}
+
+function getAppMainHtml(jsLangObj) {
+    const mainHtml = getSurveyHtml(jsLangObj.survey);
+    return mainHtml
 }
 
 function getAppBodyHtml(lang, app, jsLangObj) {
@@ -97,56 +108,23 @@ function getAppBodyHtml(lang, app, jsLangObj) {
         <header>
             <h1 id="header-title">${jsLangObj.title}</h1>
         </header>
-        <main data-app="${app}">
+        <main id="app-main" data-app="${app}" data-page="splash">
             <h2 id="main-cta-short">${jsLangObj.callToActionShort}</h2>
             <p id="main-cta-long">${jsLangObj.callToActionLong}</p>
             <div id="main-view-survey">
-                <button id="main-survey-button"><span>${jsLangObj.buttonText}</span></button>
+                <button id="main-survey-button" data-app=${app}><span>${jsLangObj.buttonText}</span></button>
             </div>
         </main>
         <footer>
             <p>Copyright &copy; 2019 zenglenn42</p>
         </footer>
     `
-
-    // const bodyHtml = `
-    //     <span id="title" style="display: none">${jsLangObj.title}</span>
-    //     <span id="backgroundImg" style="display: none">${jsLangObj.backgroundImgFile}</span>
-    //     <header>
-    //         <h1 id="header-title">${jsLangObj.title}</h1>
-    //         <div id="header-padding"></div>
-    //         <div id="header-select-lang">
-    //             ${langSelectHtml}
-    //         </div>
-    //     </header>
-    //     <main>
-    //         <h2 id="main-cta-short">${jsLangObj.callToActionShort}</h2>
-    //         <p id="main-cta-long">${jsLangObj.callToActionLong}</p>
-    //         <div id="main-select-survey">
-    //             <h2>${jsLangObj.selectDemoText}</h2>
-    //             ${demoSelectHtml}
-    //         </div>
-    //     </main>
-    //     <footer>
-    //         <p>Copyright &copy; 2019 zenglenn42</p>
-    //     </footer>
-    // `
-return bodyHtml
+    return bodyHtml
 }
 
 function getSimilarityEngineBodyHtml(lang, jsObj) {
     jsLangObj = getLangObj(lang);
     demoTitles = jsObj.demoTitles(lang);
-
-    // let demoSurveyOptions = demoTitles.map((title, index) => {
-    //     let minifiedApp = title.replace(/[ ]*/g,"");
-    //     return `<option value="${minifiedApp}">${title}</option>`
-    // });
-    // let demoSelectHtml = `
-    //     <select name="demo" id="select-demo">
-    //         <option value="">${jsLangObj.optionText}</option>
-    //         ${demoSurveyOptions}
-    //     </select>
 
     let langs = getSupportedLangCodes();
     let langOptions = langs.map((alang, index) => {
@@ -211,7 +189,7 @@ function getHomeBodyHtml(jsObj) {
     return homeBodyHtml
 }
 
-function getSurveyBodyHtml(jsObj) {
+function getSurveyHtml(jsObj) {
     const minComment = jsObj.minComment;
     const maxComment = jsObj.maxComment
     const questionsHtml = jsObj.questions.map((question, index) => {
