@@ -66,7 +66,6 @@ module.exports = function(app) {
             </head>
             <body>
                 <div id="body-container" app="${app}">
-                    <p>Hello from ${app} Similarity Engine App</p>
                 </div>
             </body>
             <script type="text/javascript">
@@ -91,20 +90,44 @@ module.exports = function(app) {
     });
 }
 
-function getAppBodyHtml(lang, app, jsObj) {
+function getAppBodyHtml(lang, app, jsLangObj) {
     const bodyHtml = `
-    <span id="title" style="display: none">${app}</span>
-    <span id="backgroundImg" style="display: none">${jsObj.backgroundImgFile}</span>
-    <header>
-        <h1 id="header-title">${jsObj.title}</h1>
-    </header>
-    <main>
-        <p>main section goes here...</p>
-    </main>
-    <footer>
-        <p>Copyright &copy; 2019 zenglenn42</p>
-    </footer>
-`
+        <span id="title" style="display: none">${jsLangObj.title}</span>
+        <span id="backgroundImg" style="display: none">${jsLangObj.backgroundImgFile}</span>
+        <header>
+            <h1 id="header-title">${jsLangObj.title}</h1>
+        </header>
+        <main data-app="${app}">
+            <h2 id="main-cta-short">${jsLangObj.callToActionShort}</h2>
+            <p id="main-cta-long">${jsLangObj.callToActionLong}</p>
+        </main>
+        <footer>
+            <p>Copyright &copy; 2019 zenglenn42</p>
+        </footer>
+    `
+
+    // const bodyHtml = `
+    //     <span id="title" style="display: none">${jsLangObj.title}</span>
+    //     <span id="backgroundImg" style="display: none">${jsLangObj.backgroundImgFile}</span>
+    //     <header>
+    //         <h1 id="header-title">${jsLangObj.title}</h1>
+    //         <div id="header-padding"></div>
+    //         <div id="header-select-lang">
+    //             ${langSelectHtml}
+    //         </div>
+    //     </header>
+    //     <main>
+    //         <h2 id="main-cta-short">${jsLangObj.callToActionShort}</h2>
+    //         <p id="main-cta-long">${jsLangObj.callToActionLong}</p>
+    //         <div id="main-select-survey">
+    //             <h2>${jsLangObj.selectDemoText}</h2>
+    //             ${demoSelectHtml}
+    //         </div>
+    //     </main>
+    //     <footer>
+    //         <p>Copyright &copy; 2019 zenglenn42</p>
+    //     </footer>
+    // `
 return bodyHtml
 }
 

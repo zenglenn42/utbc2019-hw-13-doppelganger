@@ -46,6 +46,14 @@ main {
     flex-direction: column;
 }
 
+main[data-app="FriendFinder"] {
+    color: black;
+}
+
+main[data-app="DanceFinder"] {
+    color: white;
+}
+
 #main-cta-short {
     margin-bottom: 0;
 }
