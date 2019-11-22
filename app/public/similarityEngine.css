@@ -64,8 +64,9 @@ main[data-app="DanceFinder"] {
 }
 
 #select-demo {
-    font-size: 130%;
-    padding: 0.25em 1em;
+    font-size: 125%;
+    padding: .3em .8em;
+    line-height: 1.5;
     padding-right: 1.5em;
 }
 
@@ -77,12 +78,17 @@ main[data-app="DanceFinder"] {
     padding-bottom: 1em;
 }
 
-#main-survey-button {
-    background-color: #0060df;
+button {
+    /* Courtesy CSS Secrets :-) */
+    padding: .3em .8em;
+    border: 1px solid srba(0,0,0,.1);
+    background: #0060df linear-gradient(hsla(0,0%,100%,.2), transparent);
+    border-radius: .2em;
+    box-shadow: 0 .05em .25em rgba(0,0,0,.5);
     color: white;
-    border-radius: 0.4em;
-    font-size: 130%;
-    padding: 0.3em 0.7em;
+    text-shadow: 0 -.05em .05em rgba(0,0,0,.5);
+    font-size: 125%;
+    line-height: 1.5;
 }
 
 footer {
