@@ -63,14 +63,26 @@ main[data-app="DanceFinder"] {
     font-size: 125%;
 }
 
-#main-select-survey {
-    padding-bottom: 1em;
-}
-
 #select-demo {
     font-size: 130%;
     padding: 0.25em 1em;
     padding-right: 1.5em;
+}
+
+#main-select-survey {
+    padding-bottom: 1em;
+}
+
+#main-view-survey {
+    padding-bottom: 1em;
+}
+
+#main-survey-button {
+    background-color: #0060df;
+    color: white;
+    border-radius: 0.4em;
+    font-size: 130%;
+    padding: 0.3em 0.7em;
 }
 
 footer {

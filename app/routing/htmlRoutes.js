@@ -100,6 +100,9 @@ function getAppBodyHtml(lang, app, jsLangObj) {
         <main data-app="${app}">
             <h2 id="main-cta-short">${jsLangObj.callToActionShort}</h2>
             <p id="main-cta-long">${jsLangObj.callToActionLong}</p>
+            <div id="main-view-survey">
+                <button id="main-survey-button"><span>${jsLangObj.buttonText}</span></button>
+            </div>
         </main>
         <footer>
             <p>Copyright &copy; 2019 zenglenn42</p>
