@@ -90,15 +90,24 @@ main[data-app="DanceFinder"] {
     margin-bottom: 1em;
 }
 
-button {
+button,
+input[type="submit"],
+input[type="reset"],
+input[type="button"] {
     /* Courtesy CSS Secrets :-) */
-    padding: .3em .8em;
-    border: 1px solid srba(0,0,0,.1);
+    padding: .2em .6em;
+    border: 1px solid rgba(0,0,0,.1);
     background: #0060df linear-gradient(hsla(0,0%,100%,.2), transparent);
     border-radius: .2em;
     box-shadow: 0 .05em .25em rgba(0,0,0,.5);
     color: white;
     text-shadow: 0 -.05em .05em rgba(0,0,0,.5);
+    font-size: 125%;
+    line-height: 1.5;
+    margin-right: 0.75em;
+}
+
+.chosen-select {
     font-size: 125%;
     line-height: 1.5;
 }

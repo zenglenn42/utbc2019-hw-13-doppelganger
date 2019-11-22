@@ -196,7 +196,7 @@ function getSurveyHtml(jsObj) {
         let num = index + 1;
         let questionHtml = `
             <h3><strong>${jsObj.questionText} ${num}</strong></h3>
-            <h4>${question}</h4>
+            <p class="chosen-select">${question}</p>
             <select name="q${num}" class="chosen-select" id="q${num}" required>
                 <option value=""></option>
                 <option value="1">1 (${minComment})</option>
@@ -224,7 +224,7 @@ function getSurveyHtml(jsObj) {
                     <input type="button" value="${jsObj.apiText}" id="api-button">
                 </p>
             </form>
-            <div class="modal">
+            <div class="modal" style="display: none;">
                 <div class="modal-content">
                     <span class="close-btn">&times;</span>
                     <div id="results">
