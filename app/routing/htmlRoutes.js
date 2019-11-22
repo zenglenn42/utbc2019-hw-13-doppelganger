@@ -3,7 +3,10 @@ const {
     getObj, 
     getLangObj, 
     getLanguageName,
-    getSupportedLangCodes 
+    getSupportedLangCodes,
+    getAppObj,
+    getAppTitleKeys,
+    getAppImg
 } = require("../data/similarityEngineObj.js")
 
 module.exports = function(app) {
@@ -27,6 +30,14 @@ module.exports = function(app) {
         res.sendFile(path.join(__dirname, "/../public/similarityEngineBackground.jpg"));
     });
 
+    app.get("/FriendFinderBackground.jpg", (req, res) => {
+        res.sendFile(path.join(__dirname, "/../public/FriendFinderBackground.jpg"));
+    });
+
+    app.get("/DanceFinderBackground.jpg", (req, res) => {
+        res.sendFile(path.join(__dirname, "/../public/DanceFinderBackground.jpg"));
+    });
+
     app.get("/i18nLogo.png", (req, res) => {
         res.sendFile(path.join(__dirname, "/../public/i18nLogo.png"));
     });
@@ -36,22 +47,80 @@ module.exports = function(app) {
         console.log("getting body, server says lang =", lang)
         res.send(getSimilarityEngineBodyHtml(lang, getObj()));
     });
+
+    app.get("/appSkeleton.html", (req, res) => {
+        let lang = req.query.lang;
+        let app = req.query.app;
+
+        console.log("get skeleton html for", app);
+        let appSkeletonHtml = `
+            <!DOCTYPE html>
+            <html lang="en">
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <meta http-equiv="X-UA-Compatible" content="ie=edge">
+                <title>Similarity Engine App</title>
+                <link rel="stylesheet" type="text/css" href="similarityEngine.css">
+                <script type="text/javascript" src="similarityEngineController.js"></script
+            </head>
+            <body>
+                <div id="body-container" app="${app}">
+                    <p>Hello from ${app} Similarity Engine App</p>
+                </div>
+            </body>
+            <script type="text/javascript">
+                document.addEventListener(
+                    "DOMContentLoaded",
+                    (event) => {
+                        controller = new SimilarityEngineController("${lang}", "${app}");
+                    }
+                );
+            </script>
+            </html>
+            `
+        res.send(appSkeletonHtml);
+    })
+
+    app.get("/appBody.html", (req, res) => {
+        let lang = req.query.lang;
+        let app = req.query.app;
+        console.log("getting body: lang =", lang);
+        console.log(`app = >${app}<`)
+        res.send(getAppBodyHtml(lang, app, getAppObj(app, lang)));
+    });
+}
+
+function getAppBodyHtml(lang, app, jsObj) {
+    const bodyHtml = `
+    <span id="title" style="display: none">${app}</span>
+    <span id="backgroundImg" style="display: none">${jsObj.backgroundImgFile}</span>
+    <header>
+        <h1 id="header-title">${jsObj.title}</h1>
+    </header>
+    <main>
+        <p>main section goes here...</p>
+    </main>
+    <footer>
+        <p>Copyright &copy; 2019 zenglenn42</p>
+    </footer>
+`
+return bodyHtml
 }
 
 function getSimilarityEngineBodyHtml(lang, jsObj) {
     jsLangObj = getLangObj(lang);
     demoTitles = jsObj.demoTitles(lang);
 
-    let demoSurveyOptions = demoTitles.map((title, index) => {
-        let minifiedApp = title.replace(/[ ]*/g,"");
-        return `<option value="${minifiedApp}">${title}</option>`
-    });
-    let demoSelectHtml = `
-        <select name="demo" id="select-demo">
-            <option value="">${jsLangObj.optionText}</option>
-            ${demoSurveyOptions}
-        </select>
-        `
+    // let demoSurveyOptions = demoTitles.map((title, index) => {
+    //     let minifiedApp = title.replace(/[ ]*/g,"");
+    //     return `<option value="${minifiedApp}">${title}</option>`
+    // });
+    // let demoSelectHtml = `
+    //     <select name="demo" id="select-demo">
+    //         <option value="">${jsLangObj.optionText}</option>
+    //         ${demoSurveyOptions}
+    //     </select>
 
     let langs = getSupportedLangCodes();
     let langOptions = langs.map((alang, index) => {
@@ -66,6 +135,18 @@ function getSimilarityEngineBodyHtml(lang, jsObj) {
         </select>
         `
 
+    let demoTitleKeys = getAppTitleKeys();
+    let demoSurveyOptions = demoTitles.map((title, index) => {
+
+        let minifiedApp = demoTitleKeys[index].replace(/[ ]*/g,"");
+        return `<option value="/appSkeleton.html?lang=${lang}&app=${minifiedApp}">${title}</option>`
+    });
+    let demoSelectHtml = `
+        <select name="demo" id="select-demo" onchange="window.location.href=this.value;">
+            <option value="">${jsLangObj.optionText}</option>
+            ${demoSurveyOptions}
+        </select>
+        `
     const bodyHtml = `
         <span id="title" style="display: none">${jsLangObj.title}</span>
         <header>

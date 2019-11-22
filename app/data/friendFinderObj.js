@@ -25,7 +25,8 @@ const appObjEn = {
     brandingLogo: "Branding-Logo.png",
     poweredbyLogo: "similarityEngineLogo.png",
     i18nLogo: "i18nLogo.png",
-    survey: surveyObjEn
+    survey: surveyObjEn,
+    backgroundImgFile: "FriendFinderBackground.jpg"
 }
 
 const appObjEs = {
@@ -41,7 +42,8 @@ const appObjEs = {
     brandingLogo: "Branding-Logo.png",
     poweredbyLogo: "similarityEngineLogo.png",
     i18nLogo: "i18nLogo.png",
-    survey: surveyObjEs
+    survey: surveyObjEs,
+    backgroundImgFile: "FriendFinderBackground.jpg"
 }
 
 const appObjHi = {
@@ -57,7 +59,8 @@ const appObjHi = {
     brandingLogo: "Branding-Logo.png",
     poweredbyLogo: "similarityEngineLogo.png",
     i18nLogo: "i18nLogo.png",
-    survey: surveyObjHi
+    survey: surveyObjHi,
+    backgroundImgFile: "FriendFinderBackground.jpg"
 }
 
 const appObjZh = {
@@ -73,7 +76,8 @@ const appObjZh = {
     brandingLogo: "Branding-Logo.png",
     poweredbyLogo: "similarityEngineLogo.png",
     i18nLogo: "i18nLogo.png",
-    survey: surveyObjZh
+    survey: surveyObjZh,
+    backgroundImgFile: "FriendFinderBackground.jpg"
 }
 
 const appObjs = {

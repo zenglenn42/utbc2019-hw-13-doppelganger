@@ -1,5 +1,10 @@
 const DEFAULT_LANG = "en"
-const getDemoTitles = require("./demoSurveyObjs.js")
+const {
+    getDemoTitles,
+    getDemoTitleKeys,
+    getDemoObj,
+    getDemoImg
+ }  = require("./demoSurveyObjs.js")
 
 const similarityEngineEn = {
     langName:          "English",
@@ -63,4 +68,24 @@ function getSupportedLangs() {
     return ["en", "Español"]
 }
 
-module.exports = { getObj, getLangObj, getLanguageName, getSupportedLangCodes }
+function getAppObj(app, lang) {
+    return getDemoObj(app, lang)
+}
+
+function getAppTitleKeys() {
+    return getDemoTitleKeys()
+}
+
+function getAppImg(app, lang) {
+    return getDemoImg(app, lang)
+}
+
+module.exports = { 
+    getObj, 
+    getLangObj, 
+    getLanguageName, 
+    getSupportedLangCodes, 
+    getAppObj, 
+    getAppTitleKeys, 
+    getAppImg 
+}

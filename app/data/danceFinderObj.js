@@ -25,7 +25,8 @@ const appObjEn = {
     brandingLogo: "Branding-Logo.png",
     poweredbyLogo: "SimilarityEngineLogo.png",
     i18nLogo: "i18nLogo.png",
-    survey: surveyObjEn
+    survey: surveyObjEn,
+    backgroundImgFile: "DanceFinderBackground.jpg"
 }
 
 const appObjEs = {
@@ -41,7 +42,8 @@ const appObjEs = {
     brandingLogo: "Branding-Logo.png",
     poweredbyLogo: "SimilarityEngineLogo.png",
     i18nLogo: "i18nLogo.png",
-    survey: surveyObjEs
+    survey: surveyObjEs,
+    backgroundImgFile: "DanceFinderBackground.jpg"
 }
 
 const appObjHi = {
@@ -57,7 +59,8 @@ const appObjHi = {
     brandingLogo: "Branding-Logo.png",
     poweredbyLogo: "SimilarityEngineLogo.png",
     i18nLogo: "i18nLogo.png",
-    survey: surveyObjHi
+    survey: surveyObjHi,
+    backgroundImgFile: "DanceFinderBackground.jpg"
 }
 
 const appObjZh = {
@@ -73,7 +76,12 @@ const appObjZh = {
     brandingLogo: "Branding-Logo.png",
     poweredbyLogo: "SimilarityEngineLogo.png",
     i18nLogo: "i18nLogo.png",
-    survey: surveyObjZh
+    survey: surveyObjZh,
+    backgroundImgFile: "DanceFinderBackground.jpg"
+}
+
+function getDanceFinderImg() {
+    return appObj.backgroundImgFile;
 }
 
 const appObjs = {

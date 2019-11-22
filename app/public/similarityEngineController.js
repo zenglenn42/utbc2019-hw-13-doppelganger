@@ -1,12 +1,12 @@
 const DEFAULT_LANG = "en";
+const DEFAULT_APP = "similarityEngine"
 
 class SimilarityEngineController {
-    constructor(lang = DEFAULT_LANG) {
-        // Once the rest of the home page body elements are dynamically 
-        // added to the DOM, complete controller initialization by
-        // adding other event handlers.
+    constructor(lang = DEFAULT_LANG, app = DEFAULT_APP) {
         this.lang = lang;
-        this.getBodyHtml(this.initController.bind(this))
+        this.app = app;
+        console.log("controller app = ", app);
+        this.getBodyHtml(this.initController.bind(this));
     }
 
     initController() {
@@ -14,13 +14,7 @@ class SimilarityEngineController {
         if (title) {
             document.title = title;
         }
-        //let selectLangEl = document.getElementById("select-lang");
-        this.delegate(document, "change", "#select-demo", this.changeApp.bind(this));
         this.delegate(document, "change", "#select-lang", this.changeLang.bind(this));
-    }
-
-    changeApp(e) {
-        let app = document.getElementById("select-demo").value
     }
     
     getLang() {
@@ -34,10 +28,18 @@ class SimilarityEngineController {
     changeLang(e) {
         const langSelect = document.getElementById("select-lang");
         this.setLang(langSelect.value);
-        this.getBodyHtml()
+        this.getBodyHtml();
     }
 
-    elRedraw(elId) {
+    setBackgroundImg(sel) {
+        let imgFile = document.getElementById("backgroundImg").innerHTML;
+        if (imgFile) {
+            console.log("imgFile = ", imgFile);
+            document.querySelector(sel).style.backgroundImage = `url('${imgFile}')`;
+        }
+    }
+
+    domForceRender(elId) {
         console.log("domRedraw:", elId);
         var element = document.getElementById(elId);
         var n = document.createTextNode(' ');
@@ -67,7 +69,14 @@ class SimilarityEngineController {
     };
 
     getBodyHtml(callback) {
-        let queryUrl = `/similarityEngineBody.html?lang=${this.lang}`
+        let queryUrl = "";
+        switch (this.app) {
+            case "similarityEngine":
+                queryUrl = `/${this.app}Body.html?lang=${this.lang}&app=${this.app}`
+                break;
+            default:
+                queryUrl = `/appBody.html?lang=${this.lang}&app=${this.app}`
+        }
         this.fetchBodyHtml(queryUrl, callback)
     }
 
@@ -87,6 +96,7 @@ class SimilarityEngineController {
                 // console.log("body html = ", body)
                 var bodyDiv = document.getElementById("body-container");
                 bodyDiv.innerHTML = body;
+                this.setBackgroundImg("main");
                 if (callback) {
                     console.log("calling callback")
                     callback(bodyDiv, body);
