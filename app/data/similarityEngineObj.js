@@ -3,7 +3,8 @@ const {
     getDemoTitles,
     getDemoTitleKeys,
     getDemoObj,
-    getDemoImg
+    getDemoImg,
+    getDemoSurveyRespondents,
  }  = require("./demoSurveyObjs.js")
 
 const similarityEngineEn = {
@@ -105,6 +106,10 @@ function getAppImg(app, lang) {
     return getDemoImg(app, lang)
 }
 
+function getAppSurveyRespondents(app, lang) {
+    return getDemoSurveyRespondents(app, lang)
+}
+
 module.exports = { 
     getObj, 
     getLangObj, 
@@ -112,5 +117,6 @@ module.exports = {
     getSupportedLangCodes, 
     getAppObj, 
     getAppTitleKeys, 
-    getAppImg 
+    getAppImg,
+    getAppSurveyRespondents
 }

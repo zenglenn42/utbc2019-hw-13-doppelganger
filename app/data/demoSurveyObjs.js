@@ -38,9 +38,16 @@ const getDemoImg = function(app, lang = DEFAULT) {
     return demoObj[app](lang).backgroundImgFile
 }
 
+const getDemoSurveyRespondents = function(app, lang = DEFAULT_LANG) {
+    console.log(demoObj[app]);
+    console.log(demoObj[app](lang));
+    return demoObj[app](lang).respondents
+}
+
 module.exports = {
     getDemoTitles,
     getDemoTitleKeys,
     getDemoObj,
-    getDemoImg
+    getDemoImg,
+    getDemoSurveyRespondents
 }

@@ -1,4 +1,4 @@
-var surveyRespondents = require("../data/respondents.js")
+const { getAppSurveyRespondents } = require("../data/similarityEngineObj.js")
 
 module.exports = function(app) {
     app.get("/surveyRespondents.json", (req, res) => {
@@ -16,6 +16,11 @@ module.exports = function(app) {
 
         try {
             newRespondent = req.body;
+            let lang = newRespondent.lang;
+            let app = newRespondent.app;
+            console.log("submitSurvey lang = ", lang, " app = ", app);
+            let surveyRespondents = getAppSurveyRespondents(app, lang);
+            console.log("respondents = ", surveyRespondents);
             let [mostSimilarIndex, mostPercent, leastSimilarIndex, leastPercent] = mostSimilar(newRespondent, surveyRespondents);
             let results = {
                 "name": surveyRespondents[mostSimilarIndex].name,
@@ -30,7 +35,7 @@ module.exports = function(app) {
             // surveyRespondents.push(req.body)
             res.json(results)
         } catch(e) {
-            console.log("Error: Unable to find someone similar.");
+            console.log("Error: Unable to find a good match.");
             console.log(e)
             res.json({})
         }

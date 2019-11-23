@@ -12,6 +12,8 @@ const {
     surveyObjZh,
 } = require("./danceFinderSurveyObj.js")
 
+const surveyRespondents = require("./danceFinderRespondentsObj.js");
+
 const appObjEn = {
     title: "Dance Finder",
     callToActionShort: "Find your best moves",
@@ -26,6 +28,7 @@ const appObjEn = {
     poweredbyLogo: "SimilarityEngineLogo.png",
     i18nLogo: "i18nLogo.png",
     survey: surveyObjEn,
+    respondents: surveyRespondents,
     backgroundImgFile: "DanceFinderBackground.jpg"
 }
 
@@ -43,6 +46,7 @@ const appObjEs = {
     poweredbyLogo: "SimilarityEngineLogo.png",
     i18nLogo: "i18nLogo.png",
     survey: surveyObjEs,
+    respondents: surveyRespondents,
     backgroundImgFile: "DanceFinderBackground.jpg"
 }
 
@@ -60,6 +64,7 @@ const appObjHi = {
     poweredbyLogo: "SimilarityEngineLogo.png",
     i18nLogo: "i18nLogo.png",
     survey: surveyObjHi,
+    respondents: surveyRespondents,
     backgroundImgFile: "DanceFinderBackground.jpg"
 }
 
@@ -77,6 +82,7 @@ const appObjZh = {
     poweredbyLogo: "SimilarityEngineLogo.png",
     i18nLogo: "i18nLogo.png",
     survey: surveyObjZh,
+    respondents: surveyRespondents,
     backgroundImgFile: "DanceFinderBackground.jpg"
 }
 

@@ -12,6 +12,8 @@ const {
     surveyObjZh,
 } = require("./friendFinderSurveyObj.js")
 
+const surveyRespondents = require("./friendFinderRespondentsObj.js");
+
 const appObjEn = {
     title: "Friend Finder",
     callToActionShort: "Find your mental doppelgänger!",
@@ -26,6 +28,7 @@ const appObjEn = {
     poweredbyLogo: "similarityEngineLogo.png",
     i18nLogo: "i18nLogo.png",
     survey: surveyObjEn,
+    respondents: surveyRespondents,
     backgroundImgFile: "FriendFinderBackground.jpg"
 }
 
@@ -43,6 +46,7 @@ const appObjEs = {
     poweredbyLogo: "similarityEngineLogo.png",
     i18nLogo: "i18nLogo.png",
     survey: surveyObjEs,
+    respondents: surveyRespondents,
     backgroundImgFile: "FriendFinderBackground.jpg"
 }
 
@@ -60,6 +64,7 @@ const appObjHi = {
     poweredbyLogo: "similarityEngineLogo.png",
     i18nLogo: "i18nLogo.png",
     survey: surveyObjHi,
+    respondents: surveyRespondents,
     backgroundImgFile: "FriendFinderBackground.jpg"
 }
 
@@ -77,6 +82,7 @@ const appObjZh = {
     poweredbyLogo: "similarityEngineLogo.png",
     i18nLogo: "i18nLogo.png",
     survey: surveyObjZh,
+    respondents: surveyRespondents,
     backgroundImgFile: "FriendFinderBackground.jpg"
 }
 

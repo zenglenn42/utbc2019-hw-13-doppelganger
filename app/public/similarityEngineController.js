@@ -163,7 +163,7 @@ class SimilarityEngineController {
 
         // Normalize form data.
         var formElement = document.querySelector("#surveyForm");
-        var formDataObj = this.normalizeFormData(formElement);
+        var formDataObj = this.normalizeFormData(formElement, this.app, this.lang);
 
         // See: https://css-tricks.com/using-fetch/
         const url = "/submitSurvey.json";
@@ -247,7 +247,7 @@ class SimilarityEngineController {
 //
 // We can add some validation checks to this later.
 
-    normalizeFormData(formElement) {
+    normalizeFormData(formElement, app, lang) {
         var formData = new FormData(formElement);
         var formDataObj = {scores: []}
         for (var [key, value] of formData.entries()) {
@@ -257,6 +257,8 @@ class SimilarityEngineController {
                 formDataObj[key] = value;
             }
         }
+        formDataObj["app"] = app;
+        formDataObj["lang"] = lang;
         return formDataObj
     }
 }
