@@ -17,6 +17,15 @@ class SimilarityEngineController {
         let langSelectEl = document.getElementById("select-lang");
         this.delegate(document, "change", "#select-lang", this.changeLang.bind(this));
         this.delegate(document, "click",  "#main-survey-button", this.getSurveyHtml.bind(this));
+        this.delegate(document, "submit", "#surveyForm", this.postSurveyForm.bind(this));
+
+        this.similarText = document.getElementById("similar").innerText;
+        this.similarResults = document.getElementById("similarResults").innerText;
+        this.dissimilarResults = document.getElementById("dissimilarResults").innerText;
+        this.delegate(document, "click", ".close-btn", (e) => {
+            let modal = document.querySelector(".modal")
+            modal.style.display = "none"
+        });
     }
     
     getLang() {
@@ -147,5 +156,107 @@ class SimilarityEngineController {
                 console.log("404 Resource not found.")
             }
         })
+    }
+
+    postSurveyForm(e) {
+        e.preventDefault();
+
+        // Normalize form data.
+        var formElement = document.querySelector("#surveyForm");
+        var formDataObj = this.normalizeFormData(formElement);
+
+        // See: https://css-tricks.com/using-fetch/
+        const url = "/submitSurvey.json";
+        fetch(
+            url, 
+            {
+                method: 'post',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formDataObj)
+            }
+        ).then(response => 
+            {
+                if (response.ok) {
+                    return response.json()
+                } else {
+                    return Promise.reject({
+                        status: response.status,
+                        statusText: response.statusText
+                    })
+                }
+            }
+        ).then(resultsObj => {
+            console.log("resultsObj", resultsObj)
+            let modal = document.querySelector(".modal")
+            modal.style.display = "block"
+            let resultsEl = document.getElementById("results");
+            let resultsHtml = `
+                <h1>No results.</h1>
+            `
+            if (resultsObj.name) {
+                resultsHtml = `
+                    <h1>${this.similarResults}</h1>
+                    <h2>${resultsObj.name}</h2>
+                `
+                if (resultsObj.photo) {
+                    resultsHtml += `
+                    <img class="modal-img" src="${resultsObj.photo}" alt="image unavailable">
+                    `
+                }
+                if (resultsObj.percent) {
+                    resultsHtml += `
+                    <h2>${resultsObj.percent}% ${this.similarText}</h2>
+                    `
+                }
+                if (resultsObj.nameLeast) {
+                    resultsHtml += `
+                        <h1>${this.dissimilarResults}</h1>
+                        <h2>${resultsObj.nameLeast}</h2>
+                    `
+                    if (resultsObj.photoLeast) {
+                        resultsHtml += `
+                        <img class="modal-img" src="${resultsObj.photoLeast}" alt="image unavailable">
+                        `
+                    }
+                    if (resultsObj.percentLeast) {
+                        resultsHtml += `
+                        <h2>${resultsObj.percentLeast}% ${this.similarText}</h2>
+                        `
+                    }
+                }
+            }
+            resultsEl.innerHTML = resultsHtml
+        })
+        .catch(error => {
+            if (error.status === 404) {
+                console.log("404 Resource not found.")
+            }
+        })
+    }
+
+// Transform key/value pairs from survey form input elements into
+// a normalized object structured like this:
+//
+// formDataObj = {   
+//     name: 'Ahmed',
+//     photo: 'http://photo.com/some/picture.jpg',
+//     scores: [ '5', '1', '4', '4', '5', '1', '2', '5', '4', '1' ] 
+// }
+//
+// We can add some validation checks to this later.
+
+    normalizeFormData(formElement) {
+        var formData = new FormData(formElement);
+        var formDataObj = {scores: []}
+        for (var [key, value] of formData.entries()) {
+            if (key.match(/^q[0-9]*/)) {
+                formDataObj.scores.push(value);
+            } else {
+                formDataObj[key] = value;
+            }
+        }
+        return formDataObj
     }
 }

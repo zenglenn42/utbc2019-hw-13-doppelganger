@@ -18,6 +18,10 @@ module.exports = function(app) {
         res.sendFile(path.join(__dirname, "/../public/similarityEngine.css"));
     });
 
+    app.get("/surveyModal.css", (req, res) => {
+        res.sendFile(path.join(__dirname, "/../public/surveyModal.css"));
+    });
+
     app.get("/similarityEngineController.js", (req, res) => {
         res.sendFile(path.join(__dirname, "/../public/similarityEngineController.js"));
     });
@@ -105,6 +109,9 @@ function getAppBodyHtml(lang, app, jsLangObj) {
     const bodyHtml = `
         <span id="title" style="display: none">${jsLangObj.title}</span>
         <span id="backgroundImg" style="display: none">${jsLangObj.backgroundImgFile}</span>
+        <span id="similar" style="display: none">${jsLangObj.similarText}</span>
+        <span id="similarResults" style="display: none">${jsLangObj.similarResults}</span>
+        <span id="dissimilarResults" style="display: none">${jsLangObj.dissimilarResults}</span>
         <header>
             <h1 id="header-title">${jsLangObj.title}</h1>
         </header>
