@@ -19,6 +19,19 @@ const similarityEngineEn = {
     backgroundImgFile: "similarityEngineBackground.jpg"
 }
 
+const similarityEngineZh = {
+    langName:          "简体中文",
+    title:             "相似引擎",
+    aboutButtonText:   "关于",
+    aboutText:         "在此添加有关此应用及其工作原理的更广泛的文字 ...",
+    callToActionShort: "查找调查表的类似受访者",
+    callToActionLong:  "完成一项调查以量化您与其他调查受访者或原型之间的相似性",
+    selectDemoText:    "试试吧 ...",
+    optionText:        "选择一个应用",
+    selectLangText:    "语言",
+    backgroundImgFile: "similarityEngineBackground.jpg"
+}
+
 const similarityEngineEs = {
     langName:          "Español",
     title:             "Motor de Similitud",
@@ -32,10 +45,25 @@ const similarityEngineEs = {
     backgroundImgFile: "similarityEngineBackground.jpg"
 }
 
+const similarityEngineHi = {
+    langName:          "हिंदी",
+    title:             "समानता इंजन",
+    aboutButtonText:   "के बारे में",
+    aboutText:         "इस एप्लिकेशन के बारे में और अधिक विस्तृत पाठ जोड़ें और यह यहाँ कैसे काम करता है ...",
+    callToActionShort: "किसी ऐसे व्यक्ति का पता लगाएं जो सर्वेक्षण के समान प्रतिक्रिया करता है।",
+    callToActionLong:  "आप और अन्य सर्वेक्षण उत्तरदाताओं या आर्कटाइप्स के बीच समानता निर्धारित करने के लिए एक सर्वेक्षण पूरा करें।",
+    selectDemoText:    "कोशिश करो ...",
+    optionText:        "एक एप्लिकेशन चुनें",
+    selectLangText:    "भाषा",
+    backgroundImgFile: "similarityEngineBackground.jpg"
+}
+
 const similarityEngine = {
     lang: {
         "en": similarityEngineEn,
         "es": similarityEngineEs,
+        "zh": similarityEngineZh,
+        "hi": similarityEngineHi
     },
     demoTitles:        getDemoTitles,
     gitHubIcon:        "",
@@ -63,10 +91,6 @@ function getLangObj(lang = DEFAULT_LANG) {
 
 function getObj() {
     return similarityEngine;
-}
-
-function getSupportedLangs() {
-    return ["en", "Español"]
 }
 
 function getAppObj(app, lang) {

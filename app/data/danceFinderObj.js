@@ -47,7 +47,7 @@ const appObjEs = {
 }
 
 const appObjHi = {
-    title: "Hi: Dance Finder",
+    title: "नृत्य खोजक",
     callToActionShort: "Hi: Find your best moves",
     callToActionLong: "Hi: Answer a few basic questions then find some dances you may want to try.",
     buttonText: "Hi: Go to Survey",
@@ -64,7 +64,7 @@ const appObjHi = {
 }
 
 const appObjZh = {
-    title: "Zh: Dance Finder",
+    title: "舞蹈发现者",
     callToActionShort: "Zh: Find your best moves",
     callToActionLong: "Zh: Answer a few basic questions then find some dances you may want to try.",
     buttonText: "Zh: Go to Survey",
