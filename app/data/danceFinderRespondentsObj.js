@@ -14,20 +14,6 @@ var surveyRespondents = [
 		]
 	},
 	{
-		"name": "Argentine Tango",
-		"photo": "",
-		"scores": [
-			"5",
-			"2",
-			"4",
-			"1",
-			"4",
-			"1",
-			"4",
-			"4",
-		]
-	},
-	{
 		"name": "West Coast Swing",
 		"photo": "",
 		"scores": [
@@ -138,6 +124,20 @@ var surveyRespondents = [
 			"2",
 			"2",
 		]
-	}
+	},
+	{
+		"name": "Argentine Tango",
+		"photo": "",
+		"scores": [
+			"5",
+			"2",
+			"4",
+			"1",
+			"4",
+			"1",
+			"4",
+			"4",
+		]
+	},
 ];
 module.exports = surveyRespondents;
