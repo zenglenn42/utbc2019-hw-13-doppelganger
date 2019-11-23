@@ -160,13 +160,13 @@ footer {
 
 .close-btn {
     float: right;
-    color: lightgray;
+    color: darkgray;
     font-size: 24px;
     font-weight: bold;
 }
 
 .close-btn:hover {
-    color: darkgray;
+    color: black;
 }
 
 #results {

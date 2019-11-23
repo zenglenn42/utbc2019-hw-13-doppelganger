@@ -15,13 +15,10 @@ This is not a full CRUD (Create, Retrieve, Update, Delete) application.  Nominal
 
 ## Minimal Viable Product (MVP)
 
-![alt](docs/img/ui.jpg)
-
-## MVP + Internationalization
-
-Make our application accessible by ~2 billion people by supporting the top 4 spoken languages.
-
-![alt](docs/img/ui-i18n-top4.png)
+![alt](docs/img/se-splash.png)
+![alt](docs/img/se-apps.png)
+![alt](docs/img/app-splash.png)
+![alt](docs/img/ff-results.png)
 
 ## Technology stack
 
