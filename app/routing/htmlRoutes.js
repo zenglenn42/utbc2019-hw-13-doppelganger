@@ -109,8 +109,8 @@ function getAppBodyHtml(lang, app, jsLangObj) {
             <h1 id="header-title">${jsLangObj.title}</h1>
         </header>
         <main id="app-main" data-app="${app}" data-page="splash">
-            <h2 id="main-cta-short">${jsLangObj.callToActionShort}</h2>
-            <p id="main-cta-long">${jsLangObj.callToActionLong}</p>
+            <h2 id="main-cta-short"><span class="cta-text">${jsLangObj.callToActionShort}</span></h2>
+            <p id="main-cta-long"><span class="cta-text">${jsLangObj.callToActionLong}</span></p>
             <div id="main-view-survey">
                 <button id="main-survey-button" data-app=${app}><span>${jsLangObj.buttonText}</span></button>
             </div>
@@ -162,8 +162,8 @@ function getSimilarityEngineBodyHtml(lang, jsObj) {
             </div>
         </header>
         <main>
-            <h2 id="main-cta-short">${jsLangObj.callToActionShort}</h2>
-            <p id="main-cta-long">${jsLangObj.callToActionLong}</p>
+            <h2 id="main-cta-short"><span class="cta-text">${jsLangObj.callToActionShort}</span></h2>
+            <p id="main-cta-long"><span class="cta-text">${jsLangObj.callToActionLong}</span></p>
             <div id="main-select-survey">
                 <h2>${jsLangObj.selectDemoText}</h2>
                 ${demoSelectHtml}
