@@ -6,7 +6,8 @@ const {
     getSupportedLangCodes,
     getAppObj,
     getAppTitleKeys,
-    getAppImg
+    getAppImg,
+    getAppSurveyHtml,
 } = require("../data/similarityEngineObj.js")
 
 module.exports = function(app) {
@@ -96,12 +97,13 @@ module.exports = function(app) {
     app.get("/appMain.html", (req, res) => {
         let lang = req.query.lang;
         let app = req.query.app;
-        res.send(getAppMainHtml(getAppObj(app, lang)));
+        res.send(getAppMainHtml(app, lang));
     });
 }
 
-function getAppMainHtml(jsLangObj) {
-    const mainHtml = getSurveyHtml(jsLangObj.survey);
+function getAppMainHtml(app, lang) {
+    //const mainHtml = getSurveyHtml(jsLangObj.survey);
+    const mainHtml = getAppSurveyHtml(app, lang);
     return mainHtml
 }
 
