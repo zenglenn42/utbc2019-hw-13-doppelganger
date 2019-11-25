@@ -73,6 +73,10 @@ const getDemoSurveyHtml = function(app, lang) {
             `
             break;
     }
+    let optionalButtonsHtml = `
+        <input type="button" value="${jsObj.apiText}" id="api-button">
+    `
+    optionalButtonsHtml = ""
     const surveyHtml = `
         <div id="survey-container">
             <h2>${jsObj.surveyTitle}</h2>
@@ -85,7 +89,7 @@ const getDemoSurveyHtml = function(app, lang) {
                 <p>
                     <input type="submit" value="${jsObj.submitText}">
                     <input type="reset" value="${jsObj.resetText}">
-                    <input type="button" value="${jsObj.apiText}" id="api-button">
+                    ${optionalButtonsHtml}
                 </p>
             </form>
             <div class="modal" style="display: none;">
