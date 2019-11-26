@@ -150,7 +150,8 @@ footer {
     -webkit-animation-duration: 0.4s;
     animation-name: animatetop;
     animation-duration: 0.4s;
-    overflow-y: scroll;
+    overflow: -moz-scrollbars-vertical;
+    overflow: scroll;
     border-radius: 0.2em;
     border: 2px solid black;
     box-shadow: 0 .05em .25em rgba(0,0,0,.5);

@@ -205,11 +205,13 @@ class SimilarityEngineController {
                 let percentSimilar = parseInt(result.percentSimilar).toFixed(0);
                 let num = index + 1;
                 let resultHtml = `
-                    <h1>${num}. ${result.name} ${percentSimilar}% ${this.matchText}</h1>
+                    <h2>${num}. ${result.name}</h2>
+                    <p>${percentSimilar}% ${this.matchText}</p>
                 `
                 if (result.photo) {
                     resultHtml += `<img class="modal-img" src="${result.photo}" alt="image unavailable"></img>`
                 }
+                resultHtml += "<hr>"
                 return resultHtml
             });
             console.log("resultsHtml = ", resultsHtml);
