@@ -19,7 +19,8 @@ module.exports = function(app) {
             let lang = newRespondent.lang;
             let app = newRespondent.app;
             let surveyRespondents = getAppSurveyRespondents(app, lang);
-            let sortedResults = sortBySimilarity(newRespondent, surveyRespondents, "DESCENDING").map((result, index) => {
+            let sortedResults = sortBySimilarity(newRespondent, surveyRespondents, "DESCENDING").map((result) => {
+                let index = result.index;
                 return {
                     "name": surveyRespondents[index].name,
                     "photo": surveyRespondents[index].photo,
@@ -51,9 +52,8 @@ function sortBySimilarity(you, surveyRespondents, direction = "ASCENDING") {
         throw new Error("sortBySimilarity(): empty respondends database");
     }
 
-    console.log(you.scores);
     let l2MaxDistance = getl2MaxDistance(you.scores.length);
-    let percentSimilar = surveyRespondents.map((respondent, i) => {
+    let pSimilar = surveyRespondents.map((respondent, i) => {
         let l2 = euclidianDistance(you.scores, respondent.scores);
         let results  = {
             index: i,
@@ -63,19 +63,11 @@ function sortBySimilarity(you, surveyRespondents, direction = "ASCENDING") {
     });
 
     if (direction === "ASCENDING") { 
-        percentSimilar.sort((a, b) => {
-            if (a.percentSimilar === b.percentSimilar) return 0;
-            if (a.percentSimilar < b.percentSimilar) return -1;
-            return 1;
-        })
+        pSimilar.sort( (a,b) => a.percentSimilar - b.percentSimilar );
     } else {
-        percentSimilar.sort((a, b) => {
-            if (a.percentSimilar === b.percentSimilar) return 0;
-            if (a.percentSimilar > b.percentSimilar) return -1;
-            return 1;
-        }) 
+        pSimilar.sort( (a,b) => b.percentSimilar - a.percentSimilar );
     }
-    return percentSimilar;
+    return pSimilar;
 }   
 
 function getl2MaxDistance(numQuestions) {
