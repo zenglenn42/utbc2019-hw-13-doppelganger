@@ -365,6 +365,7 @@ Now when I try to submit with an empty input field, I'm rewarded with a bit of b
     * It would be relatively easy to leverage React and some Material UI components.
     * Add more robust form validation.
     * Use [SweetAlert](https://sweetalert.js.org/) for the modal.
+    * Dance Finder could use pictures and videos of dances.  Maybe some giphy bling.
 
 * Add a database backend to persist user survey results.
     * Harden the code to catch duplicate entries.
