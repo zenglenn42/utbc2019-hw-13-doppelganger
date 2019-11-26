@@ -142,7 +142,7 @@ footer {
 
 .modal-content {
     position: relative;
-    background-color: white;
+    background-color: rgb(200, 200, 200);
     padding: 20px;
     margin: auto; 
     width: 75%;  
@@ -151,6 +151,9 @@ footer {
     animation-name: animatetop;
     animation-duration: 0.4s;
     overflow-y: scroll;
+    border-radius: 0.2em;
+    border: 2px solid black;
+    box-shadow: 0 .05em .25em rgba(0,0,0,.5);
 }
 
 .modal-img {
@@ -160,13 +163,13 @@ footer {
 
 .close-btn {
     float: right;
-    color: darkgray;
+    color: black;
     font-size: 24px;
     font-weight: bold;
 }
 
 .close-btn:hover {
-    color: black;
+    color: red;
 }
 
 #results {
