@@ -277,7 +277,7 @@ Here's a sketch of the HTML
 
 ![alt](docs/img/nice-buttons.png)
 
-I bought the book "CSS Secrets", some time ago and love it.  Some nice fu from there is responsible for the styling on the buttons.
+I bought the book "CSS Secrets" some time ago and love it.  Some nice fu from there is responsible for the styling on the buttons.
 
 ### Modal Results Window
 
