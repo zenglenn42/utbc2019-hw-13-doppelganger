@@ -114,6 +114,7 @@ function getAppBodyHtml(lang, app, jsLangObj) {
         <span id="similar" style="display: none">${jsLangObj.similarText}</span>
         <span id="similarResults" style="display: none">${jsLangObj.similarResults}</span>
         <span id="dissimilarResults" style="display: none">${jsLangObj.dissimilarResults}</span>
+        <span id="matchText" style="display: none">${jsLangObj.matchText}</span>
         <header>
             <h1 id="header-title">${jsLangObj.title}</h1>
         </header>

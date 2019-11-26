@@ -1,5 +1,6 @@
 const DEFAULT_LANG = "en";
 const DEFAULT_APP = "similarityEngine"
+const MAX_NUM_RESULTS = 3; // Only report top 3 results for now.
 
 class SimilarityEngineController {
     constructor(lang = DEFAULT_LANG, app = DEFAULT_APP) {
@@ -22,6 +23,7 @@ class SimilarityEngineController {
         this.similarText = document.getElementById("similar").innerText;
         this.similarResults = document.getElementById("similarResults").innerText;
         this.dissimilarResults = document.getElementById("dissimilarResults").innerText;
+
         this.delegate(document, "click", ".close-btn", (e) => {
             let modal = document.querySelector(".modal")
             modal.style.display = "none"
@@ -114,6 +116,10 @@ class SimilarityEngineController {
         ).then( body => {
                 var bodyDiv = document.getElementById("body-container");
                 bodyDiv.innerHTML = body;
+                let matchEl = document.getElementById("matchText");
+                if (matchEl) {
+                    this.matchText = document.getElementById("matchText").innerText;
+                }
                 this.setBackgroundImg("main");
                 if (callback) {
                     console.log("calling callback")
@@ -187,47 +193,27 @@ class SimilarityEngineController {
                     })
                 }
             }
-        ).then(resultsObj => {
-            console.log("resultsObj", resultsObj)
+        ).then(jsobj => {
+            console.log("results", jsobj.results)
+            let resultsArr = jsobj.results;
+            resultsArr.length = Math.min(resultsArr.length, MAX_NUM_RESULTS);
+
             let modal = document.querySelector(".modal")
             modal.style.display = "block"
             let resultsEl = document.getElementById("results");
-            let resultsHtml = `
-                <h1>No results.</h1>
-            `
-            if (resultsObj.name) {
-                resultsHtml = `
-                    <h1>${this.similarResults}</h1>
-                    <h2>${resultsObj.name}</h2>
+            let resultsHtml = resultsArr.map((result, index) => {
+                let percentSimilar = parseInt(result.percentSimilar).toFixed(0);
+                let num = index + 1;
+                let resultHtml = `
+                    <h1>${num}. ${result.name} ${percentSimilar}% ${this.matchText}</h1>
                 `
-                if (resultsObj.photo) {
-                    resultsHtml += `
-                    <img class="modal-img" src="${resultsObj.photo}" alt="image unavailable">
-                    `
+                if (result.photo) {
+                    resultHtml += `<img class="modal-img" src="${result.photo}" alt="image unavailable"></img>`
                 }
-                if (resultsObj.percent) {
-                    resultsHtml += `
-                    <h2>${resultsObj.percent}% ${this.similarText}</h2>
-                    `
-                }
-                if (resultsObj.nameLeast) {
-                    resultsHtml += `
-                        <h1>${this.dissimilarResults}</h1>
-                        <h2>${resultsObj.nameLeast}</h2>
-                    `
-                    if (resultsObj.photoLeast) {
-                        resultsHtml += `
-                        <img class="modal-img" src="${resultsObj.photoLeast}" alt="image unavailable">
-                        `
-                    }
-                    if (resultsObj.percentLeast) {
-                        resultsHtml += `
-                        <h2>${resultsObj.percentLeast}% ${this.similarText}</h2>
-                        `
-                    }
-                }
-            }
-            resultsEl.innerHTML = resultsHtml
+                return resultHtml
+            });
+            console.log("resultsHtml = ", resultsHtml);
+            resultsEl.innerHTML = resultsHtml.join("");
         })
         .catch(error => {
             if (error.status === 404) {
