@@ -26,7 +26,6 @@ and internationalized:
 * Backend
   * Node.js
   * Express.js
-  * [Functional](https://github.com/zenglenn42/utbc2019-hw-13-similarity-engine/blob/c096a76fe929ffb09ff0306ddaa35f57ebbd1975/app/data/survey.js#L33) JS
   * i18n
     * Chinese
     * Spanish
