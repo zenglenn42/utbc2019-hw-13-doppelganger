@@ -156,7 +156,7 @@ module.exports = getObj;
 
 ## Whoa, we have a similarity engine.
 
-Decoupling the HTML from the data required to generate our user interface opens up not only internationalization, but the possibility of serving up any multiple-choice survey.
+Decoupling the HTML from the data required to generate our user interface opens up not only internationalization, but the possibility of serving up *__any__* multiple-choice survey.
 
 ![alt](docs/img/black-and-white-round-car-air-filter-159293.jpg)
 
@@ -276,7 +276,7 @@ Here's a sketch of the HTML
 
 ![alt](docs/img/nice-buttons.png)
 
-I bought the book "CSS Secrets" some time ago and love it.  Some nice fu from there is responsible for the styling on the buttons.
+I bought the book "[CSS Secrets](https://www.oreilly.com/library/view/css-secrets/9781449372736/)" some time ago and love it.  Some nice fu from there is responsible for the styling on the buttons.
 
 ### Modal Results Window
 
