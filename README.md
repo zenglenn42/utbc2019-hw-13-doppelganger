@@ -371,7 +371,17 @@ Now when I try to submit with an empty input field, I'm rewarded with a bit of b
     * Harden the code to catch duplicate entries.
     * Maybe implement full CRUD.
 
+* Internationalization hardening
+    * Make error messages iternationalized
+    * Results in Dance Finder are in English :-/ ("Fix It!")
+
 * Play with other forms of measuring compatibility.
+    * Make the similarity algorithm selectable.
+
+* Refactor backend code
+    * Leverage OO
+
+* Sketch out the monetization pitch.
 
 * Spend time with friends.
 
