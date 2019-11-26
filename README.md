@@ -1,24 +1,21 @@
 # utbc2019-hw-13-similarity-engine [(demo)](https://still-stream-71803.herokuapp.com)
 
-Find a similar survey respondent.
+Find an [L2](https://en.wikipedia.org/wiki/Euclidean_distance)-similar survey respondent.
 
-![alt](docs/img/vsmilelx-l6JiEFGaDIQ-unsplash.jpg)
+![alt](docs/img/similarity-engine-ui.png)
 ##### Photo by 浮萍 闪电 on Unsplash
 
-## Specification
+with two demo applications:
 
-Implement a full-stack site that takes user survey results and compares those to other users' surveys to deduce and display the name and picture of the user with the most proximate responses.  
+![alt](docs/img/se-demo-app-ui.png)
 
-The pool of known people is represented by an in-memory array seeded by a [static js file](https://github.com/zenglenn42/utbc2019-hw-13-similarity-engine/blob/master/app/data/respondents.js).  The array is augmented over time as the site remains operative and new users submit their responses.
+and internationalized:
 
-This is not a full CRUD (Create, Retrieve, Update, Delete) application.  Nominally only create and retrieve are required at the record level.
+![alt](docs/img/ff-i18n-ui.png)
 
-## Minimal Viable Product (MVP)
+... ready to monetize for your specific domain ;-)
 
-![alt](docs/img/se-splash.png)
-![alt](docs/img/se-apps.png)
-![alt](docs/img/app-splash.png)
-![alt](docs/img/ff-results.png)
+![alt](docs/img/monetize-me.png)
 
 ## Technology stack
 
@@ -38,52 +35,23 @@ This is not a full CRUD (Create, Retrieve, Update, Delete) application.  Nominal
   * Model Analytics
     * L2 similarity
 
-## Server-side cheet sheet ;-)
+## Specification
 
-Refresh your brain [here](docs/notes.md).
+In the beginning, there was "Friend Finder" ...
 
-## Designer's Blog
+"Implement a full-stack site that takes user survey results and compares those to other users' surveys to deduce and display the name and picture of the user with the most proximate responses.  
 
-I know the point of this exercise is just to:
+The pool of known people is represented by an in-memory array seeded by a [static js file](https://github.com/zenglenn42/utbc2019-hw-13-similarity-engine/blob/master/app/data/respondents.js).  The array is augmented over time as the site remains operative and new users submit their responses."
 
-* deploy a simple Node.js Express web server
-* present a form to the user
-* post user response data to the backend
-* perform a server-side similarity calculation
-* present a similarity match to the frontend
+It looks like this:
 
-However ...
+![alt](docs/img/ui.jpg)
 
-### "There's options!"
+Very vanilla.  Very minimal.
 
-![alt](docs/img/raphael-schaller-D6uxeDSylxo-unsplash.jpg)
+## Data-driven Design
 
-* Backend
-    * Single Page Application or Static HTML?
-    * What kind of similarity?
-        * L1, L2, Cosine?
-* Frontend
-    * jQuery? 
-    * Bootstrap? 
-    * Templates? 
-* Internationalization
-    * i18n?
-
-These are the questions running through my mind.  It's such a simple application but I kinda want to future-proof it a bit.
-
-I could go with a couple static html files, one for the home page, one for the survey.  The survey could hardcode a route for scoring the response data and return a match from the in-memory respondents list.
-
-It's all very adequate and mid-90's ... and not what I'm going to do.
-
-### JS Object-based Survey Form
-
-Whenever I see a bunch of hardcoded HTML, it just feels wrong.  
-
-* there's no scalability of content
-* we've limited our frontend options
-* we've complicated support for internationalization
-
-So I make form construction [data driven](https://github.com/zenglenn42/utbc2019-hw-13-similarity-engine/blob/d442fb6c55779c5ddb94c7c18864624ae8f54136/app/data/surveyBody.js#L6), opting for some server side [HTML generation](https://github.com/zenglenn42/utbc2019-hw-13-similarity-engine/blob/d442fb6c55779c5ddb94c7c18864624ae8f54136/app/routing/htmlRoutes.js#L37).
+I decide early-on to make the user interface [data driven](https://github.com/zenglenn42/utbc2019-hw-13-similarity-engine/blob/d442fb6c55779c5ddb94c7c18864624ae8f54136/app/data/surveyBody.js#L6), opting for some server side [HTML generation](https://github.com/zenglenn42/utbc2019-hw-13-similarity-engine/blob/d442fb6c55779c5ddb94c7c18864624ae8f54136/app/routing/htmlRoutes.js#L37) from the backend.  
 
 ```
 const surveyObj = {
@@ -112,246 +80,16 @@ const surveyObj = {
 };
 ```
 
-What we have now is much more of a similarity /engine/ since we can add or edit the survey questions without changing any code.
-
-![alt](docs/img/black-and-white-round-car-air-filter-159293.jpg)
-
-Even the body of our home page gets distilled into a [js object](https://github.com/zenglenn42/utbc2019-hw-13-similarity-engine/blob/69fbcf7a337f968649b442d4471d38b479af6d25/app/data/homeBody.js#L1) and [reinflated to HTML](https://github.com/zenglenn42/utbc2019-hw-13-similarity-engine/blob/69fbcf7a337f968649b442d4471d38b479af6d25/app/routing/htmlRoutes.js#L27) as needed.
-
-Down the road (when VC clears ;-), we could easily send the raw JSON down to the frontend where it could be clothed in some spiffy [Material UI](https://material-ui.com/) components.
-
-Interestingly, this decision steers the next.
-
-### Ajax, bring it
-
-![alt](docs/img/alexandru-g-stavrica-1OFBOk1rfHU-unsplash.jpg)
-
-Our dynamically generated form implies Ajax by definition since we've diverged from serving up static pages of HTML along file boundaries.
-
-But how do we make those Ajax requests?
-
-* old school XMLHttpRequest
-* 3rd party library (like jQuery or axios)?
-* Fetch api?
-
-Strangely, I feel a bit nostalgic for the XMLHttpRequest interface in the DOM.  It's /the/ archetypal mechanism for supporting Ajax requests originating from the browser so it's now universally supported.  
-
-Plus there are a ton of examples illustrating how to use it with RESTful verbs (GET, POST, etc).  I even wire up my frontend to the server with [XHR](https://github.com/zenglenn42/utbc2019-hw-13-similarity-engine/blob/d442fb6c55779c5ddb94c7c18864624ae8f54136/app/public/controller.js#L173) in a low impedance dash to get stuff communicating.
-
-But that feels a bit too retro.  I mean there's a /reason/ why 3rd party solutions for doing Ajax manifested.
-
-Arguably, they:
-
-* offer simpler usage patterns
-* normalize the API (if browser support diverges)
-
-### I break with thee, jQuery ❌
-
-Despite the alure of 3rd party libraries, I'm keeping jQuery at arm's length.  Sure, it offers enormous utility, including these tasty ajax functions:
-
-```it
-    $.get(URL,callback); 
-    $.post(URL,data,callback); 
-    $.ajax(url[, options])
-```
-
-But if it's so handy, I (or some maintainer) may start using some of its DOM manipulation entry points, complicating my efforts to leverage virtual-DOM based technologies (like [React](https://reactjs.org/)) that could improve the user experience down the road.
-
-Who knows, maybe one day I'll feel the same way about 3rd party virtual-DOM manipulators as I do about jQuery. :D
-
-Abandoning jQuery means I need to find an alternative to the hyper-useful:
-
-```
-    $(document).on(event, selector, callback)
-```
-
-which registers event handlers for dynamically generated DOM elements, exactly the case with our [survey form](https://github.com/zenglenn42/utbc2019-hw-13-similarity-engine/blob/d442fb6c55779c5ddb94c7c18864624ae8f54136/app/public/controller.js#L36).
-
-[This will suffice](https://stackoverflow.com/questions/30880757/javascript-equivalent-to-on), though it may need to be hardened in production:
-
-```
-    delegate(el, evt, sel, handler) {
-        el.addEventListener(evt, function(event) {
-            let t = event.target;
-            while (t && t !== this) {
-            if (t.matches(sel)) {
-                handler.call(t, event);
-            }
-            t = t.parentNode;
-            }
-        });
-    };
-```
-
-As for axios, I've used it in other projects and it's a fine API.  But I want to stay current with browser standards (and maybe polyfill as needed).
-
-### ["That's so Fetch"](https://media.giphy.com/media/vJ6hRee1ZlyNi/giphy.gif)
-
-It seems like the [fetch API](https://developers.google.com/web/ilt/pwa/working-with-the-fetch-api) is the new hotness because:
-
-* I don't have to rely on a 3rd party API.
-* Browser support is decent.
-* It offers a modern, promise-based, usage pattern.
-
-It /is/ a bit weird to [POST something by calling fetch](https://github.com/zenglenn42/utbc2019-hw-13-similarity-engine/blob/a07d40a5a4a0826891dbce0ae40542a5c825bb17/app/public/controller.js#L100), though.  Whatever, we all learned to shut down Windows by pressing start.
-
-Happily I find [this resource](https://css-tricks.com/using-fetch/) for using fetch with non-trivial error handling.  (I weather another pang for XHR. :-/)
-
-### Intrinsic Beauty -- [Object Oriented Controller](https://github.com/zenglenn42/utbc2019-hw-13-similarity-engine/blob/d442fb6c55779c5ddb94c7c18864624ae8f54136/app/public/controller.js#L2)
-
-![alt](docs/img/hannah-troupe-s5PoKQEHnxk-unsplash.jpg)
-
-Sometimes appearances can be deceiving.  We judge too soon.  The UI is pretty plain at the moment, but under the covers is a nice object oriented survey controller that enables behavior and a goodly flow of HTML (and JSON that could be easily leveraged to beautify the frontend).  Here's how we instantiate the controller:
-
-```
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <script type="text/javascript" src="controller.js"></script>
-</head>
-<body>
-    <div id="body-container">
-        <h1>Find your Doppelgänger</h1>
-        ..
-    </div>
-</body>
-    <script type="text/javascript">
-        document.addEventListener(
-            "DOMContentLoaded",
-            (event) => { surveyController = new SurveyController(); }
-                         -----------------------------------------
-        );
-    </script>
-</html>
-```
-
-In the controller's constructor, we register event handlers which allow the application to post survey data and get results back from the server to display.
-
-```
-class SurveyController {
-    constructor() {
-        let initControllerCB = this.initController.bind(this);
-        this.getHomeBodyHtml(initControllerCB)
-    }
-
-    initController() {
-        let titleText = document.getElementById("title").innerText;
-        if (titleText) {
-            document.title = titleText;
-        }
-
-        this.delegate(document, "click", ".close-btn", (e) => {
-            let modal = document.querySelector(".modal")
-            modal.style.display = "none"
-        });
-
-        // Register click handler for dynamically added survey form.
-        this.delegate(document, "submit", "#surveyForm", this.postSurveyForm.bind(this));
-
-        // Register click handler for survey button which gets survey html.
-        var surveyButton = document.getElementById("get-survey-html")
-        surveyButton.addEventListener("click", this.getSurveyBodyHtml.bind(this))
-    }
-    ...
-}
-```
-
-### Form Data Validation
-
-![alt](docs/img/david-travis-WC6MJ0kRzGw-unsplash.jpg)
-
-While leveraging browser-supplied functionality, I employ the 'required' HTML attribute for my ```<input>``` form elements.
-
-```
-    <form id="surveyForm">
-        <h1>About You</h1>
-        <input name="name" type="text" required></input>
-                                       --------
-        <hr>
-        ..
-    </form>
-```
-
-Normally, this prevents the user from submitting incomplete forms to the server.  However my initial implementation defeats this desired behavior because I naively hook into the "click" event for the submit button (to bypass non-Ajaxy form processing with ACTION="```<surver-route>```").  Sadly, that fools the DOM into thinking I'm going rogue and will take on /all/ validation tasks with my custom submit handler.
-
-The trick to get Ajax posting AND non-empty field validation by the browser is to:
-
-* drop the ACTION="blah" METHOD="POST" form attributes
-* leave the submit button alone
-```
-    <form id="surveyForm">
-        ..
-        <input type="submit" value="Submit">
-    </form>
-```
-
-* register a handler for the form's 'submit' event
-```
-    delegate(document, "submit", "#surveyForm", postSurveyForm);
-    ...
-    function postSurveyForm(e) {
-        e.preventDefault();
-        ..
-        fetch(
-            "/submitSurvey.json", 
-            {
-                method: 'post',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(formData)
-            }
-        ).then( response => { /* handle response */ }
-        ).catch( error =>   { /* handle error */ }
-        )
-    }
-```
-
-Now when I try to submit with an empty input field, I'm rewarded with a bit of browser-supplied animation that guides me to the empty field:
-
-![alt](docs/img/required-field.png)
-
-### Modals
-
-The specification requires us to report results in a modal window.  Since I'm going super minimal on the UI for now, I'm tempted to use a simple alert or info box from the DOM, but these only support text and I need something that will at least allow an ```<img>``` tag, if not other HTML.
-
-I could go with a 3rd party library like sweetalerts, but I find something more spare [here](https://medium.com/@nerdplusdog/a-how-to-guide-for-modal-boxes-with-javascript-html-and-css-6a49d063987e).
-
-The essense of the solution is to define some CSS classes and associate those with some ```<div>```'s to control visibility (and animation!).
-
-```
-    <div class="modal">
-        <div class="modal-content">
-            <span class="close-btn">&times;</span>
-            <div id="results">
-            </div>
-        </div>
-    </div>
-```
-
-Initially we tweak the ```display``` attribute of the div:
-
-```
-    let modal = document.querySelector(".modal")
-    modal.style.display = "none"
-```
-
-and then in the callback that processes results, we enable the modal:
-
-```
-    modal.style.display = "block"
-```
-
 ## Internationalization
 
-With a couple hours [work](https://github.com/zenglenn42/utbc2019-hw-13-similarity-engine/compare/39321344cca8733956fa0d52fcf1939c0c6c557c...2a6564eb9c28c2921ade2ebaff49468cbc11f09f) this morning, I leverage the jsonified UI content to produce an internationalized version of the similarity engine.  
-
-New languages can now be added in minutes.  For fun, I add Spanish, Hindi, and Chinese by just editing two files:
-
-* i18n [home page](https://github.com/zenglenn42/utbc2019-hw-13-similarity-engine/blob/a7a69c3546f9bdc4cec33ebab549ee28235d1956/app/data/homeBody.js#L19)
-* i18n [survey page](https://github.com/zenglenn42/utbc2019-hw-13-similarity-engine/blob/a7a69c3546f9bdc4cec33ebab549ee28235d1956/app/data/surveyBody.js#L34)
+This allows me to easily support a simple form of internationalization:
 
 ![alt](docs/img/ui-i18n-top4-320.png)
+
+by just editing two files:
+
+* [landing page](https://github.com/zenglenn42/utbc2019-hw-13-similarity-engine/blob/a7a69c3546f9bdc4cec33ebab549ee28235d1956/app/data/homeBody.js#L19)
+* [survey page](https://github.com/zenglenn42/utbc2019-hw-13-similarity-engine/blob/a7a69c3546f9bdc4cec33ebab549ee28235d1956/app/data/surveyBody.js#L34)
 
 Integration on the frontend happens at the controller level which can be instantiated with a preferred language or modified after the fact through a ```SurveyController.setLang(lang)``` method:
 
@@ -417,6 +155,56 @@ function getObj(lang = DEFAULT_LANG) {
 module.exports = getObj;
 ```
 
+## Whoa, we have a similarity engine.
+
+Decoupling the HTML from the data required to generate our user interface opens up not only internationalization, but the possibility of serving up any multiple-choice survey.
+
+![alt](docs/img/black-and-white-round-car-air-filter-159293.jpg)
+
+Can I use this survey engine to find a style of dance I may want to learn?
+
+I craft a set of multiple choice questions that relate to dance and then, taking on the persona of a specific dance, respond to the survey.  I take the survey as "Salsa" or "Waltz" and build up a pool of archetype responses.
+
+Users who then respond similarly would be scored as having an affinity for that particular dance.  The calculation for quantifying similarity (using some simple linear algebra) is the same across domains, whether it's finding friends or finding dances.  Of course, there is probably some science and art to good archetype survey design.  But an informal demo among some dance geeks seems to serve up interesting and helpful results.
+
+And voila ... Dance Finder is born:
+
+![alt](docs/img/df-ui.png)
+
+With more abstraction, we could also make the similarity algorithm pluggable.  Maybe cosine distance or a hybrid combination of numerical methods is the more appropriate choice for a given survey domain.
+
+## AJAX
+
+![alt](docs/img/alexandru-g-stavrica-1OFBOk1rfHU-unsplash.jpg)
+
+Much of the content under the covers is dynamically generated (landing pages, survey forms) and is munged into a div sitting in some skeleton HTML.  Consequently, I need some Ajaxy-idiom to get that HTML.  I elect to use [fetch](https://developers.google.com/web/ilt/pwa/working-with-the-fetch-api) since it comes with the browser and is a nice, promise-based solution that avoids 3rd-party libraries like jQuery or the venerable XMLHttpRequest.
+
+Happily I find [this resource](https://css-tricks.com/using-fetch/) for using fetch with non-trivial error handling.
+
+Abandoning jQuery means I need to find an alternative to the hyper-useful:
+
+```
+    $(document).on(event, selector, callback)
+```
+
+which registers event handlers for dynamically generated DOM elements, exactly the case with our [survey form](https://github.com/zenglenn42/utbc2019-hw-13-similarity-engine/blob/d442fb6c55779c5ddb94c7c18864624ae8f54136/app/public/controller.js#L36).
+
+[This will suffice](https://stackoverflow.com/questions/30880757/javascript-equivalent-to-on), though it would need to be hardened in production:
+
+```
+    delegate(el, evt, sel, handler) {
+        el.addEventListener(evt, function(event) {
+            let t = event.target;
+            while (t && t !== this) {
+            if (t.matches(sel)) {
+                handler.call(t, event);
+            }
+            t = t.parentNode;
+            }
+        });
+    };
+```
+
 ## % Similarity
 
 I want the number.  
@@ -447,9 +235,129 @@ I fall back on an L2 implementation but first bias the raw scores to the left so
 
 If I were to commercialize this code, I'd dig more deeply into the analytics or consult my awesome math friends. It seemes reasonable to make the code configurable with 'similarity scoring' functions that could be passed in for different kinds of survey data.  I also think about how different questions may actually fall along the same axis especially in psychometric data.  That should be accounted for in a more sophisticated scoring model.
 
-For now, I'm in good enough territory.  As an easter egg, I also pass back the most and least similar respondents.  Sometimes it's good to be challenged by contrarians. ;-)
+For now, I'm in good enough territory.
 
 ![alt](docs/img/ui-percent-similar.png)
+
+## Style
+
+This application is more about wiring up a Node.js Express server, adding some routes, and making requests against those routes from the frontend.  So I'm not fussing too much with the user interface.  [React](https://reactjs.org/) will wait for another day.
+
+But there are a few choices that make the user experience not horrible. :-)
+
+### Flexbox
+
+I use flexbox in my css to get some easy responsiveness, organizing most content in one column of flex items with a ```main``` section that can grow and shrink, but always sticks the footer at the bottom of the browser window.
+
+```
+#body-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1;
+}
+```
+
+Here's a sketch of the HTML
+
+```
+<body>
+    <div id="body-container">
+        <header>...</header>
+        <main>...</main>
+        <footer>...</footer>
+    </div>
+</body>
+```
+
+### Scalable Buttons
+
+![alt](docs/img/nice-buttons.png)
+
+I bought the book "CSS Secrets", some time ago and love it.  Some nice fu from there is responsible for the styling on the buttons.
+
+### Modal Results Window
+
+If I wanted to really trick this out, I might use Sweet Alerts, but I opt for something more [spare](https://medium.com/@nerdplusdog/a-how-to-guide-for-modal-boxes-with-javascript-html-and-css-6a49d063987e).  It even includes a little animation.  So basically I just have to instrument the results div with the right modal class:
+
+```
+    <div class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <div id="results">
+            </div>
+        </div>
+    </div>
+```
+and then change the display attribute when results are returned to the frontend:
+
+```
+    let modal = document.querySelector(".modal")
+    modal.style.display = "block"
+```
+
+## Form Data Validation
+
+![alt](docs/img/david-travis-WC6MJ0kRzGw-unsplash.jpg)
+
+While leveraging browser-supplied functionality, I employ the 'required' HTML attribute for my ```<input>``` form elements.
+
+```
+    <form id="surveyForm">
+        <h1>About You</h1>
+        <input name="name" type="text" required></input>
+                                       --------
+        <hr>
+        ..
+    </form>
+```
+
+Normally, this prevents the user from submitting incomplete forms to the server.  However my initial implementation defeats this desired behavior because I naively hook into the "click" event for the submit button (to bypass non-Ajaxy form processing with ACTION="```<surver-route>```").  Sadly, that fools the DOM into thinking I'm going rogue and will take on /all/ validation tasks with my custom submit handler.
+
+The trick to get Ajax posting AND non-empty field validation by the browser is to:
+
+* drop the ACTION="blah" METHOD="POST" form attributes
+* leave the submit button alone
+```
+    <form id="surveyForm">
+        ..
+        <input type="submit" value="Submit">
+    </form>
+```
+
+* register a handler for the form's 'submit' event
+```
+    delegate(document, "submit", "#surveyForm", postSurveyForm);
+    ...
+    function postSurveyForm(e) {
+        e.preventDefault();
+        ..
+        fetch(
+            "/submitSurvey.json", 
+            {
+                method: 'post',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            }
+        ).then( response => { /* handle response */ }
+        ).catch( error =>   { /* handle error */ }
+        )
+    }
+```
+
+Now when I try to submit with an empty input field, I'm rewarded with a bit of browser-supplied animation that guides me to the empty field:
+
+![alt](docs/img/required-field.png)
+
+
+## Server-side cheet sheet ;-)
+
+* Refresh your brain [here](docs/notes.md).
 
 # Next Steps
 
