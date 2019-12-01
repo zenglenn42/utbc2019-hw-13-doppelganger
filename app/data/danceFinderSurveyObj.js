@@ -15,7 +15,7 @@ const surveyObjEn = {
         "You prefer slower dances",
         "You prefer energetic, momentum dances.",
         "You prefer romantic dances.",
-        "You prefer spicey dances.",
+        "You prefer spicy dances.",
     ],
     submitText: "Submit",
     resetText: "Reset",
