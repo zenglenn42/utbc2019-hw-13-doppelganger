@@ -1,6 +1,11 @@
 body {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     margin: 0;
+    /* 
+        Fix issue with click events not working on iOS safari.
+        https://stackoverflow.com/questions/24077725/mobile-safari-sometimes-does-not-trigger-the-click-event
+    */
+    cursor:pointer; 
 }
 
 #body-container {
